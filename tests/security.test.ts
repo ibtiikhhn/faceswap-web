@@ -1,0 +1,21 @@
+import { describe,it,expect,afterEach } from 'vitest';
+import { PGlite } from '@electric-sql/pglite';
+import { NextRequest } from 'next/server';
+import fs from 'node:fs/promises';
+import sharp from 'sharp';
+import { boundedBody, assertOrigin } from '@/server/http';
+import { validateAndNormalizeImage,localObjectPath,assertAssetOwner } from '@/server/storage';
+import { createGuestToken,getOrCreateGuest,getGuestFromRequest,claimGuestForUser,hashGuestToken } from '@/server/auth/guest';
+import type { DbClient } from '@/server/db';
+const clients:PGlite[]=[];
+afterEach(async()=>{for(const db of clients.splice(0))await db.close();});
+async function database(){const db=new PGlite();clients.push(db);for(const name of (await fs.readdir('migrations/app')).filter(x=>x.endsWith('.sql')).sort()){await db.exec((await fs.readFile(`migrations/app/${name}`,'utf8')).replace(/create extension if not exists pgcrypto;/gi,''));}return db;}
+describe('input and session boundaries',()=>{
+ it('rejects oversized streamed bodies even without content-length',async()=>{const request=new Request('http://localhost',{method:'POST',body:'12345678'});await expect(boundedBody(request,4)).rejects.toMatchObject({status:413});});
+ it('rejects spoofed origin even if x-forwarded-host agrees',()=>{const req=new Request('http://localhost:3000/api/guest',{method:'POST',headers:{origin:'https://evil.example','x-forwarded-host':'evil.example'}});expect(()=>assertOrigin(req)).toThrow(/Cross-site/);});
+ it('rejects SVG disguised as a PNG',async()=>{const file=new File(['<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"/>'],'photo.png',{type:'image/png'});await expect(validateAndNormalizeImage(file)).rejects.toMatchObject({status:400});});
+ it('normalizes valid image bytes and strips original encoding',async()=>{const png=await sharp({create:{width:12,height:10,channels:3,background:'#b0c582'}}).png().toBuffer();const result=await validateAndNormalizeImage(new File([new Uint8Array(png)],'sample.png',{type:'image/png'}));expect(result.contentType).toBe('image/webp');expect(result.width).toBe(12);expect((await sharp(result.buffer).metadata()).format).toBe('webp');});
+ it('prevents storage paths from escaping the local upload directory',()=>{expect(()=>localObjectPath('../../private.txt')).toThrow();expect(()=>localObjectPath('/etc/passwd')).toThrow();});
+ it('issues its own guest token instead of adopting a supplied unknown token',async()=>{const db=await database();const req=new NextRequest('http://localhost:3000',{headers:{cookie:'fs_guest=attacker-chosen'}});const guest=await getOrCreateGuest(req,db as unknown as DbClient);expect(guest.token).not.toBe('attacker-chosen');expect(guest.isNew).toBe(true);});
+ it('claims photos atomically and removes guest access without resetting the trial',async()=>{const db=await database();const user=await db.query<{id:string}>("insert into app.users(email) values('owner@test.invalid') returning id");const token=createGuestToken();const guest=await db.query<{id:string}>("insert into app.guest_sessions(token_hash,expires_at,trial_state) values($1,now()+interval '1 day','consumed') returning id",[hashGuestToken(token)]);const guestId=guest.rows[0].id;const userId=user.rows[0].id;const asset=await db.query<{id:string}>("insert into app.assets(guest_id,kind,object_key,content_type,width,height,byte_count,expires_at) values($1,'result','test/photo.webp','image/webp',1,1,10,now()+interval '1 day') returning id",[guestId]);await db.transaction(async tx=>claimGuestForUser(tx as unknown as DbClient,{guestId,userId}));const request=new NextRequest('http://localhost:3000',{headers:{cookie:`fs_guest=${token}`}});expect(await getGuestFromRequest(request,db as unknown as DbClient)).toBeNull();await expect(getOrCreateGuest(request,db as unknown as DbClient)).rejects.toMatchObject({code:'auth_required'});await expect(assertAssetOwner(db as unknown as DbClient,asset.rows[0].id,{guestId})).rejects.toMatchObject({status:404});expect(await assertAssetOwner(db as unknown as DbClient,asset.rows[0].id,{userId})).toHaveProperty('id',asset.rows[0].id);expect((await db.query<{trial_state:string}>('select trial_state from app.guest_sessions where id=$1',[guestId])).rows[0].trial_state).toBe('consumed');});
+});

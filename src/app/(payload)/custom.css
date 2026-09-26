@@ -1,0 +1,161 @@
+body {
+  --theme-elevation-0: #ffffff;
+}
+
+.cms-saas {
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 32px;
+}
+
+.cms-saas__header,
+.cms-saas__panel-head,
+.cms-saas__metrics,
+.cms-saas__grant {
+  display: flex;
+  gap: 16px;
+}
+
+.cms-saas__header,
+.cms-saas__panel-head {
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.cms-saas h1,
+.cms-saas h2,
+.cms-saas p {
+  margin: 0;
+}
+
+.cms-saas__eyebrow,
+.cms-saas__owner,
+.cms-saas__panel-head p,
+.cms-saas__table span {
+  color: var(--theme-elevation-500);
+  font-size: 13px;
+}
+
+.cms-saas__eyebrow {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.cms-saas__metrics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  margin-bottom: 24px;
+}
+
+.cms-saas__metrics div,
+.cms-saas__panel,
+.cms-saas__notice,
+.cms-saas__error {
+  background: var(--theme-elevation-0);
+  border: 1px solid var(--theme-elevation-150);
+  border-radius: 8px;
+}
+
+.cms-saas__metrics div {
+  padding: 18px;
+}
+
+.cms-saas__metrics span,
+.cms-saas__metrics strong,
+.cms-saas__table span {
+  display: block;
+}
+
+.cms-saas__metrics strong {
+  font-size: 30px;
+  line-height: 1.1;
+  margin-top: 8px;
+}
+
+.cms-saas__notice,
+.cms-saas__error {
+  margin-bottom: 16px;
+  padding: 12px 14px;
+}
+
+.cms-saas__notice {
+  border-color: #4d8f63;
+}
+
+.cms-saas__error {
+  border-color: #b94a48;
+}
+
+.cms-saas__panel {
+  overflow: hidden;
+}
+
+.cms-saas__panel-head {
+  border-bottom: 1px solid var(--theme-elevation-150);
+  padding: 20px;
+}
+
+.cms-saas__panel-head p {
+  max-width: 430px;
+}
+
+.cms-saas__table-wrap {
+  overflow-x: auto;
+}
+
+.cms-saas__table {
+  border-collapse: collapse;
+  min-width: 960px;
+  width: 100%;
+}
+
+.cms-saas__table th,
+.cms-saas__table td {
+  border-bottom: 1px solid var(--theme-elevation-100);
+  padding: 14px 16px;
+  text-align: left;
+  vertical-align: top;
+}
+
+.cms-saas__table th {
+  color: var(--theme-elevation-600);
+  font-size: 12px;
+  text-transform: uppercase;
+}
+
+.cms-saas__grant {
+  align-items: center;
+}
+
+.cms-saas__grant input {
+  min-width: 0;
+}
+
+.cms-saas__grant input[name='amount'] {
+  width: 96px;
+}
+
+.cms-saas__grant input[name='reason'] {
+  width: 220px;
+}
+
+.cms-saas__grant button {
+  cursor: pointer;
+}
+
+@media (max-width: 900px) {
+  .cms-saas {
+    padding: 20px;
+  }
+
+  .cms-saas__header,
+  .cms-saas__panel-head {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cms-saas__metrics {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
