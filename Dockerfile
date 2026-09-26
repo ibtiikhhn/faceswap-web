@@ -5,6 +5,8 @@ RUN npm ci
 
 FROM dependencies AS build
 COPY . .
+# Git does not preserve an empty public directory.
+RUN mkdir -p public
 RUN npm run build
 
 FROM node:22-alpine AS runtime
