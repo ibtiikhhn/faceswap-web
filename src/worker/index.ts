@@ -4,6 +4,7 @@ import { getPool } from '@/server/db'
 import { deleteObject } from '@/server/storage'
 import { processSwapJob, queueStaleSwapJobs } from '@/server/swaps/service'
 import { processStripeWebhookInbox } from '@/server/billing/webhook-worker'
+import { runIsolatedNodeTask } from './isolated-task'
 
 const parsed = env()
 const SWAP_QUEUE = 'swap.process'
@@ -104,11 +105,7 @@ let lastCmsRun = 0
 async function processScheduledPosts() {
   if (!featureState().payload || Date.now() - lastCmsRun < 60_000) return
   lastCmsRun = Date.now()
-  const [{ getPayload }, { default: config }] = await Promise.all([
-    import('payload'), import('@payload-config'),
-  ])
-  const payload = await getPayload({ config })
-  await payload.jobs.run({ allQueues: true, limit: 10, sequential: true })
+  await runIsolatedNodeTask(['--import', 'tsx', 'scripts/run-cms-jobs.ts'])
 }
 
 let timer: NodeJS.Timeout | undefined

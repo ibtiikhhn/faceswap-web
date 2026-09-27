@@ -34,6 +34,14 @@ Do not put migration commands in every web replica's start command. Use a Railwa
 
 ## Checks and operations
 
+### CMS transaction timeouts
+
+Set `CMS_DATABASE_POOL_MAX=4` or higher on web and worker. The installed Payload PostgreSQL adapter holds one connection for reconnect handling; its operations need additional connections for transactions and reads. The app enforces a minimum of four. Count the web, worker, queue, and CMS pools together against the database connection quota.
+
+Scheduled publishing runs once per minute in a separate, short-lived Node process. An unhandled Payload client error now fails that batch rather than terminating swap processing. The parent stops a batch after two minutes and retries on a later tick; connections held by the failed child close when it exits. If a batch times out while actually publishing a post, inspect the CMS job status before manually retrying that individual job.
+
+Repeated publishing errors still require investigation: verify the CMS migrations ran on the same database, use a direct database connection for the worker, and check the database connection quota. Do not disable database transaction timeouts or TLS verification to hide the problem.
+
 - HTTP liveness: `/api/health/live`; readiness: `/api/health/ready`.
 - Monitor failed jobs, stalled jobs, webhook failures, worker restarts, credit reversals, database/storage usage, and trial spending.
 - Confirm standard PostgreSQL concurrency behavior under simultaneous submissions; PGlite's local multiplexer does not substitute for that load test.

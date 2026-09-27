@@ -11,6 +11,7 @@ import { Owners } from '@/cms/collections/Owners'
 import { Posts } from '@/cms/collections/Posts'
 import { Redirects } from '@/cms/collections/Redirects'
 import { SiteSettings } from '@/cms/collections/SiteSettings'
+import { cmsPoolSize } from '@/server/db/cms-pool'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
@@ -49,7 +50,7 @@ export default buildConfig({
   globals: [SiteSettings],
   db: postgresAdapter({
     pool: {
-      max: Number(process.env.CMS_DATABASE_POOL_MAX ?? 4),
+      max: cmsPoolSize(),
       connectionTimeoutMillis: 5000,
       idleTimeoutMillis: 10000,
       connectionString: process.env.DATABASE_URL || 'postgres://payload:payload@127.0.0.1:5432/payload_unconfigured',
