@@ -12,6 +12,9 @@ export type PublishedPost = {
     url: string | null
     alt: string | null
   }
+  updatedAt?: string | null
+  canonicalUrl?: string | null
+  socialImage?: string | null
   seoTitle?: string | null
   seoDescription?: string | null
 }
@@ -87,6 +90,9 @@ function toPublishedPost(doc: any): PublishedPost {
       url: typeof doc.coverImage === 'object' ? doc.coverImage?.url ?? null : null,
       alt: doc.coverAlt ?? (typeof doc.coverImage === 'object' ? doc.coverImage?.alt ?? null : null),
     },
+    updatedAt: doc.updatedAt ?? null,
+    canonicalUrl: doc.canonicalUrl ?? null,
+    socialImage: typeof doc.socialImage === 'object' ? doc.socialImage?.url ?? null : null,
     seoTitle: doc.seoTitle ?? null,
     seoDescription: doc.seoDescription ?? null,
   }
@@ -100,4 +106,22 @@ export async function getBlogRedirect(slug: string) {
   const rule = result.docs[0]
   if (!rule || !/^\/blog\/[a-zA-Z0-9_-]+$/.test(rule.to) || rule.to === `/blog/${slug}`) return null
   return { to: rule.to, permanent: rule.permanent }
+}
+
+/** Sitemap retrieval is paginated independently from the journal's visible page. */
+export async function getPublishedPostSitemapEntries() {
+  if (!featureState().payload) return [];
+  const payload = await getPayload({ config });
+  const entries: { slug: string; updatedAt: string; canonicalUrl?: string | null }[] = [];
+  let page = 1;
+  for (;;) {
+    const result = await payload.find({ collection: 'posts', depth: 0, draft: false, overrideAccess: false,
+      page, limit: 500, sort: 'id', select: { slug: true, updatedAt: true, canonicalUrl: true },
+      where: { and: [{ _status: { equals: 'published' } }, { publishedAt: { less_than_equal: new Date().toISOString() } }] },
+    });
+    for (const post of result.docs) entries.push({ slug: post.slug, updatedAt: post.updatedAt, canonicalUrl: post.canonicalUrl });
+    if (!result.hasNextPage) break;
+    page++;
+  }
+  return entries;
 }

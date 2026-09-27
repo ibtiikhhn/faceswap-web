@@ -1,0 +1,6 @@
+import Link from 'next/link';
+export const legalContact = 'jasperburges0@gmail.com';
+export function ContactEmail() { return <a href={`mailto:${legalContact}`}>{legalContact}</a>; }
+export function LegalLayout({ title, description, sections, children }: { title: string; description: string; sections: readonly (readonly [string, string])[]; children: React.ReactNode }) {
+  return <div className="wrap legal-layout"><aside className="legal-toc"><details><summary>On this page</summary><nav aria-label={`${title} contents`}><ol>{sections.map(([id, label]) => <li key={id}><a href={`#${id}`}>{label}</a></li>)}</ol></nav></details></aside><article className="legal-document"><div className="eyebrow">SWAPTHISFACE.COM · CODEFLOW SOLUTIONS</div><h1>{title}</h1><p className="legal-meta">Last updated: <time dateTime="2026-09-27">27 September 2026</time> · Staging edition</p><p>{description}</p>{children}<div className="legal-contact"><p>Questions? Contact Codeflow Solutions at <ContactEmail/>.</p><p><Link href="/privacy">Privacy policy</Link> · <Link href="/terms">Terms & conditions</Link> · <Link href="/dashboard/settings">Account settings</Link></p></div></article></div>;
+}
