@@ -22,6 +22,8 @@ Add a PostgreSQL database in Neon or Railway and create private R2 storage. Use 
 
 Do not put migration commands in every web replica's start command. Use a Railway pre-deploy/release command or a separate controlled release run. CMS and app tables are independently managed in their own schemas.
 
+Set the **web** pre-deploy command to exactly `npm run release`. It runs app migrations, CMS migrations, and (when both bootstrap variables are present) owner creation in order. Each step has a numbered log entry, and any failed step stops the release. For initial setup, set `PAYLOAD_ADMIN_EMAIL` and `PAYLOAD_ADMIN_PASSWORD`; remove both after the owner is created. Keep `DATABASE_URL` and `PAYLOAD_SECRET`. Leave the worker pre-deploy command empty. This single command avoids depending on shell interpretation of `&&` in deployment settings.
+
 ## Environment and secrets
 
 - `APP_ENV=staging` permits labeled mock previews in a staging environment.

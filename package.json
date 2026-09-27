@@ -14,6 +14,7 @@
     "test": "vitest run",
     "worker": "node --env-file-if-exists=.env.local --import tsx src/worker/index.ts",
     "db:migrate": "node --env-file-if-exists=.env.local --import tsx scripts/migrate.ts",
+    "release": "node --env-file-if-exists=.env.local --import tsx scripts/release.ts",
     "cms:generate-types": "payload generate:types",
     "cms:generate-importmap": "payload generate:importmap",
     "cms:migrate": "node --env-file-if-exists=.env.local node_modules/payload/bin.js migrate",
