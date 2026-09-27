@@ -55,3 +55,15 @@ Do not publish empty article shells. Each article should answer a distinct quest
 - [Google link guidance](https://developers.google.com/search/docs/crawling-indexing/links-crawlable): use descriptive links that help readers.
 - [Google noindex guidance](https://developers.google.com/search/docs/crawling-indexing/block-indexing): crawlers must be able to fetch a page to observe noindex.
 - [Google article markup](https://developers.google.com/search/docs/appearance/structured-data/article): provide article details that reflect the actual published page; markup does not guarantee a search feature.
+
+## Homepage content expansion — 28 September 2026
+
+The homepage now covers these distinct reader intents, without repeating exact-match variants in every section:
+- Hero: put your face in another photo; source selfie plus target image.
+- Photo selection: what source and target mean and which image supplies the composition.
+- Creative ideas: portrait styles, costumes, vintage-inspired portraits, and photo cards. These are clearly ideas, not fabricated output examples.
+- Realistic results: angle, lighting, clarity, and output review.
+- Editing scope: two-photo face replacement versus prompt-based generation, filters, background edits, and clothing changes.
+- Nine visible homepage FAQs: how-to, “any photo” limits, filters, realism, one free guest trial, browser/mobile use, clothing/backgrounds, unsupported multiple/video swaps, and permissions.
+
+The homepage FAQ uses server-rendered HTML disclosures. No rich-result visibility or ranking gains are promised. Keep the mock-preview explanation until the actual provider is enabled, and revisit the trial metadata wording when it changes. Primary reference: [Google's people-first content guidance](https://developers.google.com/search/docs/fundamentals/creating-helpful-content).
