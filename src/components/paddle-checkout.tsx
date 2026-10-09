@@ -22,7 +22,7 @@ export function PaddleCheckout(){
    const paddle=await initialized;
    if(!paddle)throw new Error('Checkout could not load. Please refresh and try again.');
    if(disposed)return;
-   paddle.Checkout.open({transactionId:data.transactionId,settings:{displayMode:'overlay',variant:'one-page',allowLogout:false,successUrl:window.location.origin+'/dashboard/billing?checkout=success'}});
+   paddle.Checkout.open({transactionId:data.transactionId,settings:{displayMode:'overlay',variant:'one-page',allowLogout:false,successUrl:window.location.origin+'/dashboard/billing?checkout=success&transaction='+encodeURIComponent(data.transactionId)}});
    setMessage(data.environment==='sandbox'?'Sandbox checkout — test payments only.':'Complete your payment in the secure checkout window.');
   }).catch(e=>{if(!disposed)setError(errorMessage(e));});
   return()=>{disposed=true;};

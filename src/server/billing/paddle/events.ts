@@ -52,16 +52,28 @@ export async function applyPaddleEvent(tx:DbClient,event:Event){
  if(prior.rows.length)return;
  const checkout=(await tx.query<{user_id:string;price_id:string;credits:number;kind:string;code:string}>('select * from app.paddle_checkouts where transaction_id=$1 and environment=$2',[d.id,paddleEnvironment()])).rows[0];
  const subscription=d.subscription_id?(await tx.query<{user_id:string;paddle_price_id:string;current_period_start:Date|string|null;current_period_end:Date|string|null}>('select user_id,paddle_price_id,current_period_start,current_period_end from app.subscriptions where paddle_subscription_id=$1 and paddle_environment=$2',[d.subscription_id,paddleEnvironment()])).rows[0]:undefined;
- if(!checkout && d.origin!=='subscription_recurring')throw new Error('Unbound transaction requires review');
+ const upgrade=!checkout && d.origin==='subscription_update';
+ if(!checkout && !upgrade && d.origin!=='subscription_recurring')throw new Error('Unbound transaction requires review');
  const userId=checkout?.user_id??subscription?.user_id;
  if(!userId)throw new Error('Waiting for subscription or checkout binding');
  const owner=(await tx.query<{paddle_customer_id:string}>(`select ${paddleCustomerColumn()} as paddle_customer_id from app.users where id=$1`,[userId])).rows[0];
  if(owner?.paddle_customer_id!==d.customer_id)throw new Error('Customer mismatch');
  const offer=offers.find(o=>process.env[o.priceEnv]===items[0]?.price.id);
- if(!offer || items.length!==1 || items[0].quantity!==1 || items[0].proration)throw new Error('Transaction catalog mismatch');
+ if(!offer || items.length!==1 || items[0].quantity!==1 || (!upgrade && items[0].proration))throw new Error('Transaction catalog mismatch');
  if(checkout && (checkout.price_id!==items[0].price.id || checkout.code!==offer.code || checkout.kind!==offer.kind))throw new Error('Checkout mismatch');
  if(!checkout && (offer.kind!=='subscription' || subscription?.paddle_price_id!==items[0].price.id))throw new Error('Renewal mismatch');
  let paidPeriod=d.billing_period;
+ let creditAmount=checkout?.credits??offer.credits;
+ if(upgrade){
+  // Only our supported weekly-to-monthly term upgrade may replace an allowance.
+  if(offer.code!=='monthly'||!subscription)throw new Error('Unsupported plan change');
+  if(items[0].proration){
+   const prorated=z.object({rate:z.string().regex(/^(?:0(?:\.\d+)?|1(?:\.0+)?)$/),billing_period:period}).parse(items[0].proration);
+   paidPeriod=prorated.billing_period;
+   creditAmount=Math.floor(offer.credits*Number(prorated.rate));
+  }
+ }
+
  // Initial transactions may omit billing_period. Use the mirrored period only
  // when it contains this payment's occurrence, never a newer renewal period.
  if(!paidPeriod && checkout && offer.kind==='subscription' && subscription?.current_period_start && subscription.current_period_end){
@@ -72,10 +84,16 @@ export async function applyPaddleEvent(tx:DbClient,event:Event){
  const inserted=await tx.query(`insert into app.paddle_transactions(id,user_id,subscription_id,period_start,period_end,environment) values($1,$2,$3,$4,$5,$6) on conflict do nothing returning id`,[d.id,userId,d.subscription_id??null,paidPeriod?.starts_at??null,paidPeriod?.ends_at??null,paddleEnvironment()]);
  if(!inserted.rows.length)return;
  const revoked=(await tx.query("select id from app.paddle_adjustments where transaction_id=$1 and status='approved' and type='full' and action in ('refund','chargeback')",[d.id])).rows.length>0;
- if(!revoked){
+ if(upgrade){
+  // Expire only earlier overlapping subscription allowances. Packs and later
+  // renewal grants must survive an out-of-order upgrade event.
+  await tx.query(`update app.credit_grants set remaining_amount=0,expires_at=least(expires_at,$2::timestamptz)
+   where id in (select grant_id from app.paddle_transactions where subscription_id=$1 and environment=$3 and period_start<$2::timestamptz and period_end>$2::timestamptz)`,[d.subscription_id,paidPeriod!.starts_at,paddleEnvironment()]);
+ }
+ if(!revoked && creditAmount>0){
   const prefix=paddleEnvironment()==='sandbox'?'paddle_sandbox':'paddle';
   const source=offer.kind==='pack'?`${prefix}_pack`:`${prefix}_subscription`;
-  await grantCredits(tx,{userId,amount:checkout?.credits??offer.credits,source,sourceRef:d.id,expiresAt:offer.kind==='subscription'?new Date(paidPeriod!.ends_at):null});
+  await grantCredits(tx,{userId,amount:creditAmount,source,sourceRef:d.id,expiresAt:offer.kind==='subscription'?new Date(paidPeriod!.ends_at):null});
   await tx.query('update app.paddle_transactions set grant_id=(select id from app.credit_grants where source=$2 and source_ref=$1) where id=$1',[d.id,source]);
  }
  if(offer.kind==='subscription'){

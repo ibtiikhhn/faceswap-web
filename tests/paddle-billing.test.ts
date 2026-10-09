@@ -64,8 +64,8 @@ describe('Paddle credit settlement',()=>{
   expect((await tx.query<{status:string}>('select status from app.subscriptions')).rows[0].status).toBe('canceled');
   await intent();await apply(payment());expect(await creditBalance(tx,uid)).toBe(200);
  });
- it('refuses prorated changes as full renewal allowances',async()=>{
-  await apply(subscription());await expect(apply(payment({origin:'subscription_update',subscription_id:'sub_test'}))).rejects.toThrow(/Unbound/);
+ it('rejects a pack disguised as a subscription upgrade',async()=>{
+  await apply(subscription());await expect(apply(payment({origin:'subscription_update',subscription_id:'sub_test'}))).rejects.toThrow(/mismatch/);
  });
  it('revokes full refunds and prevents out-of-order refunds from granting credits',async()=>{
   await intent();const adjustment=eventSchema.parse({event_id:'evt_refund',event_type:'adjustment.updated',occurred_at:start,data:{id:'adj_test',status:'approved',action:'refund',type:'full',transaction_id:'txn_paid',items:[{item_id:'txnitm_test',type:'full'}]}});
@@ -111,4 +111,32 @@ it('uses the matching initial subscription period when checkout omits billing_pe
  await intent('subscription','pri_week','weekly',100);await apply(subscription());
  await apply(payment({subscription_id:'sub_test',billing_period:null,items:[{price:{id:'pri_week'},quantity:1}]}));
  expect(await creditBalance(tx,uid)).toBe(100);
+});
+
+describe('paid monthly upgrades',()=>{
+ it('replaces the weekly allowance after verified payment, preserves packs, and deduplicates',async()=>{
+  vi.stubEnv('PADDLE_MONTHLY_PRICE_ID','pri_month');
+  await apply(subscription());await intent('subscription','pri_week','weekly',100);
+  await apply(payment({subscription_id:'sub_test',items:[{price:{id:'pri_week'},quantity:1}],billing_period:period}));
+  await tx.query("insert into app.credit_grants(user_id,original_amount,remaining_amount,source,source_ref) values($1,200,200,'paddle_sandbox_pack','separate-pack')",[uid]);
+  const upgradePeriod={starts_at:new Date(Date.now()-1000).toISOString(),ends_at:new Date(Date.now()+30*86400_000).toISOString()};
+  const changed=subscription('active',later);changed.data.items=[{price:{id:'pri_month'},quantity:1}];changed.data.current_billing_period=upgradePeriod;await apply(changed);
+  const event=payment({id:'txn_upgrade',origin:'subscription_update',subscription_id:'sub_test',billing_period:upgradePeriod,items:[{price:{id:'pri_month'},quantity:1,proration:{rate:'1',billing_period:upgradePeriod}}]});
+  await apply(event);await apply(event);
+  expect(await creditBalance(tx,uid)).toBe(700);
+ });
+ it('grants only the proportional monthly allowance and rejects an invalid proration rate',async()=>{
+  vi.stubEnv('PADDLE_MONTHLY_PRICE_ID','pri_month');
+  const changed=subscription();changed.data.items=[{price:{id:'pri_month'},quantity:1}];await apply(changed);
+  const data={id:'txn_upgrade',origin:'subscription_update',subscription_id:'sub_test',billing_period:period};
+  await expect(apply(payment({...data,items:[{price:{id:'pri_month'},quantity:1,proration:{rate:'2',billing_period:period}}]}))).rejects.toThrow();
+  expect(await creditBalance(tx,uid)).toBe(0);
+  await apply(payment({...data,items:[{price:{id:'pri_month'},quantity:1,proration:{rate:'0.5',billing_period:period}}]}));
+  expect(await creditBalance(tx,uid)).toBe(250);
+ });
+ it('does not grant upgrade credits before matching subscription state arrives',async()=>{
+  vi.stubEnv('PADDLE_MONTHLY_PRICE_ID','pri_month');await apply(subscription());
+  await expect(apply(payment({id:'txn_upgrade',origin:'subscription_update',subscription_id:'sub_test',billing_period:period,items:[{price:{id:'pri_month'},quantity:1}]}))).rejects.toThrow(/mismatch/);
+  expect(await creditBalance(tx,uid)).toBe(0);
+ });
 });

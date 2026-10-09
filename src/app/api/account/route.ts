@@ -21,10 +21,10 @@ export async function GET(request: NextRequest) {
     const credits = actor.userId ? await creditBalances(pool, actor.userId) : { available: 0, reserved: 0 };
     const subscription = actor.userId
       ? await pool.query<{ status: string; plan_code: string | null; current_period_end: string | null }>(
-          `select s.status, s.plan_code as "planCode", s.current_period_end as "currentPeriodEnd"
+          `select s.status, s.plan_code as "planCode", s.current_period_end as "currentPeriodEnd", s.cancel_at_period_end as "cancelAtPeriodEnd"
            from app.subscriptions s
            where s.user_id = $1 and (s.paddle_environment=$2 or s.paddle_environment is null)
-           order by s.updated_at desc
+           order by (s.status in ('active','trialing','past_due','paused')) desc, s.updated_at desc
            limit 1`,
           [actor.userId,env().PADDLE_ENVIRONMENT]
         )

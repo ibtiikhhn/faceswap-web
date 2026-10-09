@@ -3,7 +3,7 @@ export type Account = {
   service?: { mockSwap: boolean; swapsEnabled?: boolean };
   user?: { id: string; name?: string | null; email?: string | null } | null;
   credits?: number | { available?: number; reserved?: number };
-  subscription?: { status?: string; planCode?: string | null; currentPeriodEnd?: string | null } | null;
+  subscription?: { status?: string; planCode?: string | null; cancelAtPeriodEnd?: boolean; currentPeriodEnd?: string | null } | null;
   trial?: { state?: string | null };
 };
 
