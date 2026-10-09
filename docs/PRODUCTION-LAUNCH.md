@@ -1,6 +1,6 @@
 # SwapThisFace.com production launch — 8 October 2026
 
-Target: real single-face photo swaps at **https://swapthisface.com**, Google login, private R2 storage, and no purchases. Paddle integration follows later. Codeflow Solutions operates from Pakistan; its business contact address is still needed.
+Target: real single-face photo swaps at **https://swapthisface.com**, Google login, private R2 storage, and no purchases. Paddle integration follows later. Ibtihaj Uddin, trading as SwapThisFace.com operates from Pakistan; its business contact address is still needed.
 
 ## Before the domain cutover
 

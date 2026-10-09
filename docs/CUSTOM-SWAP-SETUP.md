@@ -36,3 +36,6 @@ Automated tests use generated colored images and mocked network responses; no cu
 Before enabling public external processing, confirm the Custom Swap operator's identity, downstream processing, retention/deletion and training terms; these are absent from the supplied contract. The privacy page now describes the endpoint and these known limits rather than implying provider copies follow our R2 expiry rules. The studio obtains consent before external submission. Stripe is retired; Paddle integration is pending.
 
 For a controlled end-to-end staging check: use two photos you have permission to process, check the consent box, submit one guest trial or an account with a valid test entitlement, confirm no mock watermark, verify the saved result can be downloaded from the app, and check credit/trial settlement. Do not send private URL tokens in logs or support screenshots.
+
+## Policy update — 10 October 2026
+The owner identified PiAPI as the underlying provider. The app continues to submit through this custom gateway. See LEGAL-LAUNCH-CHECKLIST.md for published PiAPI sources and outstanding gateway retention verification. Paddle is now integrated and sandbox testing was reported complete by the owner.
