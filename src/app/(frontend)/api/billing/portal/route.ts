@@ -1,23 +1,17 @@
-import { requireUser } from "@/server/auth";
-import { billingErrorResponse, errorJson, isForbiddenOriginError, json, requireSameOrigin } from "@/server/billing/http";
-import { getOrCreateStripeCustomerId } from "@/server/billing/repository";
-import { createPortalSession } from "@/server/billing/stripe-actions";
-
-export const runtime = "nodejs";
-
-export async function POST(request: Request) {
-  try {
-    requireSameOrigin(request);
-    const userId = await requireUser(request as any);
-    const user = { id: userId };
-    const customerId = await getOrCreateStripeCustomerId(user);
-    const url = await createPortalSession(customerId);
-
-    return json({ url });
-  } catch (error) {
-    if (isForbiddenOriginError(error)) {
-      return errorJson("forbidden_origin", "Billing mutations must come from this site.", 403);
-    }
-    return billingErrorResponse(error);
-  }
+import { NextRequest } from 'next/server';
+import { requireUser } from '@/server/auth';
+import { getPool } from '@/server/db';
+import { assertOrigin, HttpError } from '@/server/http';
+import { billingErrorResponse, json } from '@/server/billing/http';
+import { getPaddle, requirePaddle, paddleCustomerColumn, paddleEnvironment } from '@/server/billing/paddle/api';
+export const runtime='nodejs';
+export async function POST(request:NextRequest){
+ try{
+  requirePaddle();assertOrigin(request);
+  const userId=await requireUser(request);
+  const user=(await getPool().query<{paddle_customer_id:string|null}>(`select ${paddleCustomerColumn()} as paddle_customer_id from app.users where id=$1`,[userId])).rows[0];
+  if(!user?.paddle_customer_id)throw new HttpError(404,'No billing account exists yet.');
+  const session=await getPaddle().customerPortalSessions.create(user.paddle_customer_id,[]);
+  return json({url:session.urls.general.overview});
+ }catch(e){return billingErrorResponse(e);}
 }

@@ -3,11 +3,12 @@ import { z } from "zod";
 import { getPool } from "@/server/db";
 import { getActor } from "@/server/auth";
 import { getOrCreateGuest, setGuestCookie } from "@/server/auth/guest";
-import { assertOrigin, assertRateLimit, config503, fail, json } from "@/server/http";
+import { assertOrigin, assertRateLimit, config503, fail, json, HttpError } from "@/server/http";
 import { createSwapJob, formatSwapJob, listSwaps } from "@/server/swaps/service";
 import { featureState } from "@/server/env";
 
 const swapRequestSchema = z.object({
+  providerConsent: z.boolean().optional(),
   sourceAssetId: z.string().uuid(),
   targetAssetId: z.string().uuid(),
   requestKey: z.string().min(12).max(80).optional(),
@@ -26,6 +27,7 @@ export async function GET(request: NextRequest) {
 
 export async function POST(request: NextRequest) {
   try {
+    if (!featureState().swapsEnabled) throw new HttpError(503, "Photo swaps are coming soon. Uploads are currently closed.", "swaps_disabled");
     if (!featureState().database) return config503("Database");
     assertOrigin(request);
     assertRateLimit(request, "swaps", 15, 60_000);
@@ -38,10 +40,12 @@ export async function POST(request: NextRequest) {
       guestCookie = { token: guest.token, maxAge: guest.maxAge };
     }
     const body = swapRequestSchema.parse(await request.json());
+    if (!featureState().mockSwap && body.providerConsent !== true) throw new HttpError(400, "Confirm permission to send both photos to the face-swap processor.", "provider_consent_required");
     const job = await createSwapJob({
       client: pool,
       actor,
       sourceAssetId: body.sourceAssetId,
+      providerConsent: body.providerConsent,
       targetAssetId: body.targetAssetId,
       requestKey: body.requestKey
     });

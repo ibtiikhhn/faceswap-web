@@ -10,6 +10,7 @@ export const runtime = "nodejs";
 
 export async function POST(request: NextRequest) {
   try {
+    if (!featureState().swapsEnabled) throw new HttpError(503, "Photo swaps are coming soon. Uploads are currently closed.", "swaps_disabled");
     if (!featureState().database) return config503("Database");
     assertOrigin(request);
     assertRateLimit(request, "uploads", 20, 60_000);

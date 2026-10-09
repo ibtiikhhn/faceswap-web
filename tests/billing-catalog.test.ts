@@ -18,13 +18,13 @@ describe("billing catalog", () => {
     assert.equal(parsePositiveInt(undefined), null);
   });
 
-  it("does not expose Stripe price ids in the public catalog", () => {
+  it("keeps legacy Stripe offers disabled even when price IDs remain configured", () => {
     const catalog = getPublicBillingCatalog({
       STRIPE_PRICE_WEEKLY: "price_week",
       BILLING_WEEKLY_CREDITS: "10",
     } as unknown as NodeJS.ProcessEnv);
 
-    assert.equal(catalog.subscriptions[0].configured, true);
+    assert.equal(catalog.subscriptions[0].configured, false);
     assert.equal(catalog.subscriptions[0].includedCredits, 10);
     assert.equal("stripePriceId" in catalog.subscriptions[0], false);
   });

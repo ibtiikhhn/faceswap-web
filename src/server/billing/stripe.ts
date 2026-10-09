@@ -1,14 +1,10 @@
-import Stripe from "stripe";
+import type Stripe from "stripe";
 import { env } from "@/server/env";
 import { HttpError } from "@/server/http";
 
-let stripeClient: Stripe | null = null;
 
-export function getStripe() {
-  const parsed = env();
-  if (!parsed.STRIPE_SECRET_KEY) throw new HttpError(503, "Stripe is not configured yet.", "stripe_not_configured");
-  stripeClient ??= new Stripe(parsed.STRIPE_SECRET_KEY);
-  return stripeClient;
+export function getStripe(): Stripe {
+  throw new HttpError(503, "Paid plans are not available yet.", "billing_unavailable");
 }
 
 export type BillingPlan = {

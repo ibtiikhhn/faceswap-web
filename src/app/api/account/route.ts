@@ -4,7 +4,7 @@ import { getPool } from "@/server/db";
 import { creditBalances } from "@/server/billing/credits";
 import { config503, fail, json } from "@/server/http";
 import { listSwaps } from "@/server/swaps/service";
-import { featureState } from "@/server/env";
+import { env, featureState } from "@/server/env";
 
 export async function GET(request: NextRequest) {
   try {
@@ -23,14 +23,15 @@ export async function GET(request: NextRequest) {
       ? await pool.query<{ status: string; plan_code: string | null; current_period_end: string | null }>(
           `select s.status, s.plan_code as "planCode", s.current_period_end as "currentPeriodEnd"
            from app.subscriptions s
-           where s.user_id = $1
+           where s.user_id = $1 and (s.paddle_environment=$2 or s.paddle_environment is null)
            order by s.updated_at desc
            limit 1`,
-          [actor.userId]
+          [actor.userId,env().PADDLE_ENVIRONMENT]
         )
       : { rows: [] };
     return json({
       authenticated: Boolean(actor.userId),
+      service: { mockSwap: featureState().mockSwap, swapsEnabled: featureState().swapsEnabled },
       user: user.rows[0] ?? null,
       credits,
       subscription: subscription.rows[0] ?? null,

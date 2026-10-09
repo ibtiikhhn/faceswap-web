@@ -117,7 +117,7 @@ export default async function SaaSOverview({ searchParams, initPageResult }: Adm
       </section>
       <section className="cms-saas__panel">
         <h2>Recent subscriptions</h2>
-        <p>Manage billing changes and refunds in Stripe. Suspending app access does not cancel a subscription.</p>
+        <p>Payments are disabled while Paddle integration is pending. Suspending app access does not cancel a subscription.</p>
         <div className="cms-saas__table-wrap"><table className="cms-saas__table"><thead><tr><th>Customer</th><th>Plan</th><th>Status</th><th>Paid through</th></tr></thead><tbody>
           {operations.subscriptions.map(s => <tr key={s.id}><td>{s.email}</td><td>{s.plan_code ?? 'Unassigned'}</td><td>{s.status}{s.cancel_at_period_end ? ' · ends at period end' : ''}</td><td>{s.paid_current_period_end ? dateFormat(s.paid_current_period_end) : 'Not confirmed'}</td></tr>)}
           {!operations.subscriptions.length && <tr><td colSpan={4}>No subscriptions yet.</td></tr>}

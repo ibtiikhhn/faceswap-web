@@ -1,11 +1,25 @@
+import { env } from "@/server/env";
 import { HttpError } from "@/server/http";
 import type { DbClient } from "@/server/db";
+
+// A subscription grant belongs to one paid subscription; packs stand alone.
+function usableGrant() {
+const prefix=env().PADDLE_ENVIRONMENT==='sandbox'?'paddle_sandbox':'paddle';
+return `(source = '${prefix}_pack' or
+ (source = '${prefix}_subscription' and exists (
+  select 1 from app.paddle_transactions t join app.subscriptions s on s.paddle_subscription_id=t.subscription_id
+  where t.grant_id=app.credit_grants.id and s.status='active' and s.paid_current_period_start<=now() and s.paid_current_period_end>now()
+ )) or (source not in ('paddle_pack','paddle_subscription','paddle_sandbox_pack','paddle_sandbox_subscription') and exists (
+  select 1 from app.subscriptions s where s.user_id=app.credit_grants.user_id and s.paddle_subscription_id is null and s.status='active' and s.paid_current_period_end>now()
+  and not exists (select 1 from app.billing_revocations r where r.reference=s.latest_paid_invoice_id)
+ )))`;
+}
 
 export async function creditBalance(client: DbClient, userId: string) {
   const result = await client.query<{ available: string }>(
     `select coalesce(sum(remaining_amount), 0)::text as available
      from app.credit_grants
-     where user_id = $1 and remaining_amount > 0 and (expires_at is null or expires_at > now())`,
+     where user_id = $1 and ${usableGrant()} and remaining_amount > 0 and (expires_at is null or expires_at > now())`,
     [userId]
   );
   return Number(result.rows[0]?.available ?? 0);
@@ -17,7 +31,7 @@ export async function creditBalances(client: DbClient, userId: string) {
        coalesce(sum(remaining_amount), 0)::text as available,
        coalesce(sum(reserved_amount), 0)::text as reserved
      from app.credit_grants
-     where user_id = $1 and (expires_at is null or expires_at > now())`,
+     where user_id = $1 and ${usableGrant()} and (expires_at is null or expires_at > now())`,
     [userId]
   );
   return {
@@ -57,15 +71,13 @@ export async function grantCredits(client: DbClient, input: {
 }
 
 export async function reserveCreditForJob(client: DbClient, userId: string, jobId: string) {
-  if (!(await hasActiveSubscription(client, userId))) {
-    throw new HttpError(402, "An active subscription is required to use credits.", "subscription_required");
-  }
 
   const grants = await client.query<{ id: string }>(
     `select id
      from app.credit_grants
      where user_id = $1
        and remaining_amount > 0
+       and ${usableGrant()}
        and (expires_at is null or expires_at > now())
      order by expires_at nulls last, created_at
      for update skip locked

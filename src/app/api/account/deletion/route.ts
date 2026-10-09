@@ -3,7 +3,7 @@ import { requireUser } from "@/server/auth";
 import { getPool, withTransaction } from "@/server/db";
 import { releaseReservation } from "@/server/billing/credits";
 import { assertOrigin, assertRateLimit, config503, fail, HttpError, json } from "@/server/http";
-import { featureState } from "@/server/env";
+import { env, featureState } from "@/server/env";
 
 export async function POST(request: NextRequest) {
   try {
@@ -17,9 +17,10 @@ export async function POST(request: NextRequest) {
         `select s.id
          from app.subscriptions s
          where s.user_id = $1
+           and (s.paddle_environment is null or s.paddle_environment='production' or $2='sandbox')
            and s.status in ('active', 'trialing', 'past_due', 'incomplete', 'unpaid', 'paused')
          limit 1`,
-        [userId]
+        [userId,env().PADDLE_ENVIRONMENT]
       );
       if (activeSubscription.rows[0]) {
         throw new HttpError(409, "Cancel the active subscription before deleting this account.", "active_subscription");

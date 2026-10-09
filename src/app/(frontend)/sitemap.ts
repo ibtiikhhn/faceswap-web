@@ -6,7 +6,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   if (!publicIndexingEnabled()) return [];
   const posts = await getPublishedPostSitemapEntries();
   return [
-    ...['/', '/face-swap', '/pricing', '/blog', '/privacy', '/terms'].map(path => ({ url: absoluteUrl(path) })),
+    ...['/', '/face-swap', '/pricing', '/blog', '/privacy', '/terms', '/refunds'].map(path => ({ url: absoluteUrl(path) })),
     ...posts.flatMap(post => {
       const url = absoluteUrl(`/blog/${encodeURIComponent(post.slug)}`);
       const canonical = httpUrl(post.canonicalUrl);

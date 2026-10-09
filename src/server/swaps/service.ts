@@ -1,9 +1,10 @@
+import { env } from "@/server/env";
 import { randomBytes } from "node:crypto";
 import sharp from "sharp";
 import { getPool, withTransaction, type DbClient } from "@/server/db";
 import { HttpError } from "@/server/http";
 import { assertAssetOwner, createAsset, deleteObject, putObject } from "@/server/storage";
-import { consumeReservation, hasActiveSubscription, releaseReservation, reserveCreditForJob } from "@/server/billing/credits";
+import { consumeReservation, releaseReservation, reserveCreditForJob } from "@/server/billing/credits";
 import { runProviderSwap } from "@/server/swaps/provider";
 
 const DEFAULT_TRIAL_DAILY_LIMIT = 100;
@@ -45,20 +46,18 @@ export function formatSwapJob(row: SwapRow) {
   };
 }
 
-async function assertPaidAccess(client: DbClient, userId: string) {
-  if (!(await hasActiveSubscription(client, userId))) {
-    throw new HttpError(402, "An active subscription is required to create swaps.", "subscription_required");
-  }
-}
-
 export async function createSwapJob(input: {
   client?: DbClient;
   actor: { userId?: string; guestId?: string };
+  providerConsent?: boolean;
   sourceAssetId: string;
   targetAssetId: string;
   requestKey?: string;
 }) {
+  if (env().SWAPS_ENABLED === "false") throw new HttpError(503, "Photo swaps are coming soon.", "swaps_disabled");
   const client = input.client ?? getPool();
+  const providerMode = env().SWAP_PROVIDER;
+  if (providerMode === "external" && input.providerConsent !== true) throw new HttpError(400, "Permission for external face processing is required.", "provider_consent_required");
   if (!input.actor.userId && !input.actor.guestId) throw new HttpError(401, "A session is required.", "session_required");
 
   return withTransaction(client, async (tx) => {
@@ -88,7 +87,6 @@ export async function createSwapJob(input: {
     }
     const mode = input.actor.userId ? "paid_credit" : "guest_trial";
     if (input.actor.userId) {
-      await assertPaidAccess(tx, input.actor.userId);
       if (input.actor.guestId) {
         await tx.query(
           `update app.guest_sessions
@@ -121,8 +119,8 @@ export async function createSwapJob(input: {
     }
 
     const job = await tx.query<{ id: string; state: string }>(
-      `insert into app.swap_jobs (user_id, guest_id, source_asset_id, target_asset_id, mode, request_key)
-       values ($1,$2,$3,$4,$5,$6)
+      `insert into app.swap_jobs (user_id, guest_id, source_asset_id, target_asset_id, mode, request_key, provider_mode, provider_consent_at)
+       values ($1,$2,$3,$4,$5,$6,$7,case when $7 = 'external' then now() else null end)
        returning id, state`,
       [
         input.actor.userId ?? null,
@@ -130,7 +128,8 @@ export async function createSwapJob(input: {
         input.sourceAssetId,
         input.targetAssetId,
         mode,
-        input.requestKey ?? randomId(24)
+        input.requestKey ?? randomId(24),
+        providerMode
       ]
     );
     if (input.actor.userId) await reserveCreditForJob(tx, input.actor.userId, job.rows[0].id);
@@ -205,6 +204,7 @@ export async function queueStaleSwapJobs(client: DbClient) {
 }
 
 export async function processSwapJob(client: DbClient, jobId: string) {
+  if (env().SWAPS_ENABLED === "false") return null;
   const started = await withTransaction(client, async (tx) => {
     const claimed = await tx.query<{ id: string }>(
       `select id
@@ -216,14 +216,14 @@ export async function processSwapJob(client: DbClient, jobId: string) {
     );
     if (!claimed.rows[0]) return null;
 
-    const result = await tx.query<{ source_key: string; target_key: string }>(
+    const result = await tx.query<{ source_key: string; target_key: string; provider_mode: "mock" | "external" }>(
       `update app.swap_jobs
        set state = 'processing',
            error_code = null,
            error_message = null,
            updated_at = now()
        where id = $1
-       returning
+       returning provider_mode,
          (select object_key from app.assets where id = source_asset_id) as source_key,
          (select object_key from app.assets where id = target_asset_id) as target_key`,
       [jobId]
@@ -234,14 +234,17 @@ export async function processSwapJob(client: DbClient, jobId: string) {
   if (!job) return;
   let writtenKey: string | undefined;
   try {
-    const provider = await runProviderSwap({ jobId, sourceKey: job.source_key, targetKey: job.target_key });
+    const usable = await client.query<{ id: string }>(`select a.id from app.assets a join app.swap_jobs j on a.id in (j.source_asset_id,j.target_asset_id)
+      where j.id=$1 and j.state='processing' and a.status='active' and (a.expires_at is null or a.expires_at>now())`, [jobId]);
+    if (usable.rows.length !== 2) throw new Error('Swap inputs are no longer available.');
+    const provider = await runProviderSwap({ jobId, sourceKey: job.source_key, targetKey: job.target_key, mode: job.provider_mode });
     if (provider.status === "failed") {
       await markJobFailed(client, jobId, provider.code, provider.message);
       return;
     }
     const saving = await client.query("update app.swap_jobs set state = 'saving', provider_request_id = $2, updated_at = now() where id = $1 and state = 'processing' returning id", [jobId, provider.providerRequestId]);
     if (!saving.rows[0]) return;
-    const stamped = await stampDevelopmentPreview(provider.resultBuffer);
+    const stamped = provider.isMock ? await stampDevelopmentPreview(provider.resultBuffer) : provider.resultBuffer;
     const metadata = await sharp(stamped).metadata();
     await withTransaction(client, async (tx) => {
       const locked = await tx.query<{ user_id: string | null; guest_id: string | null; mode: string; state: string }>(
@@ -300,7 +303,7 @@ export async function processSwapJob(client: DbClient, jobId: string) {
         height: metadata.height ?? 1,
         byteCount: stamped.byteLength,
         expiresAt: current.user_id ? new Date(Date.now() + 30 * 24 * 3600_000) : new Date(Date.now() + 24 * 3600_000),
-        metadata: { mock: true, label: "DEVELOPMENT PREVIEW - no face swap was performed." }
+        metadata: provider.isMock ? { mock: true, label: "DEVELOPMENT PREVIEW - no face swap was performed." } : { mock: false, provider: "custom-swap" }
       });
       await tx.query(
         `update app.swap_jobs

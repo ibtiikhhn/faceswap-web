@@ -1,10 +1,12 @@
 # Railway deployment
 
+Current launch: see [PRODUCTION-LAUNCH.md](PRODUCTION-LAUNCH.md). Paddle replaces Stripe; payments remain disabled.
+
 ## Services
 
 Deploy two services from this repository using the same Dockerfile:
 
-- **Web:** configuration `railway.json`; `npm run start`; expose HTTPS through the custom domain.
+- **Web:** reference configuration `railway.web.reference.json`; `npm run start`; expose HTTPS through the custom domain.
 - **Worker:** configuration `railway.worker.json`; `npm run worker`; no public domain and no HTTP health-check path.
 
 Add a PostgreSQL database in Neon or Railway and create private R2 storage. Use independent staging and production data, buckets, Stripe configuration, and secrets. The local PGlite server is strictly a development aid.
@@ -27,11 +29,11 @@ Set the **web** pre-deploy command to exactly `npm run release`. It runs app mig
 ## Environment and secrets
 
 - `APP_ENV=staging` permits labeled mock previews in a staging environment.
-- `APP_ENV=production` rejects the mock provider. Production cannot process real swaps until the final adapter has been implemented.
+- `APP_ENV=production` rejects the mock provider. The Custom Swap adapter is implemented; configure its verified result hosts and run a live staging test before production.
 - `NODE_ENV=production` controls optimized Node/Next behavior; it is intentionally distinct from the application environment so local production builds can be tested.
 - Set production Google OAuth redirect URLs and separate secure random values for `BETTER_AUTH_SECRET` and `PAYLOAD_SECRET`.
 - Set `STORAGE_DRIVER=r2`; container-local photo storage does not survive redeploys and is unsuitable for production.
-- Use Stripe test secrets in staging and live secrets only after account eligibility and product configuration are settled.
+- Stripe is retired. Paddle will be integrated separately; purchases remain disabled.
 - Give the worker the same database/private-storage/provider configuration as the web application, with the minimum operational access needed.
 
 ## Checks and operations

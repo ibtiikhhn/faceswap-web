@@ -4,6 +4,15 @@ COPY package.json package-lock.json ./
 RUN npm ci
 
 FROM dependencies AS build
+# Railway exposes variables to Docker builds only when declared as build arguments.
+# These are public configuration, never credentials.
+ARG APP_ENV=development
+ARG APP_URL=http://localhost:3000
+ARG NEXT_PUBLIC_APP_URL
+ARG SWAPS_ENABLED=true
+ARG SWAP_PROVIDER=mock
+ARG CUSTOM_SWAP_URL=https://faceswap-django.onrender.com/faceswap_file/
+ARG CUSTOM_SWAP_RESULT_HOSTS
 COPY . .
 # Git does not preserve an empty public directory.
 RUN mkdir -p public

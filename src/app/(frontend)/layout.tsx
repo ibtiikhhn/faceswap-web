@@ -11,5 +11,5 @@ export const metadata: Metadata = {
  robots: publicIndexingEnabled() ? { index: true, follow: true } : { index: false, follow: false },
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
- return <html lang="en"><body><a className="skip-link" href="#main">Skip to content</a><AccountProvider><Header /><main id="main">{children}</main><Footer /></AccountProvider></body></html>;
+ return <html lang="en"><body><a className="skip-link" href="#main">Skip to content</a><AccountProvider><Header /><main id="main">{process.env.SWAPS_ENABLED === 'false' && <div className="wrap"><p className="inline-notice" role="status">Coming soon: photo processing and paid plans are not available yet. Explore SwapThisFace.com while we prepare for launch.</p></div>}{children}</main><Footer /></AccountProvider></body></html>;
 }

@@ -1,12 +1,12 @@
 # SwapThisFace.com legal launch checklist
 
-Updated 27 September 2026. Public pages are detailed staging drafts, not jurisdiction-reviewed final paid-service terms.
+Updated 8 October 2026. Codeflow Solutions operates from Pakistan. The business contact address and paid-service terms still need completion.
 
 ## Confirmed
 - Operator supplied by owner: Codeflow Solutions.
 - Support and privacy contact supplied by owner: jasperburges0@gmail.com.
 - Google sign-in, Railway hosting, Neon database, Cloudflare R2 storage.
-- Stripe and external face-swap provider integration deferred.
+- Stripe is retired; Paddle is planned and purchases are disabled. Custom Swap adapter implemented 3 October 2026; external activation requires confirmed result hosts and processor-policy review. See CUSTOM-SWAP-SETUP.md.
 - Original asset expiry: 24 hours from upload; result expiry: guests 24 hours, accounts 30 days. Guest claim extends result expiry.
 - Account deletion disables access and queues photo removal; it does not automatically erase/anonymize all structured records.
 - Google Fonts and Unsplash assets make external browser requests. Revisit if assets become self-hosted.

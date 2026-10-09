@@ -47,5 +47,5 @@ export function StudioInvitation() {
 }
 
 export function Footer() {
-  return <footer className="site-footer"><div className="footer-top"><div><Brand/><p>A new perspective, one photo at a time.</p></div><div className="footer-links"><Link href="/face-swap">Create a swap</Link><Link href="/pricing">Pricing</Link><Link href="/blog">Journal</Link><Link href="/privacy">Privacy policy</Link><Link href="/terms">Terms & conditions</Link></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Codeflow Solutions · SwapThisFace.com</span><a href="mailto:jasperburges0@gmail.com">Contact support <ArrowUpRight size={13}/></a></div></footer>;
+  return <footer className="site-footer"><div className="footer-top"><div><Brand/><p>A new perspective, one photo at a time.</p></div><div className="footer-links"><Link href="/face-swap">Create a swap</Link><Link href="/pricing">Pricing</Link><Link href="/blog">Journal</Link><Link href="/privacy">Privacy policy</Link><Link href="/terms">Terms & conditions</Link><Link href="/refunds">Refund policy</Link></div></div><div className="footer-bottom"><span>© {new Date().getFullYear()} Codeflow Solutions · SwapThisFace.com</span><a href="mailto:jasperburges0@gmail.com">Contact support <ArrowUpRight size={13}/></a></div></footer>;
 }

@@ -1,9 +1,9 @@
+import { processPaddleEvents } from '@/server/billing/paddle/events'
 import { PgBoss } from 'pg-boss'
 import { env, featureState, requireEnv } from '@/server/env'
 import { getPool } from '@/server/db'
 import { deleteObject } from '@/server/storage'
 import { processSwapJob, queueStaleSwapJobs } from '@/server/swaps/service'
-import { processStripeWebhookInbox } from '@/server/billing/webhook-worker'
 import { runIsolatedNodeTask } from './isolated-task'
 
 const parsed = env()
@@ -70,13 +70,6 @@ async function dispatchOutbox() {
   }
 }
 
-async function processStripeInbox() {
-  for (let index = 0; index < 10; index += 1) {
-    const result = await processStripeWebhookInbox()
-    if (!result) return
-  }
-}
-
 async function cleanupExpiredAssets() {
   const pool = getPool()
   const assets = await pool.query<{ id: string; object_key: string }>(
@@ -116,8 +109,8 @@ async function tick() {
   if (running) return
   running = true
   try {
-    await dispatchOutbox()
-    await processStripeInbox()
+    if (featureState().swapsEnabled) await dispatchOutbox()
+    await processPaddleEvents(getPool())
     await cleanupExpiredAssets()
     try { await processScheduledPosts() } catch (error) { console.error("Scheduled publishing failed; will retry.", error) }
   } finally {

@@ -135,13 +135,13 @@ export function getPublicBillingCatalog(env: NodeJS.ProcessEnv = process.env): P
       code: plan.code,
       name: plan.name,
       interval: plan.interval,
-      configured: Boolean(plan.stripePriceId && plan.includedCredits),
+      configured: false,
       includedCredits: plan.includedCredits,
     })),
     creditPacks: getCreditPacks(env).map((pack) => ({
       code: pack.code,
       name: pack.name,
-      configured: Boolean(pack.stripePriceId && pack.credits),
+      configured: false,
       credits: pack.credits,
     })),
   };
