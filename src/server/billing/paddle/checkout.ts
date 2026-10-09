@@ -1,6 +1,7 @@
 import { getPool, withTransaction } from '@/server/db';
 import { HttpError } from '@/server/http';
 import { getPaddle, requirePaddle, paddleCustomerColumn } from './api';
+import { recoverPaddleCheckout, checkoutFailureState, providerErrorCode } from './recovery';
 import { offers } from './catalog';
 
 export async function createPaddleCheckout(userId: string, code: string, kind: 'subscription' | 'pack') {
@@ -15,6 +16,7 @@ export async function createPaddleCheckout(userId: string, code: string, kind: '
     throw new HttpError(503, 'This offer needs configuration review.', 'billing_unavailable');
   }
   const pool = getPool();
+  await recoverPaddleCheckout(pool,paddle,userId);
   const intent = await withTransaction(pool, async tx => {
     await tx.query('select id from app.users where id=$1 for update', [userId]);
     if (kind === 'subscription') {
@@ -31,6 +33,7 @@ export async function createPaddleCheckout(userId: string, code: string, kind: '
     return {id:inserted.rows[0].id,transactionId:null};
   });
   if (intent.transactionId) return {url:`/checkout?transaction=${encodeURIComponent(intent.transactionId)}`};
+  let stage:'customer'|'transaction'|'persist'='customer';
   try {
     const user=(await pool.query<{email:string;paddle_customer_id:string|null}>(`select email,${paddleCustomerColumn()} as paddle_customer_id from app.users where id=$1`,[userId])).rows[0];
     let customerId=user.paddle_customer_id;
@@ -40,12 +43,18 @@ export async function createPaddleCheckout(userId: string, code: string, kind: '
       customerId=customer.id;
       await pool.query(`update app.users set ${paddleCustomerColumn()}=$2 where id=$1`,[userId,customerId]);
     }
-    const transaction=await paddle.transactions.create({items:[{priceId,quantity:1}],customerId,collectionMode:'automatic',customData:{checkout_id:intent.id},checkout:{url:new URL('/checkout',settings.APP_URL).toString()}});
+    stage='transaction';
+    const transaction=await paddle.transactions.create({items:[{priceId,quantity:1}],customerId,collectionMode:'automatic',customData:{checkout_id:intent.id}});
+    stage='persist';
     await pool.query("update app.paddle_checkouts set transaction_id=$2,state='ready' where id=$1",[intent.id,transaction.id]);
     return {url:`/checkout?transaction=${encodeURIComponent(transaction.id)}`};
-  } catch {
+  } catch (error) {
     // A timeout may hide a successful remote creation. Never retry blindly.
-    await pool.query("update app.paddle_checkouts set state='review' where id=$1 and state='creating'",[intent.id]);
+    const state=checkoutFailureState(error,stage);
+    const providerCode=providerErrorCode(error);
+    console.error('Paddle checkout failed',{checkoutId:intent.id,stage,state,providerCode:providerCode??'unavailable'});
+    await pool.query("update app.paddle_checkouts set state=$2 where id=$1 and state='creating'",[intent.id,state]);
+    if(state==='canceled')throw new HttpError(502,providerCode?`Payment setup needs attention (${providerCode}). Please contact support.`:'Checkout could not be opened. Please try again.','checkout_failed');
     throw new HttpError(502,'Checkout could not be opened. Please contact support if the problem persists.','checkout_review');
   }
 }

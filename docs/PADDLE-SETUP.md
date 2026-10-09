@@ -39,7 +39,7 @@ The user chose sandbox testing on the existing swapthisface.com deployment. Keep
 
 ## Settlement and operations
 
-- Checkout authenticates the app user, validates the approved server catalog against Paddle, and records a checkout intent. Only the authenticated owner may open the transaction. API failures with an uncertain remote outcome move the intent to `review`; do not delete these rows and blindly retry.
+- Checkout authenticates the app user, validates the approved server catalog against Paddle, and records a checkout intent. Only the authenticated owner may open the transaction. Explicit request rejections release the intent for retry. API failures with an uncertain remote outcome move the intent to `review`. On a later checkout attempt, after a one-minute grace period, the app scans the authenticated customer’s Paddle transactions to recover an existing transaction or release a confirmed missing one. Never delete these rows and blindly retry.
 - Abandoned ready/draft checkouts can be canceled from the pricing error notice before choosing another offer. A payment in progress cannot be canceled by that route.
 - Webhooks verify the raw body with Paddle's SDK and persist a unique event ID before acknowledging. The worker applies events in a database transaction. Repeated transaction IDs and repeated subscription billing periods cannot grant twice.
 - Subscription events order by provider occurrence time. A paid transaction never overwrites canceled/paused subscription status. Renewals require a known subscription. Browser metadata never supplies the credit count or user ownership.
@@ -51,3 +51,5 @@ The user chose sandbox testing on the existing swapthisface.com deployment. Keep
 ## Production remains disabled
 
 Before live billing: complete the sandbox end-to-end test, finalize refund terms and outstanding business details, obtain Paddle website approval, create a separate live catalog/client token/API key/notification destination, and set the matching live IDs on both services. Use `PADDLE_ENVIRONMENT=production` with `APP_ENV=production` only. Switching PADDLE_ENVIRONMENT to production hides sandbox credit grants and uses a separate live customer mapping; sandbox records are retained for audit. Test swaps on the real face-swap provider can still incur provider usage. Never reuse sandbox IDs or secrets for live billing.
+
+Checkout uses the saved Paddle default payment link. Do not supply an explicit checkout.url override: the sandbox account rejected this domain override while accepting the identical saved default payment link during diagnostics.
