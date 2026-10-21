@@ -1,3 +1,4 @@
+import { usingWhop,whopEnvironment } from '@/server/billing/whop/settings';
 import { NextRequest } from 'next/server';
 import { requireUser } from '@/server/auth';
 import { getPool } from '@/server/db';
@@ -6,6 +7,13 @@ import { billingErrorResponse, json } from '@/server/billing/http';
 import { requirePaddle } from '@/server/billing/paddle/api';
 export async function GET(request: NextRequest) {
  try {
+  if(usingWhop()){
+   const userId=await requireUser(request);const id=request.nextUrl.searchParams.get('id');
+   if(!id || !/^[0-9a-f-]{36}$/i.test(id))throw new HttpError(400,'Invalid checkout.');
+   const row=(await getPool().query<{state:string}>('select state from app.whop_checkouts where id::text=$1 and user_id=$2 and environment=$3',[id,userId,whopEnvironment()])).rows[0];
+   if(!row)throw new HttpError(404,'Checkout not found.');
+   return json({state:row.state});
+  }
   const settings=requirePaddle();
   const userId=await requireUser(request);
   const id=request.nextUrl.searchParams.get('id');

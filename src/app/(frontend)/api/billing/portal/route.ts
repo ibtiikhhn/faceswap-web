@@ -1,3 +1,5 @@
+import { usingWhop } from '@/server/billing/whop/settings';
+import { whopPortal } from '@/server/billing/whop/subscription';
 import { NextRequest } from 'next/server';
 import { requireUser } from '@/server/auth';
 import { getPool } from '@/server/db';
@@ -7,8 +9,9 @@ import { getPaddle, requirePaddle, paddleCustomerColumn, paddleEnvironment } fro
 export const runtime='nodejs';
 export async function POST(request:NextRequest){
  try{
-  requirePaddle();assertOrigin(request);
+  if(!usingWhop())requirePaddle();assertOrigin(request);
   const userId=await requireUser(request);
+  if(usingWhop())return json(await whopPortal(userId));
   const user=(await getPool().query<{paddle_customer_id:string|null}>(`select ${paddleCustomerColumn()} as paddle_customer_id from app.users where id=$1`,[userId])).rows[0];
   if(!user?.paddle_customer_id)throw new HttpError(404,'No billing account exists yet.');
   const session=await getPaddle().customerPortalSessions.create(user.paddle_customer_id,[]);

@@ -1,3 +1,4 @@
+import { processWhopEvents } from '@/server/billing/whop/events'
 import { processPaddleEvents } from '@/server/billing/paddle/events'
 import { PgBoss } from 'pg-boss'
 import { env, featureState, requireEnv } from '@/server/env'
@@ -110,6 +111,7 @@ async function tick() {
   running = true
   try {
     if (featureState().swapsEnabled) await dispatchOutbox()
+    await processWhopEvents(getPool())
     await processPaddleEvents(getPool())
     await cleanupExpiredAssets()
     try { await processScheduledPosts() } catch (error) { console.error("Scheduled publishing failed; will retry.", error) }

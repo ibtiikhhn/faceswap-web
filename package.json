@@ -20,7 +20,10 @@
     "cms:migrate": "node --env-file-if-exists=.env.local node_modules/payload/bin.js migrate",
     "cms:seed-admin": "node --env-file-if-exists=.env.local --import tsx scripts/seed-admin.ts",
     "db:dev": "node --import tsx scripts/dev-db.ts",
-    "test:smoke": "node --import tsx scripts/smoke-api.ts"
+    "test:smoke": "node --import tsx scripts/smoke-api.ts",
+    "whop:setup": "node --env-file-if-exists=.env.local --import tsx scripts/setup-whop.ts",
+    "whop:webhook": "node --env-file-if-exists=.env.local --import tsx scripts/setup-whop-webhook.ts",
+    "whop:verify": "node --env-file-if-exists=.env.local --import tsx scripts/verify-whop.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1133.0",
@@ -32,6 +35,7 @@
     "@payloadcms/next": "^3.89.0",
     "@payloadcms/richtext-lexical": "^3.89.0",
     "@payloadcms/storage-s3": "^3.89.0",
+    "@whop/sdk": "^2.6.0",
     "better-auth": "^1.7.5",
     "drizzle-orm": "^0.45.2",
     "graphql": "^16.14.2",

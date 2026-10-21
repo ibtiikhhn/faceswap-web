@@ -1,3 +1,4 @@
+import { usingWhop,whopEnvironment } from '@/server/billing/whop/settings';
 import { NextRequest } from "next/server";
 import { getActor } from "@/server/auth";
 import { getPool } from "@/server/db";
@@ -19,18 +20,22 @@ export async function GET(request: NextRequest) {
       : { rows: [] };
     const swaps = await listSwaps(pool, actor, 10);
     const credits = actor.userId ? await creditBalances(pool, actor.userId) : { available: 0, reserved: 0 };
+    const whop=usingWhop();
     const subscription = actor.userId
       ? await pool.query<{ status: string; plan_code: string | null; current_period_end: string | null }>(
-          `select s.status, s.plan_code as "planCode", s.current_period_end as "currentPeriodEnd", s.cancel_at_period_end as "cancelAtPeriodEnd"
+          whop ? `select status,code as "planCode",period_end as "currentPeriodEnd",cancel_at_period_end as "cancelAtPeriodEnd"
+           from app.whop_memberships where user_id=$1 and environment=$2
+           order by (status in ('active','trialing','past_due')) desc,updated_at desc limit 1` : `select s.status, s.plan_code as "planCode", s.current_period_end as "currentPeriodEnd", s.cancel_at_period_end as "cancelAtPeriodEnd"
            from app.subscriptions s
            where s.user_id = $1 and (s.paddle_environment=$2 or s.paddle_environment is null)
            order by (s.status in ('active','trialing','past_due','paused')) desc, s.updated_at desc
            limit 1`,
-          [actor.userId,env().PADDLE_ENVIRONMENT]
+          [actor.userId,whop?whopEnvironment():env().PADDLE_ENVIRONMENT]
         )
       : { rows: [] };
     return json({
       authenticated: Boolean(actor.userId),
+      billingProvider: whop ? "whop" : "paddle",
       service: { mockSwap: featureState().mockSwap, swapsEnabled: featureState().swapsEnabled },
       user: user.rows[0] ?? null,
       credits,

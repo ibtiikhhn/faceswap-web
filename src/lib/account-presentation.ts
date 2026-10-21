@@ -1,5 +1,6 @@
 export type Account = {
   authenticated?: boolean;
+  billingProvider?: "paddle" | "whop";
   service?: { mockSwap: boolean; swapsEnabled?: boolean };
   user?: { id: string; name?: string | null; email?: string | null } | null;
   credits?: number | { available?: number; reserved?: number };

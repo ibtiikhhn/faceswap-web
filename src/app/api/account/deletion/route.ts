@@ -22,7 +22,8 @@ export async function POST(request: NextRequest) {
          limit 1`,
         [userId,env().PADDLE_ENVIRONMENT]
       );
-      if (activeSubscription.rows[0]) {
+      const activeWhop = await tx.query("select id from app.whop_memberships where user_id=$1 and (status in ('active','trialing','past_due') or period_end>now()) limit 1",[userId]);
+      if (activeSubscription.rows[0] || activeWhop.rows[0]) {
         throw new HttpError(409, "Cancel the active subscription before deleting this account.", "active_subscription");
       }
 

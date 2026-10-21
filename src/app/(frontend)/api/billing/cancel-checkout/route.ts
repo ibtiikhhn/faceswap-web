@@ -1,3 +1,4 @@
+import { usingWhop } from '@/server/billing/whop/settings';
 import { NextRequest } from 'next/server';
 import { requireUser } from '@/server/auth';
 import { getPool } from '@/server/db';
@@ -6,6 +7,7 @@ import { billingErrorResponse, json } from '@/server/billing/http';
 import { getPaddle, requirePaddle, paddleCustomerColumn, paddleEnvironment } from '@/server/billing/paddle/api';
 export async function POST(request:NextRequest){
  try{
+  if(usingWhop())throw new HttpError(409,'Return to your selected offer to resume checkout, or contact support to close it safely.');
   requirePaddle();assertOrigin(request);
   const userId=await requireUser(request);
   const pool=getPool();

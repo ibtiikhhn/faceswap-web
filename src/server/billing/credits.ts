@@ -1,15 +1,20 @@
+import { usingWhop, whopEnvironment } from './whop/settings';
 import { env } from "@/server/env";
 import { HttpError } from "@/server/http";
 import type { DbClient } from "@/server/db";
 
 // A subscription grant belongs to one paid subscription; packs stand alone.
 function usableGrant() {
+if(usingWhop())return `(source in ('whop_${whopEnvironment()}_pack','whop_${whopEnvironment()}_subscription') and exists (
+ select 1 from app.whop_payments p where p.grant_id=app.credit_grants.id and not p.disputed and p.revoked_credits<app.credit_grants.original_amount
+))`;
+
 const prefix=env().PADDLE_ENVIRONMENT==='sandbox'?'paddle_sandbox':'paddle';
 return `(source = '${prefix}_pack' or
  (source = '${prefix}_subscription' and exists (
   select 1 from app.paddle_transactions t join app.subscriptions s on s.paddle_subscription_id=t.subscription_id
   where t.grant_id=app.credit_grants.id and s.status='active' and s.paid_current_period_start<=now() and s.paid_current_period_end>now()
- )) or (source not in ('paddle_pack','paddle_subscription','paddle_sandbox_pack','paddle_sandbox_subscription') and exists (
+ )) or (source not like 'whop_%' and source not in ('paddle_pack','paddle_subscription','paddle_sandbox_pack','paddle_sandbox_subscription') and exists (
   select 1 from app.subscriptions s where s.user_id=app.credit_grants.user_id and s.paddle_subscription_id is null and s.status='active' and s.paid_current_period_end>now()
   and not exists (select 1 from app.billing_revocations r where r.reference=s.latest_paid_invoice_id)
  )))`;
@@ -142,7 +147,11 @@ export async function releaseReservation(client: DbClient, jobId: string) {
   await client.query(
     `update app.credit_grants
      set reserved_amount = reserved_amount - 1,
-         remaining_amount = remaining_amount + case when expires_at is null or expires_at > now() then 1 else 0 end
+         remaining_amount = case when source like 'whop_%' then least(
+           remaining_amount + case when expires_at is null or expires_at > now() then 1 else 0 end,
+           greatest(0,original_amount - coalesce((select revoked_credits from app.whop_payments where grant_id=app.credit_grants.id),0)
+             - (reserved_amount-1) - coalesce((select sum(amount) from app.credit_reservations where grant_id=app.credit_grants.id and state='consumed'),0)))
+         else remaining_amount + case when expires_at is null or expires_at > now() then 1 else 0 end end
      where id = $1`,
     [reservation.grant_id]
   );
