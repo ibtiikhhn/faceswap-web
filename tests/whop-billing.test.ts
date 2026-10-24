@@ -34,6 +34,19 @@ it('revokes refunds, including refund-before-success ordering',async()=>{
  await apply(payment({refunded_amount:money('0.00')}));expect(await creditBalance(tx,uid)).toBe(0);
 });
 it('applies partial refunds once',async()=>{await apply(payment());await apply(payment({refunded_amount:money('5.00')}));await apply(payment({refunded_amount:money('5.00')}));expect(await creditBalance(tx,uid)).toBe(100);});
+it('uses the saved checkout binding after Whop removes a completed hosted link',async()=>{
+ await apply(payment());
+ await apply(payment({checkout_configuration_id:null}));
+ expect(await creditBalance(tx,uid)).toBe(200);
+ await apply(payment({checkout_configuration_id:null,refunded_amount:money('5.00')}));
+ expect(await creditBalance(tx,uid)).toBe(100);
+ await apply(payment({checkout_configuration_id:null,refunded_amount:money('10.00')}));
+ expect(await creditBalance(tx,uid)).toBe(0);
+});
+it('does not bind a first payment when its checkout reference is missing',async()=>{
+ await expect(apply(payment({checkout_configuration_id:null}))).rejects.toThrow(/Unbound/);
+ expect(await creditBalance(tx,uid)).toBe(0);
+});
 it('membership activation alone grants no credits; paid periods deduplicate',async()=>{
  await tx.query("update app.whop_checkouts set plan_id='plan_week',kind='subscription',code='weekly'");
  const m=member();await syncMembership(tx,m);expect(await creditBalance(tx,uid)).toBe(0);

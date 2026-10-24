@@ -49,12 +49,19 @@ export async function settlePayment(tx:DbClient,p:Whop.Payment,m:Whop.Membership
  await tx.query("select pg_advisory_xact_lock(hashtext('whop-settlement'))");
  const offer=whopOffers.find(o=>process.env[o.env]===p.plan_id);
  if(!offer || p.product_id!==process.env.WHOP_PRODUCT_ID)throw new Error('Payment catalog mismatch');
- const previous=(await tx.query<{id:string;grant_id:string|null;revoked_credits:number;updated_at:Date}>('select * from app.whop_payments where id=$1 and environment=$2 for update',[p.id,environment])).rows[0];
+ const previous=(await tx.query<{id:string;user_id:string;checkout_id:string|null;grant_id:string|null;revoked_credits:number;updated_at:Date}>('select * from app.whop_payments where id=$1 and environment=$2 for update',[p.id,environment])).rows[0];
  if(previous && new Date(previous.updated_at)>new Date(p.updated_at))return;
  if(p.status!=='paid'){if(m)await syncMembership(tx,m);return;}
  if(p.currency!=='usd' || cents(p.subtotal)!==offer.amount || cents(p.total)<offer.amount || p.promo_code_id || p.line_items.length!==1 || p.line_items[0].plan_id!==p.plan_id || p.line_items[0].quantity!==1)throw new Error('Payment amount or quantity mismatch');
  let intent:Intent|undefined;
  if(p.checkout_configuration_id)intent=(await tx.query<Intent>('select * from app.whop_checkouts where configuration_id=$1 and environment=$2',[p.checkout_configuration_id,environment])).rows[0];
+ // Closing a fulfilled hosted link removes checkout_configuration_id from provider payments.
+ // Subsequent notifications must use the binding established by the first verified payment.
+ if(previous?.checkout_id){
+  const saved=(await tx.query<Intent>('select * from app.whop_checkouts where id=$1 and environment=$2',[previous.checkout_id,environment])).rows[0];
+  if(!saved || saved.user_id!==previous.user_id || (intent && intent.id!==saved.id))throw new Error('Payment checkout binding mismatch');
+  intent=saved;
+ }
  let userId=intent?.user_id;
  let start:string|null=null,end:string|null=null;
  if(offer.kind==='subscription') {
