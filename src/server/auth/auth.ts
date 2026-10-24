@@ -1,3 +1,5 @@
+import { usingD1 } from '@/server/db/d1/client'
+import { betterAuthSchema as d1AuthSchema } from '@/server/db/d1/auth-schema'
 import { betterAuth } from 'better-auth'
 import { drizzleAdapter } from '@better-auth/drizzle-adapter'
 import { env, featureState, requireEnv } from '@/server/env'
@@ -17,9 +19,9 @@ export function createAuth() {
     baseURL: parsed.APP_URL,
     secret: requireEnv('BETTER_AUTH_SECRET'),
     database: drizzleAdapter(getDb(), {
-      provider: 'pg',
-      schemaName: 'app',
-      schema: betterAuthSchema,
+      provider: usingD1() ? 'sqlite' : 'pg',
+      schemaName: usingD1() ? undefined : 'app',
+      schema: usingD1() ? d1AuthSchema : betterAuthSchema,
     }),
     advanced: {
       database: {

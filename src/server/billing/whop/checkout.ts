@@ -1,3 +1,5 @@
+import { randomUUID } from 'node:crypto';
+import { plannedReturning } from '@/server/db/d1/plan';
 import { getPool,withTransaction } from '@/server/db';
 import { HttpError } from '@/server/http';
 import { getWhop } from './client';
@@ -22,7 +24,8 @@ export async function createWhopCheckout(userId:string,code:string,kind:'subscri
    if(existing.code!==code)throw new HttpError(409,'A checkout is already pending. Finish that checkout or contact support before choosing another offer.','checkout_pending');
    return existing;
   }
-  return (await tx.query<{id:string;code:string;purchase_url:string|null}>('insert into app.whop_checkouts(user_id,environment,code,kind,plan_id) values($1,$2,$3,$4,$5) returning *',[userId,environment,code,kind,planId])).rows[0];
+  const id=randomUUID();
+  return (await plannedReturning(tx,'insert into app.whop_checkouts(user_id,environment,code,kind,plan_id,id) values($1,$2,$3,$4,$5,$6) returning id,code,purchase_url',[userId,environment,code,kind,planId,id],async()=>[{id,code,purchase_url:null as string|null}])).rows[0];
  });
  if(intent.purchase_url)return {url:safeWhopUrl(intent.purchase_url)};
  // A retry after a timeout uses the same provider idempotency key, never a second purchase intent.

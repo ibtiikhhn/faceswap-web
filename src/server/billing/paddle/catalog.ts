@@ -6,7 +6,7 @@ export const offers = [
 ] as const;
 export type Offer = typeof offers[number];
 export function paddleReady(env: Record<string,string|undefined> = process.env) {
-  return env.PADDLE_BILLING_ENABLED === 'true' && Boolean((env.PADDLE_API_KEY || (env.PADDLE_ENVIRONMENT !== "production" && env.PADDLE_SANDBOX_API_KEY)) && env.PADDLE_CLIENT_TOKEN && env.PADDLE_WEBHOOK_SECRET);
+  return env.DATABASE_DRIVER !== 'd1' && env.PADDLE_BILLING_ENABLED === 'true' && Boolean((env.PADDLE_API_KEY || (env.PADDLE_ENVIRONMENT !== "production" && env.PADDLE_SANDBOX_API_KEY)) && env.PADDLE_CLIENT_TOKEN && env.PADDLE_WEBHOOK_SECRET);
 }
 export function publicPaddleCatalog(env: Record<string,string|undefined> = process.env) {
   const configured = (o: Offer) => paddleReady(env) && /^pri_[a-z0-9]{26}$/.test(env[o.priceEnv] ?? '');

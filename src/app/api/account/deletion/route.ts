@@ -1,3 +1,4 @@
+import { plannedReturning } from '@/server/db/d1/plan';
 import { NextRequest } from "next/server";
 import { requireUser } from "@/server/auth";
 import { getPool, withTransaction } from "@/server/db";
@@ -27,7 +28,7 @@ export async function POST(request: NextRequest) {
         throw new HttpError(409, "Cancel the active subscription before deleting this account.", "active_subscription");
       }
 
-      const activeJobs = await tx.query<{ id: string }>(
+      const activeJobs = await plannedReturning(tx,
         `update app.swap_jobs
          set state = 'canceled',
              error_code = 'account_deleted',
@@ -37,7 +38,7 @@ export async function POST(request: NextRequest) {
          where user_id = $1
            and state in ('queued', 'validating', 'processing', 'saving', 'retry_wait', 'reconciling')
          returning id`,
-        [userId]
+        [userId], async () => (await tx.query<{id:string}>("select id from app.swap_jobs where user_id=$1 and state in ('queued','validating','processing','saving','retry_wait','reconciling')",[userId])).rows
       );
       for (const job of activeJobs.rows) {
         await releaseReservation(tx, job.id);

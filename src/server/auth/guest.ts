@@ -1,3 +1,4 @@
+import { plannedReturning } from '@/server/db/d1/plan';
 import { createHash, randomBytes } from "node:crypto";
 import type { NextRequest } from "next/server";
 import { getPool, type DbClient } from "@/server/db";
@@ -45,13 +46,14 @@ export async function getGuestFromRequest(request: NextRequest, client: DbClient
 }
 
 export async function claimGuestForUser(client: DbClient, input: { guestId: string; userId: string }) {
-  const result = await client.query(
+  const result = await plannedReturning(client,
     `update app.guest_sessions
      set claimed_user_id = $2, updated_at = now()
      where id = $1
        and (claimed_user_id is null or claimed_user_id = $2)
      returning id`,
-    [input.guestId, input.userId]
+    [input.guestId, input.userId],
+    async () => (await client.query<{id:string}>("select id from app.guest_sessions where id=$1 and (claimed_user_id is null or claimed_user_id=$2)",[input.guestId,input.userId])).rows
   );
   if (!result.rowCount) return false;
   await client.query(`update app.assets set user_id=$2,

@@ -1,4 +1,5 @@
-import { beforeEach,afterEach,it,expect,vi } from 'vitest';
+import { testD1 } from './helpers/d1';
+import { beforeEach,afterEach,it,expect,vi,describe } from 'vitest';
 import { PGlite } from '@electric-sql/pglite';
 import fs from 'node:fs/promises';
 import { createHmac } from 'node:crypto';
@@ -7,6 +8,7 @@ import { type DbClient,withTransaction } from '@/server/db';
 import { creditBalance } from '@/server/billing/credits';
 import { settlePayment,verifyWhopEvent,syncMembership } from '@/server/billing/whop/events';
 import { publicWhopCatalog } from '@/server/billing/whop/catalog';
+describe.each(['postgres','d1'])('Whop billing on %s',backend=>{
 let db:PGlite,tx:DbClient,uid:string,checkout:string;
 const start=new Date(Date.now()-3600000).toISOString(),end=new Date(Date.now()+6*86400000).toISOString();
 const money=(amount:string)=>({amount,currency:'usd',decimals:2,display_decimals:2});
@@ -15,8 +17,8 @@ function member(extra:Record<string,unknown>={}){return {id:'mem_test',account:{
 async function apply(p:Whop.Payment,m:Whop.Membership|null=null){return withTransaction(tx,t=>settlePayment(t,p,m));}
 beforeEach(async()=>{
  vi.stubEnv('BILLING_PROVIDER','whop');vi.stubEnv('WHOP_ENVIRONMENT','sandbox');vi.stubEnv('WHOP_API_KEY','test');vi.stubEnv('WHOP_ACCOUNT_ID','biz_test');vi.stubEnv('WHOP_PRODUCT_ID','prod_test');vi.stubEnv('WHOP_PACK_200_PLAN_ID','plan_pack');vi.stubEnv('WHOP_WEEKLY_PLAN_ID','plan_week');
- db=new PGlite();tx=db as unknown as DbClient;
- for(const f of (await fs.readdir('migrations/app')).filter(f=>f.endsWith('.sql')).sort())await db.exec((await fs.readFile(`migrations/app/${f}`,'utf8')).replace(/create extension if not exists pgcrypto;/gi,''));
+ db=backend==='d1'?testD1() as unknown as PGlite:new PGlite();tx=db as unknown as DbClient;
+ if(backend!=='d1')for(const f of (await fs.readdir('migrations/app')).filter(f=>f.endsWith('.sql')).sort())await db.exec((await fs.readFile(`migrations/app/${f}`,'utf8')).replace(/create extension if not exists pgcrypto;/gi,''));
  uid=(await tx.query<{id:string}>("insert into app.users(email) values('whop@example.com') returning id")).rows[0].id;
  checkout=(await tx.query<{id:string}>("insert into app.whop_checkouts(user_id,environment,code,kind,plan_id,configuration_id,state) values($1,'sandbox','small','pack','plan_pack','ch_test','ready') returning id",[uid])).rows[0].id;
 });
@@ -52,3 +54,5 @@ it('verifies exact signed bytes, timestamp and account',()=>{
  vi.stubEnv('WHOP_ACCOUNT_ID','biz_other');expect(()=>verifyWhopEvent(raw,headers)).toThrow();
 });
 it('publishes disabled offers by default and a truthful 30-day cadence',()=>{const c=publicWhopCatalog({});expect(c.subscriptions.every(p=>!p.configured)).toBe(true);expect(c.subscriptions[1].interval).toBe('30 days');});
+
+});

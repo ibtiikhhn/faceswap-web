@@ -4,7 +4,7 @@ import config from '@payload-config'
 const email = process.env.PAYLOAD_ADMIN_EMAIL
 const password = process.env.PAYLOAD_ADMIN_PASSWORD
 
-if (!process.env.DATABASE_URL || !process.env.PAYLOAD_SECRET) {
+if (!(process.env.DATABASE_DRIVER === 'd1' ? process.env.D1_GATEWAY_URL && process.env.D1_GATEWAY_SECRET : process.env.DATABASE_URL) || !process.env.PAYLOAD_SECRET) {
   throw new Error('Set DATABASE_URL and PAYLOAD_SECRET before running cms:seed-admin.')
 }
 

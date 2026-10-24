@@ -23,7 +23,11 @@
     "test:smoke": "node --import tsx scripts/smoke-api.ts",
     "whop:setup": "node --env-file-if-exists=.env.local --import tsx scripts/setup-whop.ts",
     "whop:webhook": "node --env-file-if-exists=.env.local --import tsx scripts/setup-whop-webhook.ts",
-    "whop:verify": "node --env-file-if-exists=.env.local --import tsx scripts/verify-whop.ts"
+    "whop:verify": "node --env-file-if-exists=.env.local --import tsx scripts/verify-whop.ts",
+    "d1:setup": "node --env-file=.env.local --import tsx scripts/setup-d1.ts",
+    "d1:deploy": "node --env-file=.env.local --import tsx scripts/deploy-d1-gateway.ts",
+    "d1:verify": "node --env-file=.env.local --import tsx scripts/verify-d1-remote.ts",
+    "d1:verify-local": "node --import tsx scripts/verify-d1-local.ts"
   },
   "dependencies": {
     "@aws-sdk/client-s3": "^3.1133.0",
@@ -31,6 +35,7 @@
     "@better-auth/drizzle-adapter": "^1.7.5",
     "@paddle/paddle-js": "^1.6.5",
     "@paddle/paddle-node-sdk": "^3.10.0",
+    "@payloadcms/db-d1-sqlite": "^3.89.0",
     "@payloadcms/db-postgres": "^3.89.0",
     "@payloadcms/next": "^3.89.0",
     "@payloadcms/richtext-lexical": "^3.89.0",

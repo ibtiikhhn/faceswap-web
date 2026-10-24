@@ -1,0 +1,18 @@
+{
+  "name": "swapthisface-d1",
+  "main": "index.js",
+  "compatibility_date": "2026-10-01",
+  "workers_dev": true,
+  "d1_databases": [
+    {
+      "binding": "APP_DB",
+      "database_name": "swapthisface-app",
+      "database_id": "75a110ad-5949-402f-96f4-71232b19827f"
+    },
+    {
+      "binding": "CMS_DB",
+      "database_name": "swapthisface-cms",
+      "database_id": "f1c9a97f-bfb7-4d94-ac06-df9c33d652ca"
+    }
+  ]
+}

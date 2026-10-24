@@ -1,3 +1,5 @@
+import { plannedReturning } from '@/server/db/d1/plan';
+import { isD1 } from '@/server/db/d1/client';
 import { randomUUID } from 'node:crypto'
 import { getPool, withTransaction, type DbClient } from '@/server/db'
 import { HttpError } from '@/server/http'
@@ -136,11 +138,12 @@ export async function grantOwnerCredits(input: {
     }
 
     const sourceRef = `owner:${input.actor.id}:${randomUUID()}`
-    const grant = await tx.query<{ id: string }>(
-      `insert into app.credit_grants (user_id, source, source_ref, original_amount, remaining_amount, reserved_amount)
-       values ($1, 'owner_adjustment', $2, $3, $3, 0)
+    const id = randomUUID();
+    const grant = await plannedReturning(tx,
+      `insert into app.credit_grants (user_id, source, source_ref, original_amount, remaining_amount, reserved_amount, id)
+       values ($1, 'owner_adjustment', $2, $3, $3, 0, $4)
        returning id`,
-      [input.userId, sourceRef, input.amount],
+      [input.userId, sourceRef, input.amount, id], async () => [{id}],
     )
 
     await tx.query(
@@ -163,8 +166,8 @@ export async function grantOwnerCredits(input: {
     return { grantId: grant.rows[0].id, sourceRef }
   }
 
-  if (input.client) return run(input.client)
-  return withTransaction(getPool(), run)
+  if (input.client && !isD1(input.client)) return run(input.client)
+  return withTransaction(input.client ?? getPool(), run)
 }
 
 export async function setOwnerUserSuspension(input: {

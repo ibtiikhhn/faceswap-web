@@ -1,79 +1,61 @@
-# Facecraft
+# SwapThisFace.com
 
-A Node.js/TypeScript photo face-swap SaaS with a Next.js studio, PostgreSQL jobs and credits, Google sign-in, Stripe billing, private photo storage, and Payload CMS. **Facecraft is a temporary brand.**
+Node.js/TypeScript photo face-swap SaaS: Next.js studio, Google sign-in, Whop subscriptions and credit packs, private Cloudflare R2 photos, a Railway worker, and Payload CMS.
 
-The real face-swap API is intentionally deferred. Development jobs produce explicitly labeled mock previews; they do not perform a face swap. Google, Stripe, R2, and deployment need your own service configuration.
+## Production database
+
+Cloudflare D1 is accessed through a private Worker gateway. Separate databases store application and CMS records. See [Cloudflare D1 deployment](docs/CLOUDFLARE-D1.md) for provisioning, the final Railway switch, owner setup, verification, and rollback limitations.
+
+Set `DATABASE_DRIVER=d1`, `D1_GATEWAY_URL`, and `D1_GATEWAY_SECRET` on both Railway services. The Cloudflare management API token is for provisioning only; do not put it in client code or Railway variables. Never commit `.env.local`.
 
 ## Run locally
 
-Requires Node.js 22.12+ and npm. Install dependencies with `npm ci`.
+Requires Node.js 22.12+ and npm; Node 24+ is needed for the in-memory SQLite verification script.
 
-1. Copy `.env.example` to `.env.local` and generate separate authentication/CMS secrets as described in the file.
-2. Start PostgreSQL. For a quick local-only database, run `npm run db:dev` in its own terminal. Its data persists in `.data/postgres` and it listens on port 5433.
-3. Run `npm run db:migrate`.
-4. Run `npm run worker` in another terminal.
-5. Run `npm run dev` and open the URL shown in the terminal.
+1. Run `npm ci`.
+2. Configure `.env.local` using `.env.example`. Keep separate random values for `BETTER_AUTH_SECRET` and `PAYLOAD_SECRET`.
+3. Run `npm run db:migrate` and `npm run cms:migrate` with the chosen database driver.
+4. Run `npm run worker` in a separate terminal.
+5. Run `npm run dev`; match its port to `APP_URL`.
 
-A development `.env.local` may already exist in this workspace from integration testing. Its `APP_URL` uses port 3099, so run `npm run dev -- --port 3099` when using that file. Never commit `.env.local` or `.data`.
+The optional PostgreSQL development workflow uses `DATABASE_DRIVER=postgres` and `npm run db:dev` (PGlite on port 5433, persistent data in `.data/postgres`). PostgreSQL remains available for existing installations. D1 uses its own migrations and cannot import the PostgreSQL migration SQL directly.
 
-The local database uses PGlite's PostgreSQL wire adapter for convenience. Use standard PostgreSQL (Neon or Railway) in production; the local single-engine multiplexer is not proof of production concurrency behavior.
-
-Public pages also render without credentials. Actions that need a missing service return a setup message rather than fake success. Local image storage is for development; use private R2 storage on Railway.
+Public pages render without service credentials. Unconfigured actions return setup errors. Mock swaps are labeled and rejected in production; container-local image storage is for development only.
 
 ## Features
 
-- Responsive landing page and studio with image previews, drag-and-drop uploads, progress, and result comparison.
-- One successful guest trial, Google customer accounts, saved history and deletion.
-- Server-side ownership checks, bounded image validation, and normalized image storage.
-- PostgreSQL-backed jobs, credit reservations, and background processing.
-- Stripe weekly/monthly/yearly plans, extra packs, portal, and webhook handling.
-- Payload rich-text blog editor and separate owner administration.
-
-Refer to [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md) for the product rules. Proposed credit/retention rules remain configurable decisions; actual prices and allowances have not been chosen.
+- Responsive photo studio with upload validation, previews, status, comparison, and downloads.
+- One guest trial, Google accounts, saved history, and account deletion.
+- Private assets with server-side ownership checks and retention cleanup.
+- Atomic credit reservations and durable background jobs; D1 mode does not use pg-boss.
+- Whop 7-day and 30-day subscriptions, standalone credit packs, cancellation, and durable webhooks.
+- Payload blog editor with drafts, publishing, media, and a separate owner dashboard.
 
 ## Commands
 
 | Command | Purpose |
 | --- | --- |
 | `npm run dev` | Local web application |
-| `npm run db:dev` | Local development database |
-| `npm run db:migrate` | Application database migrations |
-| `npm run worker` | Durable jobs and background maintenance |
+| `npm run db:migrate` | Application migrations for the configured backend |
+| `npm run cms:migrate` | CMS migrations for the configured backend |
+| `npm run cms:seed-admin` | Provision the owner using bootstrap environment variables |
+| `npm run release` | App migrations, CMS migrations, optional owner creation |
+| `npm run worker` | Background processing and maintenance |
+| `npm run d1:setup` | Create/reuse D1 databases and generate gateway configuration |
+| `npm run d1:deploy` | Deploy the private database gateway |
+| `npm run d1:verify` | Verify remote gateway security and atomic writes |
+| `npm run d1:verify-local` | In-memory auth/CMS migration and publishing verification |
 | `npm run typecheck` | TypeScript validation |
-| `npm test` | Accounting, billing, and authorization tests |
-| `npm run build` | Production compilation |
+| `npm test` | Accounting, billing, authorization, and migration tests |
+| `npm run build` | Production build with webpack |
 | `npm run start` | Serve the production build |
-| `npm run cms:migrate` | Apply Payload database migrations |
-| `npm run cms:seed-admin` | Explicitly provision the owner account |
 
-The project uses webpack for reproducible local builds; Turbopack stalled in this workstation's initial build. The dependency lockfile is committed with the source when you put the project into Git.
+## Service setup
 
-## Service configuration
+- Google: redirect URI `APP_URL/api/auth/callback/google` and the configured client ID/secret.
+- Whop: [setup and sandbox checks](docs/WHOP-SETUP.md). Paddle and Stripe are retired; legacy code remains for PostgreSQL compatibility.
+- R2: separate private customer uploads and public blog media; keep bucket credentials server-side.
+- Face-swap provider: HTTPS gateway and an explicit allowlist of result-image hosts. Enable real processing only with working provider configuration.
+- Railway: web runs `npm run start`; worker runs `npm run worker`. Web pre-deploy runs `npm run release`.
 
-### Google
-
-Set `BETTER_AUTH_SECRET`, `GOOGLE_CLIENT_ID`, and `GOOGLE_CLIENT_SECRET`. Configure the redirect URI as `APP_URL/api/auth/callback/google`, using the exact local port or production domain. Login and registration use the same Google flow. No fake developer login is exposed.
-
-### Stripe
-
-Use test mode during development. Set the secret and webhook signing secret, then configure server-owned recurring price IDs and their matching credit allowances. Weekly/monthly/yearly prices must use the corresponding Stripe interval. Credit packs use one-time prices. Do not reuse a price ID with changed credit terms after customers have purchased it.
-
-The pricing page deliberately does not invent prices. See `.env.example` and [billing integration notes](src/server/billing/README.md). Live checkout remains pending business-country eligibility, final prices, Stripe setup, and end-to-end test payments.
-
-### Storage
-
-Set `STORAGE_DRIVER=r2` plus the endpoint, credentials, and private bucket. Blog media has a separate public bucket/URL. Customer images must never use the public CMS bucket. Development images live under `.data/uploads` by default and are not web-served directly.
-
-### CMS
-
-See [docs/CMS.md](docs/CMS.md) for migrations, owner bootstrap, content publishing, and admin configuration. Customer Google accounts do not grant CMS access.
-
-## Verification
-
-See [docs/VERIFICATION.md](docs/VERIFICATION.md) for completed checks and remaining implementation limits. With the web app, worker, and local database running, use `npm run test:smoke` to verify the full mock flow.
-
-## Deployment and remaining work
-
-See [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md). The repository contains separate Railway configurations for web and worker services. No Railway resources or paid service accounts have been created by this build.
-
-Before public launch, connect and validate the real face-swap API, configure Google/Stripe/R2, confirm pricing and retention rules, finish the business/privacy/terms details, and exercise the system against a standard PostgreSQL database and real provider responses. Mock output is rejected when `APP_ENV=production`.
+Cloudflare, Railway, storage, and provider APIs have quotas or costs. Monitor usage and failed jobs, and verify backup recovery before accepting live payments. Local SQLite and remote concurrency smoke checks do not substitute for a production load test or live Google/Whop/provider verification after deployment.

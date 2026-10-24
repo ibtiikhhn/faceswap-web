@@ -1,3 +1,5 @@
+import { plannedReturning, isPlanned } from '@/server/db/d1/plan';
+import { isD1 } from '@/server/db/d1/client';
 import { z } from 'zod';
 import { unwrapWebhook } from '@whop/sdk/helpers';
 import type { Whop } from '@whop/sdk';
@@ -70,8 +72,9 @@ export async function settlePayment(tx:DbClient,p:Whop.Payment,m:Whop.Membership
  if(!userId)throw new Error('Unbound payment');
  if(intent && intent.plan_id!==p.plan_id)throw new Error('Checkout plan mismatch');
  if(!previous){
-  const inserted=await tx.query(`insert into app.whop_payments(id,user_id,environment,checkout_id,membership_id,period_start,period_end,updated_at)
-   values($1,$2,$3,$4,$5,$6,$7,$8) on conflict do nothing returning id`,[p.id,userId,environment,intent?.id??null,offer.kind==='subscription'?p.membership_id:null,start,end,p.updated_at]);
+  if(isPlanned(tx) && (await tx.query('select id from app.whop_payments where environment=$1 and membership_id=$2 and period_start=$3 and period_end=$4',[environment,offer.kind==='subscription'?p.membership_id:null,start,end])).rows.length)return;
+  const inserted=await plannedReturning(tx,`insert into app.whop_payments(id,user_id,environment,checkout_id,membership_id,period_start,period_end,updated_at)
+   values($1,$2,$3,$4,$5,$6,$7,$8) on conflict do nothing returning id`,[p.id,userId,environment,intent?.id??null,offer.kind==='subscription'?p.membership_id:null,start,end,p.updated_at],async()=>[{id:p.id}]);
   if(!inserted.rows.length)return;
   const source=`whop_${environment}_${offer.kind}`;
   await grantCredits(tx,{userId,amount:offer.credits,source,sourceRef:p.id,expiresAt:end?new Date(end):null});
@@ -92,7 +95,7 @@ export async function processWhopEvents(db:DbClient) {
  if(!process.env.WHOP_API_KEY || !process.env.WHOP_ACCOUNT_ID)return;
  const environment=whopEnvironment();
  const rows=(await db.query<{id:string;type:string;resource_id:string}>(`update app.whop_event_inbox set state='processing',attempts=attempts+1,next_attempt_at=now()+interval '2 minutes'
- where id in(select id from app.whop_event_inbox where environment=$1 and state in ('pending','failed','processing') and next_attempt_at<=now() and attempts<30 order by created_at limit 10 for update skip locked) returning id,type,resource_id`,[environment])).rows;
+ where id in(select id from app.whop_event_inbox where environment=$1 and state in ('pending','failed','processing') and next_attempt_at<=now() and attempts<30 order by created_at limit 10 ${isD1(db)?'':'for update skip locked'}) returning id,type,resource_id`,[environment])).rows;
  const client=getWhop();
  // Stop completed hosted links from being reused. Retry cleanup independently of fulfillment.
  const completed=(await db.query<{id:string;configuration_id:string}>("select id,configuration_id from app.whop_checkouts where environment=$1 and state='completed' and not configuration_closed and configuration_id is not null limit 10",[environment])).rows;

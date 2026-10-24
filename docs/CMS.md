@@ -8,7 +8,7 @@ The overview also lists the latest 50 jobs and subscriptions. Access suspension/
 
 ## Setup
 
-1. Set `DATABASE_URL` and `PAYLOAD_SECRET`.
+1. For D1, set `DATABASE_DRIVER=d1`, `D1_GATEWAY_URL`, `D1_GATEWAY_SECRET`, and `PAYLOAD_SECRET`; follow [CLOUDFLARE-D1.md](CLOUDFLARE-D1.md). PostgreSQL mode uses `DATABASE_URL` and `PAYLOAD_SECRET`.
 2. Run app migrations for the `app` schema.
 3. Run Payload migrations for the `cms` schema.
 4. Set `PAYLOAD_ADMIN_EMAIL` and `PAYLOAD_ADMIN_PASSWORD`.

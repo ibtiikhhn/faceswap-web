@@ -13,6 +13,9 @@ const serverEnvSchema = z.object({
   APP_URL: z.string().url().default('http://localhost:3000'),
   NEXT_PUBLIC_APP_URL: optionalUrl,
   DATABASE_URL: optionalString,
+  DATABASE_DRIVER: z.enum(['postgres','d1']).default('postgres'),
+  D1_GATEWAY_URL: optionalUrl,
+  D1_GATEWAY_SECRET: optionalString,
   BETTER_AUTH_SECRET: z.preprocess(blankToUndefined, z.string().min(32).optional()),
   GOOGLE_CLIENT_ID: optionalString,
   GOOGLE_CLIENT_SECRET: optionalString,
@@ -78,13 +81,14 @@ export function requireEnv<K extends keyof ServerEnv>(key: K): NonNullable<Serve
 
 export function featureState() {
   const parsed = getEnv()
+  const database = parsed.DATABASE_DRIVER === 'd1' ? Boolean(parsed.D1_GATEWAY_URL && parsed.D1_GATEWAY_SECRET) : Boolean(parsed.DATABASE_URL)
   return {
-    database: Boolean(parsed.DATABASE_URL),
-    auth: Boolean(parsed.DATABASE_URL && parsed.BETTER_AUTH_SECRET && parsed.GOOGLE_CLIENT_ID && parsed.GOOGLE_CLIENT_SECRET),
+    database,
+    auth: Boolean(database && parsed.BETTER_AUTH_SECRET && parsed.GOOGLE_CLIENT_ID && parsed.GOOGLE_CLIENT_SECRET),
     stripe: false, // Stripe retired; Paddle integration is pending.
     swapsEnabled: parsed.SWAPS_ENABLED === 'true',
     storage: Boolean(parsed.R2_ENDPOINT && parsed.R2_ACCESS_KEY_ID && parsed.R2_SECRET_ACCESS_KEY && parsed.R2_PRIVATE_BUCKET),
-    payload: Boolean(parsed.DATABASE_URL && parsed.PAYLOAD_SECRET),
+    payload: Boolean(database && parsed.PAYLOAD_SECRET),
     mockSwap: parsed.SWAP_PROVIDER === 'mock',
   }
 }

@@ -1,5 +1,6 @@
+import { plannedReturning, isPlanned } from '@/server/db/d1/plan';
 import { env } from "@/server/env";
-import { randomBytes } from "node:crypto";
+import { randomBytes, randomUUID } from "node:crypto";
 import sharp from "sharp";
 import { getPool, withTransaction, type DbClient } from "@/server/db";
 import { HttpError } from "@/server/http";
@@ -108,19 +109,20 @@ export async function createSwapJob(input: {
       if (Number(daily.rows[0]?.count ?? 0) >= trialDailyLimit()) {
         throw new HttpError(429, "The free trial limit has been reached for today.", "trial_daily_limit_reached");
       }
-      const claim = await tx.query(
+      const claim = await plannedReturning(tx,
         `update app.guest_sessions
          set trial_state = 'reserved', updated_at = now()
          where id = $1 and trial_state = 'available' and claimed_user_id is null
          returning id`,
-        [input.actor.guestId]
+        [input.actor.guestId], async () => (await tx.query<{id:string}>("select id from app.guest_sessions where id=$1 and trial_state='available' and claimed_user_id is null",[input.actor.guestId])).rows
       );
       if (!claim.rowCount) throw new HttpError(402, "The free trial has already been used.", "trial_used");
     }
 
-    const job = await tx.query<{ id: string; state: string }>(
-      `insert into app.swap_jobs (user_id, guest_id, source_asset_id, target_asset_id, mode, request_key, provider_mode, provider_consent_at)
-       values ($1,$2,$3,$4,$5,$6,$7,case when $7 = 'external' then now() else null end)
+    const id=randomUUID();
+    const job = await plannedReturning(tx,
+      `insert into app.swap_jobs (user_id, guest_id, source_asset_id, target_asset_id, mode, request_key, provider_mode, provider_consent_at, id)
+       values ($1,$2,$3,$4,$5,$6,$7,case when $7 = 'external' then now() else null end,$8)
        returning id, state`,
       [
         input.actor.userId ?? null,
@@ -129,8 +131,8 @@ export async function createSwapJob(input: {
         input.targetAssetId,
         mode,
         input.requestKey ?? randomId(24),
-        providerMode
-      ]
+        providerMode, id
+      ], async () => [{id,state: "queued"}]
     );
     if (input.actor.userId) await reserveCreditForJob(tx, input.actor.userId, job.rows[0].id);
     await tx.query(
@@ -183,7 +185,7 @@ export async function queueStaleSwapJobs(client: DbClient) {
            updated_at = now()
        where state in ('processing','saving','reconciling')
          and result_asset_id is null
-         and updated_at < now() - ($1::int * interval '1 minute')`,
+         and updated_at < ${isPlanned(tx) ? "strftime('%Y-%m-%dT%H:%M:%fZ','now','-' || $1 || ' minutes')" : "now() - ($1::int * interval '1 minute')"}`,
       [STALE_SWAP_JOB_MINUTES]
     );
 
@@ -216,7 +218,7 @@ export async function processSwapJob(client: DbClient, jobId: string) {
     );
     if (!claimed.rows[0]) return null;
 
-    const result = await tx.query<{ source_key: string; target_key: string; provider_mode: "mock" | "external" }>(
+    const result = await plannedReturning(tx,
       `update app.swap_jobs
        set state = 'processing',
            error_code = null,
@@ -226,7 +228,7 @@ export async function processSwapJob(client: DbClient, jobId: string) {
        returning provider_mode,
          (select object_key from app.assets where id = source_asset_id) as source_key,
          (select object_key from app.assets where id = target_asset_id) as target_key`,
-      [jobId]
+      [jobId], async () => (await tx.query<{source_key:string;target_key:string;provider_mode:'mock'|'external'}>(`select j.provider_mode,s.object_key as source_key,t.object_key as target_key from app.swap_jobs j join app.assets s on s.id=j.source_asset_id join app.assets t on t.id=j.target_asset_id where j.id=$1`,[jobId])).rows
     );
     return result.rows[0] ?? null;
   });
@@ -246,7 +248,10 @@ export async function processSwapJob(client: DbClient, jobId: string) {
     if (!saving.rows[0]) return;
     const stamped = provider.isMock ? await stampDevelopmentPreview(provider.resultBuffer) : provider.resultBuffer;
     const metadata = await sharp(stamped).metadata();
-    await withTransaction(client, async (tx) => {
+    const key = `results/${jobId}/${randomId()}.webp`;
+    writtenKey = key;
+    await putObject(key, stamped, provider.contentType);
+    const saved = await withTransaction(client, async (tx) => {
       const locked = await tx.query<{ user_id: string | null; guest_id: string | null; mode: string; state: string }>(
         `select user_id, guest_id, mode, state
          from app.swap_jobs
@@ -255,7 +260,7 @@ export async function processSwapJob(client: DbClient, jobId: string) {
         [jobId]
       );
       const current = locked.rows[0];
-      if (!current || current.state === "succeeded") return;
+      if (!current || current.state === "succeeded") return false;
       if (current.state !== "saving") {
         throw new Error(`Swap job is no longer saving; current state is ${current.state}.`);
       }
@@ -290,9 +295,6 @@ export async function processSwapJob(client: DbClient, jobId: string) {
            and (a.expires_at is null or a.expires_at > now())
          for update of a`, [jobId]);
       if (inputs.rows.length !== 2) throw new Error("Input photos are no longer available.");
-      const key = `${current.user_id ? `users/${current.user_id}` : `guests/${current.guest_id}`}/results/${randomId()}.webp`;
-      writtenKey = key;
-      await putObject(key, stamped, provider.contentType);
       const resultAssetId = await createAsset(tx, {
         userId: current.user_id ?? undefined,
         guestId: current.guest_id ?? undefined,
@@ -316,10 +318,16 @@ export async function processSwapJob(client: DbClient, jobId: string) {
       } else if (current.guest_id) {
         await tx.query("update app.guest_sessions set trial_state = 'consumed', updated_at = now() where id = $1", [current.guest_id]);
       }
+      return true;
     });
+    if (!saved) await deleteObject(key).catch(() => undefined);
   } catch (error) {
     console.error("Swap processing failed", { jobId, error });
-    if (writtenKey) await deleteObject(writtenKey).catch(() => undefined);
+    if (writtenKey) {
+      // A lost HTTP response can follow a committed batch. Never delete a committed result.
+      const referenced=await client.query('select id from app.assets where object_key=$1',[writtenKey]).catch(()=>null);
+      if(referenced && !referenced.rows.length) await deleteObject(writtenKey).catch(()=>undefined);
+    }
     await markJobFailed(client, jobId, "provider_or_storage_error", "The swap could not be completed. Please try again.");
   }
 }
@@ -343,12 +351,12 @@ async function stampDevelopmentPreview(buffer: Buffer) {
 
 export async function markJobFailed(client: DbClient, jobId: string, code: string, message: string) {
   await withTransaction(client, async (tx) => {
-    const job = await tx.query<{ user_id: string | null; guest_id: string | null; mode: string }>(
+    const job = await plannedReturning(tx,
       `update app.swap_jobs
        set state = 'failed', error_code = $2, error_message = $3, finished_at = now(), updated_at = now()
        where id = $1 and state in ('queued','processing','saving','retry_wait','reconciling')
        returning user_id, guest_id, mode`,
-      [jobId, code, message]
+      [jobId, code, message], async () => (await tx.query<{user_id:string|null;guest_id:string|null;mode:string}>("select user_id,guest_id,mode from app.swap_jobs where id=$1 and state in ('queued','processing','saving','retry_wait','reconciling')",[jobId])).rows
     );
     const row = job.rows[0];
     if (!row) return;

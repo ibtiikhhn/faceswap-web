@@ -7,6 +7,7 @@ FROM dependencies AS build
 # Railway exposes variables to Docker builds only when declared as build arguments.
 # These are public configuration, never credentials.
 ARG APP_ENV=development
+ARG DATABASE_DRIVER=postgres
 ARG APP_URL=http://localhost:3000
 ARG NEXT_PUBLIC_APP_URL
 ARG SWAPS_ENABLED=true

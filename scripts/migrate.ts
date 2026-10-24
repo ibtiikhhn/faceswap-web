@@ -1,6 +1,9 @@
+import { usingD1 } from '@/server/db/d1/client';
+import { migrateD1 } from '@/server/db/d1/migrate';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { getPool } from '@/server/db';
+if (usingD1()) { await migrateD1(); } else {
 const pool=getPool();
 const client=await pool.connect();
 try {
@@ -14,3 +17,5 @@ try {
   catch(error){await client.query('rollback');throw error;}
  }
 } finally { await client.query("select pg_advisory_unlock(hashtext('facecraft-app-migrations'))");client.release();await pool.end(); }
+
+}

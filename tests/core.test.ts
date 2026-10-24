@@ -1,3 +1,4 @@
+import { testD1 } from './helpers/d1';
 import fs from "node:fs/promises";
 import path from "node:path";
 import { PGlite } from "@electric-sql/pglite";
@@ -10,7 +11,9 @@ import * as customProvider from "@/server/swaps/providers/custom";
 import { putObject, getObject } from "@/server/storage";
 import type { DbClient } from "@/server/db";
 
+describe.each(['postgres','d1'])('Core backend %s',backend=>{
 async function db() {
+  if(backend==='d1')return testD1() as unknown as DbClient & PGlite;
   const client = new PGlite();
   const migrationDir = path.join(process.cwd(), "migrations", "app");
   const files = (await fs.readdir(migrationDir)).filter((file) => file.endsWith(".sql")).sort();
@@ -267,7 +270,7 @@ describe("core swap accounting", () => {
       asset_user_id: userId,
       asset_guest_id: guestId,
       trial_state: "consumed",
-      reservations: "0",
+      reservations: backend === "d1" ? 0 : "0",
     });
   });
 });
@@ -295,4 +298,6 @@ describe('external swap settlement', () => {
       if(!failure){const asset=(await client.query<{metadata:{mock:boolean};object_key:string}>('select a.metadata,a.object_key from app.assets a join app.swap_jobs j on a.id=j.result_asset_id where j.id=$1',[job.id])).rows[0];expect(asset.metadata.mock).toBe(false);expect(await getObject(asset.object_key)).toEqual(bytes);}
     } finally {submit.mockRestore();process.env.SWAP_PROVIDER='mock';await client.close();}
   });
+});
+
 });

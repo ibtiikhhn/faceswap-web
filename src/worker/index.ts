@@ -1,3 +1,4 @@
+import { usingD1 } from '@/server/db/d1/client'
 import { processWhopEvents } from '@/server/billing/whop/events'
 import { processPaddleEvents } from '@/server/billing/paddle/events'
 import { PgBoss } from 'pg-boss'
@@ -11,18 +12,18 @@ const parsed = env()
 const SWAP_QUEUE = 'swap.process'
 const pollMs = Number(process.env.WORKER_POLL_MS ?? 3000)
 
-if (!parsed.DATABASE_URL) {
-  throw new Error('DATABASE_URL is required to run the worker.')
+if (!featureState().database) {
+  throw new Error('Database configuration is required to run the worker.')
 }
 
-const boss = new PgBoss({
+const boss = usingD1() ? null : new PgBoss({
   connectionString: requireEnv('DATABASE_URL'),
   schema: 'pgboss',
   max: Number(process.env.QUEUE_DATABASE_POOL_MAX ?? 4),
 })
 
-await boss.start()
-await boss.createQueue(SWAP_QUEUE, {
+await boss?.start()
+await boss?.createQueue(SWAP_QUEUE, {
   policy: 'key_strict_fifo',
   retryLimit: 3,
   retryDelay: 10,
@@ -30,7 +31,7 @@ await boss.createQueue(SWAP_QUEUE, {
   retentionSeconds: 7 * 24 * 3600,
 })
 
-await boss.work<{ jobId: string }>(SWAP_QUEUE, { batchSize: 1 }, async ([job]) => {
+await boss?.work<{ jobId: string }>(SWAP_QUEUE, { batchSize: 1 }, async ([job]) => {
   await processSwapJob(getPool(), job.data.jobId)
 })
 
@@ -56,13 +57,14 @@ async function dispatchOutbox() {
          and attempts < 10
        order by created_at
        limit 25
-       for update skip locked
+       ${usingD1() ? '' : 'for update skip locked'}
      )
      returning id, payload`,
   )
   for (const event of events.rows) {
     try {
-      await boss.send(SWAP_QUEUE, { jobId: event.payload.jobId }, { singletonKey: event.payload.jobId })
+      if (!boss) await processSwapJob(pool,event.payload.jobId)
+      else await boss.send(SWAP_QUEUE, { jobId: event.payload.jobId }, { singletonKey: event.payload.jobId })
       await pool.query("update app.outbox_events set state = 'done', updated_at = now() where id = $1", [event.id])
     } catch (error) {
       console.error(error)
@@ -112,7 +114,7 @@ async function tick() {
   try {
     if (featureState().swapsEnabled) await dispatchOutbox()
     await processWhopEvents(getPool())
-    await processPaddleEvents(getPool())
+    if (!usingD1()) await processPaddleEvents(getPool())
     await cleanupExpiredAssets()
     try { await processScheduledPosts() } catch (error) { console.error("Scheduled publishing failed; will retry.", error) }
   } finally {
@@ -137,7 +139,7 @@ async function shutdown() {
   if (stopping) return
   stopping = true
   if (timer) clearTimeout(timer)
-  await boss.stop()
+  await boss?.stop()
   process.exit(0)
 }
 

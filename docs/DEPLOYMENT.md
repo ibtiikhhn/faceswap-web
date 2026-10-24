@@ -1,6 +1,6 @@
 # Railway deployment
 
-Current launch: see [PRODUCTION-LAUNCH.md](PRODUCTION-LAUNCH.md). Paddle replaces Stripe; payments remain disabled.
+Current database deployment: follow [CLOUDFLARE-D1.md](CLOUDFLARE-D1.md). Whop replaces Paddle and Stripe; see [WHOP-SETUP.md](WHOP-SETUP.md). The PostgreSQL-specific notes below are retained for the optional PostgreSQL backend.
 
 ## Services
 

@@ -5,8 +5,8 @@ type ReleaseOptions = {
 }
 
 export async function runRelease({ env, run, log = console.log }: ReleaseOptions) {
-  if (!env.DATABASE_URL || !env.PAYLOAD_SECRET) {
-    throw new Error('Release requires DATABASE_URL and PAYLOAD_SECRET.')
+  if (!(env.DATABASE_DRIVER === 'd1' ? env.D1_GATEWAY_URL && env.D1_GATEWAY_SECRET : env.DATABASE_URL) || !env.PAYLOAD_SECRET) {
+    throw new Error('Release requires DATABASE_URL (PostgreSQL) or D1_GATEWAY_URL and D1_GATEWAY_SECRET (D1), plus PAYLOAD_SECRET.')
   }
   const email = Boolean(env.PAYLOAD_ADMIN_EMAIL)
   const password = Boolean(env.PAYLOAD_ADMIN_PASSWORD)

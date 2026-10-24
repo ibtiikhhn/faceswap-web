@@ -1,3 +1,6 @@
+import { sqliteD1Adapter } from '@payloadcms/db-d1-sqlite'
+import { d1Binding } from '@/server/db/d1/binding'
+import { usingD1 } from '@/server/db/d1/client'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import sharp from 'sharp'
@@ -48,7 +51,11 @@ export default buildConfig({
   editor: lexicalEditor(),
   collections: [Owners, Categories, Media, Posts, Redirects],
   globals: [SiteSettings],
-  db: postgresAdapter({
+  db: usingD1() ? sqliteD1Adapter({
+    binding: d1Binding('cms'),
+    push: false,
+    migrationDir: path.resolve(dirname, 'migrations/d1/cms'),
+  }) : postgresAdapter({
     pool: {
       max: cmsPoolSize(),
       connectionTimeoutMillis: 5000,

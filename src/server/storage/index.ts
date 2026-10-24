@@ -1,6 +1,7 @@
+import { plannedReturning } from '@/server/db/d1/plan';
 import fs from "node:fs/promises";
 import path from "node:path";
-import { randomBytes } from "node:crypto";
+import { randomBytes, randomUUID } from "node:crypto";
 import sharp from "sharp";
 import { S3Client, GetObjectCommand, PutObjectCommand, DeleteObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
@@ -131,10 +132,11 @@ export async function createAsset(client: DbClient, input: {
   expiresAt?: Date | null;
   metadata?: Record<string, unknown>;
 }) {
-  const result = await client.query<{ id: string }>(
+  const id = randomUUID();
+  const result = await plannedReturning(client,
     `insert into app.assets
-       (user_id, guest_id, kind, object_key, content_type, width, height, byte_count, expires_at, metadata, status)
-     values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,'active')
+       (user_id, guest_id, kind, object_key, content_type, width, height, byte_count, expires_at, metadata, status, id)
+     values ($1,$2,$3,$4,$5,$6,$7,$8,$9,$10,'active',$11)
      returning id`,
     [
       input.userId ?? null,
@@ -146,8 +148,8 @@ export async function createAsset(client: DbClient, input: {
       input.height,
       input.byteCount,
       input.expiresAt ?? null,
-      JSON.stringify(input.metadata ?? {})
-    ]
+      JSON.stringify(input.metadata ?? {}), id
+    ], async () => [{id}]
   );
   return result.rows[0].id;
 }
