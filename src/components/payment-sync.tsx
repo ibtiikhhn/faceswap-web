@@ -22,7 +22,10 @@ export function PaymentSync() {
     if(disposed)return;
     await refresh();
     if(disposed)return;
-    if(result.state==='completed'){setMessage('Payment confirmed. Your credits are ready to use.');return;}
+    if(result.state==='completed'){setMessage('Payment confirmed. Your account balance is up to date.');return;}
+    if(result.state==='refunded'){setMessage('This payment was refunded. Its credits have been removed.');return;}
+    if(result.state==='partially_refunded'){setMessage('This payment was partially refunded. Your credit balance has been adjusted.');return;}
+    if(result.state==='disputed'){setMessage('This payment is under dispute. Credits from this purchase are unavailable. Contact support for help.');return;}
     if(result.state==='canceled'){setMessage('This checkout was canceled. No credits were added.');return;}
    } catch { /* A temporary network failure must not be reported as a successful payment. */ }
    if(disposed)return;

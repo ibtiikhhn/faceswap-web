@@ -1,0 +1,435 @@
+Browser tab: 1, Title: "Free Keyword Generator Tool: Find 100+ Keyword Ideas in Seconds", URL: "https://ahrefs.com/keyword-generator/?country=in&input=face%20swap%20photo".
+0 AXWebArea Free Keyword Generator Tool: Find 100+ Keyword Ideas in Seconds, URL: ahrefs.com/keyword-generator/
+	1 container
+		2 container root
+			3 container
+				4 link Description: Letaido, Value: letaido.com/
+				5 text The AI marketing platform we needed didn’t exist. So we built it.
+				6 image Tim Soulo
+				7 text Tim Soulo, CMO at Ahrefs
+				8 link Description: Get Started, Value: signin.letaido.com/sign-up
+			9 container
+				10 link Description: Ahrefs, Value: ahrefs.com/
+				11 menu bar Main navigation
+					12 (collapsed) Product, Secondary Actions: Expand
+						13 container
+							14 text Product
+							15 image
+					16 link Description: Our data, Value: ahrefs.com/big-data
+					17 (collapsed) Resources, Secondary Actions: Expand
+						18 container
+							19 text Resources
+							20 image
+					21 link Description: Pricing, Value: ahrefs.com/pricing
+					22 link Description: Enterprise, Value: ahrefs.com/enterprise
+				23 button Search Ahrefs
+					24 image
+				25 image
+				26 link Description: Sign in, Value: app.ahrefs.com/user/login
+				27 link Description: Sign up, Value: ahrefs.com/pricing
+				28 text Ahrefs
+			29 link Description: Sign up, Value: ahrefs.com/pricing
+			30 container
+				31 container Breadcrumb
+					32 content list
+						33 link Description: Free SEO Tools, Value: ahrefs.com/free-seo-tools
+				34 heading Free Keyword Generator, Value: 1
+					35 text Free Keyword Generator
+				36 text Find thousands of keyword ideas in seconds. Google /
+				37 link Description: Bing, Value: ahrefs.com/bing-keyword-tool
+				38 text /
+				39 link Description: YouTube, Value: ahrefs.com/youtube-keyword-tool
+				40 text /
+				41 link Description: Amazon, Value: ahrefs.com/amazon-keyword-tool
+				42 container
+					43 text field (settable) face swap photo
+					44 text For example,
+					45 button keyword research
+						46 text keyword research
+					47 button   India
+						48 text India
+						49 image
+					50 button Find keywords
+			51 container
+				52 link Description: Firehose, Value: firehose.com/
+				53 text Turn a keyword into a live web monitor
+				54 text Firehose watches the whole web for new pages about your keywords and streams each as it’s published — research that never goes stale.
+				55 link Description: Watch my keywords live, Value: signin.firehose.com/sign-up
+				56 link Description: Explore Firehose →, Value: firehose.com/
+			57 container
+				58 heading Discover keyword ideas, all day long, Value: 2
+					59 text Discover keyword ideas, all day long
+				60 container
+					61 text Find relevant keywords from
+					62 link Description: our database, Value: ahrefs.com/big-data
+					63 text  of over 8 billion queries. Just enter up to ten words or phrases and choose from one of six keyword ideas reports.
+				64 text Fill your content calendar for weeks, months, or even years in minutes.
+				65 text Keywords that contain your seed in the order it's written.
+				66 text Keywords that contain all the terms in your seed (in any order).
+				67 text Keywords that the top-ranking pages also rank for.
+				68 text Keywords suggested via ‘autocomplete’ when searching for your seed.
+				69 text Keywords phrased as a question.
+				70 button Phrase match
+				71 text /
+				72 button Having same terms
+				73 text /
+				74 button Also rank for
+				75 text /
+				76 button Search suggestions
+				77 text /
+				78 button Questions
+			79 container
+				80 heading See key SEO metrics, Value: 2
+					81 text See key SEO metrics
+				82 text Every keyword comes complete with local and global monthly search volume estimates and other advanced SEO metrics — all powered by clickstream data.
+				83 image
+				84 text Use these metrics to help choose the best keywords to target across hundreds of locations.
+			85 container
+				86 heading Find easy keywords to rank for, Value: 2
+					87 text Find easy keywords to rank for
+				88 text Combine filters to find untapped keywords with high organic traffic potential and low Keyword Difficulty scores.
+				89 image
+				90 text Dig deeper with filters for cost-per-click (CPC), SERP features, word count, and more.
+			91 container
+				92 heading Identify long-tail keywords, Value: 2
+					93 text Identify long-tail keywords
+				94 text Look for groups of keywords with the same Parent Topic to find long-tail variations and subtopics.
+				95 image
+				96 text Consider tackling relevant subtopics in your content to improve your chances of ranking for related queries.
+			97 container
+				98 heading Analyze the competition, Value: 2
+					99 text Analyze the competition
+				100 text Check key SEO metrics for the current top-ranking pages to see what you're up against, and how difficult it might be to crack the first page.
+				101 image
+				102 text Look at each page's estimated monthly organic traffic to gauge the true traffic potential of any keyword.
+			103 container
+				104 heading Go beyond Google, Value: 2
+					105 text Go beyond Google
+				106 text Research keyword ideas in eight other search engines: YouTube, Bing, Yahoo, Amazon, Baidu—the list goes on.
+				107 image
+				108 text Learn what people are searching for, practically anywhere.
+			109 container
+				110 heading Save keyword ideas, Value: 2
+					111 text Save keyword ideas
+				112 text Create lists of your best keywords in a couple of clicks.
+				113 image
+				114 text Export the data in seconds.
+			115 container
+				116 heading Keyword Research Guides, Value: 2
+					117 text Keyword Research Guides
+				118 link ahrefs.com/blog/keyword-research/
+				119 link Description: Keyword Research: The Beginner’s Guide by Ahrefs, Value: ahrefs.com/blog/keyword-research/
+				120 text Keyword research is the process of finding keywords that you want to rank for in search engines. It’s about understanding what potential customers are searching for and why.
+				121 link ahrefs.com/blog/long-tail-keywords/
+				122 link Description: Long-tail Keywords: What They Are and How to Get Search Traffic From Them, Value: ahrefs.com/blog/long-tail-keywords/
+				123 text Long-tail keywords are search queries that get a small number of searches per month. They tend to be longer and more specific than head keywords.
+				124 link ahrefs.com/blog/low-competition-keywords/
+				125 link Description: How to Find Low-Competition Keywords for SEO, Value: ahrefs.com/blog/low-competition-keywords/
+				126 text Learn how to find low-hanging keyword opportunities in a few steps, and how to make sure those keywords are truly low-competition and easy to rank for.
+			127 container
+				128 text Sign up for Ahrefs.  Stay discoverable—in search, AI, and beyond. 27,025 users joined Ahrefs in the last 7 days
+				129 heading Starter, Value: 3
+					130 text Starter
+				131 text See what people search and spy on competitors.
+				132 link Description: Learn more ↗, Value: ahrefs.com/blog/starter-plan/
+				133 image
+				134 container
+					135 text $ 29
+				136 container
+					137 text / mo
+				138 link Description: Get started, Value: ahrefs.com/signup
+				139 heading Ahrefs Free, Value: 3
+					140 text Ahrefs Free
+				141 text Get Ahrefs data on your site and fix what matters.
+				142 link Description: Learn more ↗, Value: ahrefs.com/free
+				143 image
+				144 text Free
+				145 link Description: Get started, Value: ahrefs.com/signup
+			146 container
+				147 text CORE TOOLS
+				148 link Description: Brand Radar, Value: ahrefs.com/brand-radar
+				149 link Description: Dashboard, Value: ahrefs.com/dashboard
+				150 link Description: Site Explorer, Value: ahrefs.com/site-explorer
+				151 link Description: Keywords Explorer, Value: ahrefs.com/keywords-explorer
+				152 link Description: Site Audit, Value: ahrefs.com/site-audit
+				153 link Description: Rank Tracker, Value: ahrefs.com/rank-tracker
+				154 link Description: GSC Insights, Value: ahrefs.com/gsc-insights
+				155 link Description: Content Explorer, Value: ahrefs.com/content-explorer
+				156 link Description: Web Analytics, Value: ahrefs.com/web-analytics
+				157 link Description: Bot Analytics, Value: ahrefs.com/bot-analytics
+				158 link Description: GBP Monitor, Value: ahrefs.com/gbp-monitor
+				159 link Description: Social Media Manager, Value: ahrefs.com/social-media-manager
+				160 link Description: AI Content Helper, Value: ahrefs.com/ai-content-helper
+				161 link Description: Report Builder, Value: ahrefs.com/report-builder
+				162 link Description: USE CASES →, Value: ahrefs.com/use-cases
+				163 link Description: Competitive Intelligence, Value: ahrefs.com/use-cases/competitive-intelligence
+				164 link Description: PPC, Value: ahrefs.com/use-cases/ppc
+				165 link Description: SEO, Value: ahrefs.com/use-cases/seo
+				166 link Description: AEO, Value: ahrefs.com/use-cases/aeo
+				167 link Description: Content Marketing, Value: ahrefs.com/use-cases/content-marketing
+				168 link Description: Brand Marketing, Value: ahrefs.com/use-cases/brand-marketing
+				169 link Description: Investing, Value: ahrefs.com/use-cases/investing
+				170 text EXTRA TOOLS & FEATURES
+				171 link Description: Domain Comparison, Value: ahrefs.com/domain-comparison
+				172 link Description: Batch Analysis, Value: ahrefs.com/batch-analysis
+				173 link Description: Link Intersect, Value: ahrefs.com/link-intersect
+				174 link Description: Content Gap, Value: ahrefs.com/content-gap
+				175 link Description: Email Alerts, Value: ahrefs.com/alerts
+				176 link Description: SEO Checker, Value: ahrefs.com/seo-checker
+				177 link Description: Traffic Checker, Value: ahrefs.com/traffic-checker
+				178 link Description: Data Studio Connectors, Value: ahrefs.com/google-data-studio-connectors
+				179 link Description: Top Websites, Value: ahrefstop.com/websites
+				180 link Description: Patches, Value: ahrefs.com/patches
+				181 link Description: Portfolios, Value: ahrefs.com/portfolios
+				182 link Description: IndexNow, Value: ahrefs.com/index-now
+				183 link Description: AI Tech SEO, Value: ahrefs.com/ai-tech-seo
+				184 link Description: All tools, Value: ahrefs.com/all
+				185 text OTHER PRODUCTS
+				186 link Description: Letaido ↗, Value: letaido.com/
+				187 link Description: Firehose ↗, Value: firehose.com/
+				188 link Description: Yep ↗, Value: yep.com/
+				189 link Description: FREE SEO TOOLS →, Value: ahrefs.com/free-seo-tools
+				190 link Description: Ahrefs Free, Value: ahrefs.com/free
+				191 link Description: AI Mode Tracker, Value: ahrefs.com/ai-mode-tracker
+				192 link Description: AI Overviews Tracker, Value: ahrefs.com/ai-overviews-tracker
+				193 link Description: AI Visibility Checker, Value: ahrefs.com/ai-visibility-checker
+				194 link Description: AI Writing Tools, Value: ahrefs.com/writing-tools
+				195 link Description: Backlink Checker, Value: ahrefs.com/backlink-checker
+				196 link Description: Broken Link Checker, Value: ahrefs.com/broken-link-checker
+				197 link Description: Website Authority Checker, Value: ahrefs.com/website-authority-checker
+				198 text Keyword Generator
+				199 link Description: SERP Checker, Value: ahrefs.com/serp-checker
+				200 link Description: SEO Toolbar, Value: ahrefs.com/seo-toolbar
+				201 link Description: Keyword Rank Checker, Value: ahrefs.com/keyword-rank-checker
+				202 link Description: Keyword Difficulty Checker, Value: ahrefs.com/keyword-difficulty
+				203 link Description: Website Checker, Value: ahrefs.com/website-checker
+				204 link Description: SEO Audit Tool, Value: ahrefs.com/seo-audit-tool
+				205 link Description: Sitemap Generator, Value: ahrefs.com/sitemap-generator
+				206 link Description: Website Change Monitor, Value: ahrefs.com/website-change-monitor
+				207 link Description: Word Count, Value: wordcount.com/
+				208 link Description: ALTERNATIVES →, Value: ahrefs.com/vs
+				209 link Description: Ahrefs vs Semrush, Value: ahrefs.com/vs/semrush
+				210 link Description: Ahrefs vs Profound, Value: ahrefs.com/vs/profound
+				211 text PRODUCT
+				212 link Description: Pricing, Value: ahrefs.com/pricing
+				213 link Description: Our data, Value: ahrefs.com/big-data
+				214 link Description: AhrefsBot, Value: ahrefs.com/robot
+				215 link Description: API, Value: docs.ahrefs.com/api
+				216 link Description: Ask Ahrefs, Value: ahrefs.com/ask-ahrefs
+				217 link Description: SEO MCP, Value: ahrefs.com/seo-mcp
+				218 link Description: SEO API, Value: ahrefs.com/seo-api
+				219 link Description: Enterprise, Value: ahrefs.com/enterprise
+				220 link Description: What’s new?, Value: ahrefs.com/blog/category/product-blog/
+				221 text COMPANY
+				222 link Description: About, Value: ahrefs.com/about
+				223 link Description: Testimonials, Value: ahrefs.com/reviews
+				224 link Description: Events, Value: ahrefs.com/events
+				225 link Description: Team, Value: ahrefs.com/team
+				226 link Description: Careers, Value: ahrefs.com/careers
+				227 link Description: Tech, Value: ahrefs.com/tech
+				228 link Description: Media kit, Value: ahrefs.com/media-kit
+				229 link Description: FAQ, Value: ahrefs.com/faq
+				230 link Description: Contact us, Value: mailto:support@ahrefs.com
+				231 text RESOURCES
+				232 link Description: Blog, Value: ahrefs.com/blog/
+				233 link Description: Tech blog, Value: tech.ahrefs.com/
+				234 link Description: Podcast, Value: ahrefs.com/podcast
+				235 link Description: Webinars, Value: ahrefs.com/webinars
+				236 link Description: SEO Guide, Value: ahrefs.com/seo
+				237 link Description: AEO Guide, Value: ahrefs.com/aeo
+				238 link Description: Help center, Value: help.ahrefs.com/
+				239 link Description: Academy, Value: ahrefs.com/academy
+				240 link Description: Marketing Agencies, Value: ahrefs.com/agencies
+				241 link Description: Digest, Value: ahrefs.com/newsletter
+				242 link Description: Discoverable, Value: ahrefs.com/discoverable
+				243 text © 2026 Ahrefs Pte. Ltd. (201227417H) 16 Raffles Quay, #33-03 Hong Leong Building, Singapore 048581
+				244 link Description: Legal info, Value: ahrefs.com/legal
+				245 link Description: Privacy Policy, Value: ahrefs.com/legal/privacy-policy
+				246 button Cookie Settings
+				247 link Description: Terms of Service, Value: ahrefs.com/legal/terms
+				248 link x.com/ahrefs
+				249 link youtube.com/c/AhrefsCom
+				250 link instagram.com/ahrefs
+				251 link facebook.com/Ahrefs
+				252 link linkedin.com/company/ahrefs/
+				253 button English
+					254 text English
+					255 image
+			256 link help.ahrefs.com/
+		257 container
+			258 text Keyword ideas for “face swap photo”
+			259 button
+				260 image
+			261 text The first 20 keywords out of 208
+			262 button Phrase match
+			263 text /
+			264 button Questions
+			265 table
+				266 row
+					267 cell
+						268 heading Keyword, Value: 4
+							269 text Keyword
+					270 cell
+						271 container
+							272 heading KD, Value: 4
+								273 text KD
+							274 image
+					275 cell
+						276 container
+							277 heading Volume ↓, Value: 4
+								278 text Volume ↓
+							279 image
+					280 cell
+						281 container
+							282 heading Updated, Value: 4
+								283 text Updated
+							284 image
+				285 row
+					286 cell
+						287 text face swap photo
+					288 cell
+						289 text Hard
+					290 cell
+						291 text >1000
+					292 cell
+						293 text 1 day
+				294 row
+					295 cell
+						296 text ai face swap photo
+					297 cell
+						298 text Hard
+					299 cell
+						300 text >1000
+					301 cell
+						302 text 8 days
+				303 row
+					304 cell
+						305 text remaker ai face swap photo
+					306 cell
+						307 text Medium
+					308 cell
+						309 text >1000
+					310 cell
+						311 text 3 days
+				312 row
+					313 cell
+						314 text face swap photo online free
+					315 cell
+						316 text Hard
+					317 cell
+						318 text >100
+					319 cell
+						320 text 16 October
+				321 row
+					322 cell
+						323 text face swap photo ai free
+					324 cell
+						325 text N/A
+					326 cell
+						327 text >100
+			328 container
+				329 link Description: Firehose, Value: firehose.com/
+				330 text Turn a keyword into a live web monitor
+				331 text You’ve got the list. Firehose watches the whole web for new pages about these terms and streams each as it’s published.
+				332 link Description: Watch my keywords live, Value: firehose.com/taps/new
+				333 link Description: Explore Firehose →, Value: firehose.com/
+			334 table
+				335 row
+					336 cell
+						337 text ai face swap photo online free
+					338 cell
+						339 text Hard
+					340 cell
+						341 text >100
+					342 cell
+						343 text 8 days
+				344 row
+					345 cell
+						346 text face swap photo free
+					347 cell
+						348 text N/A
+					349 cell
+						350 text >100
+				351 row
+					352 cell
+						353 text multiple face swap photo
+					354 cell
+						355 text N/A
+					356 cell
+						357 text >100
+				358 row
+					359 cell
+						360 text face swap photo ai
+					361 cell
+						362 text N/A
+					363 cell
+						364 text >100
+				365 row
+					366 cell
+						367 text face swap photo editor
+					368 cell
+						369 text Medium
+					370 cell
+						371 text <100
+					372 cell
+						373 text 9 October
+				374 row
+					375 cell
+						376 text remaker face swap photo
+					377 cell
+						378 link Description: Sign up, Value: ahrefs.com/pricing
+					379 cell
+						380 text <100
+				381 row
+					382 cell
+						383 text free face swap photo
+					384 cell
+						385 text <100
+				386 row
+					387 cell
+						388 text ai face swap photo free
+					389 cell
+						390 text <100
+				391 row
+					392 cell
+						393 text multi face swap photo
+					394 cell
+						395 text <100
+				396 row
+					397 cell
+						398 text ai multiple face swap photo
+					399 cell
+						400 text <100
+				401 row
+					402 cell
+						403 text multiple face swap photo online free
+					404 cell
+						405 text <100
+				406 row
+					407 cell
+						408 text face swap photo to video
+					409 cell
+						410 text <100
+				411 row
+					412 cell
+						413 text remaker ai face swap photo online free
+					414 cell
+						415 text <100
+				416 row
+					417 cell
+						418 text remark ai face swap photo
+					419 cell
+						420 text <100
+				421 row
+					422 cell
+						423 text ai face swap photo app
+					424 cell
+						425 text <100
+			426 container
+				427 heading Need more? Try Starter plan, Value: 4
+					428 text Need more? Try Starter plan
+				429 text See what people search and spy on competitors.
+				430 link Description: Learn more ↗, Value: ahrefs.com/blog/starter-plan/
+				431 link Description: Get started $29/mo, Value: ahrefs.com/signup
+
+The focused UI element is 257 container

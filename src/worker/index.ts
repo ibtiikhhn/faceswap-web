@@ -1,14 +1,15 @@
+import { reconcileRecentWhopPayments } from '@/server/billing/whop/reconcile'
+import { startPollLoop } from './poll-loop'
 import { usingD1 } from '@/server/db/d1/client'
 import { processWhopEvents } from '@/server/billing/whop/events'
 import { processPaddleEvents } from '@/server/billing/paddle/events'
 import { PgBoss } from 'pg-boss'
-import { env, featureState, requireEnv } from '@/server/env'
+import { featureState, requireEnv } from '@/server/env'
 import { getPool } from '@/server/db'
 import { deleteObject } from '@/server/storage'
 import { processSwapJob, queueStaleSwapJobs } from '@/server/swaps/service'
 import { runIsolatedNodeTask } from './isolated-task'
 
-const parsed = env()
 const SWAP_QUEUE = 'swap.process'
 const pollMs = Number(process.env.WORKER_POLL_MS ?? 3000)
 
@@ -56,7 +57,7 @@ async function dispatchOutbox() {
          and state in ('pending','failed')
          and attempts < 10
        order by created_at
-       limit 25
+       limit ${usingD1() ? 1 : 25}
        ${usingD1() ? '' : 'for update skip locked'}
      )
      returning id, payload`,
@@ -104,47 +105,24 @@ async function processScheduledPosts() {
   await runIsolatedNodeTask(['--import', 'tsx', 'scripts/run-cms-jobs.ts'])
 }
 
-let timer: NodeJS.Timeout | undefined
+// Billing must not wait for image generation, R2 cleanup, or CMS work.
+const stopLanes = [
+  startPollLoop(async () => { await reconcileRecentWhopPayments(getPool()) }, 300_000, () => console.error('Payment reconciliation failed; retrying. Check provider permissions and availability.')),
+  startPollLoop(async () => { await processWhopEvents(getPool()) }, pollMs, () => console.error('Whop processing failed; retrying. Check the billing inbox and database availability.')),
+  startPollLoop(async () => { if (!usingD1()) await processPaddleEvents(getPool()) }, pollMs, error => console.error('Paddle processing failed; retrying.', error)),
+  startPollLoop(async () => { if (featureState().swapsEnabled) await dispatchOutbox() }, pollMs, error => console.error('Swap dispatch failed; retrying.', error)),
+  startPollLoop(cleanupExpiredAssets, 60_000, error => console.error('Asset cleanup failed; retrying.', error)),
+  startPollLoop(processScheduledPosts, 60_000, error => console.error('Scheduled publishing failed; retrying.', error)),
+]
 let stopping = false
-let running = false
-
-async function tick() {
-  if (running) return
-  running = true
-  try {
-    if (featureState().swapsEnabled) await dispatchOutbox()
-    await processWhopEvents(getPool())
-    if (!usingD1()) await processPaddleEvents(getPool())
-    await cleanupExpiredAssets()
-    try { await processScheduledPosts() } catch (error) { console.error("Scheduled publishing failed; will retry.", error) }
-  } finally {
-    running = false
-  }
-}
-
-function scheduleNextTick() {
-  if (stopping) return
-  timer = setTimeout(async () => {
-    try {
-      await tick()
-    } catch (error) {
-      console.error(error)
-    } finally {
-      scheduleNextTick()
-    }
-  }, pollMs)
-}
-
 async function shutdown() {
   if (stopping) return
   stopping = true
-  if (timer) clearTimeout(timer)
+  // Let in-flight transactions complete instead of exiting between fulfillment and acknowledgment.
+  await Promise.all(stopLanes.map(stop => stop()))
   await boss?.stop()
   process.exit(0)
 }
-
-await tick()
-scheduleNextTick()
 
 process.on('SIGTERM', () => {
   shutdown().catch((error) => {

@@ -1,0 +1,312 @@
+Browser tab: 2, Title: "Free Keyword Difficulty Checker - Ahrefs", URL: "https://ahrefs.com/keyword-difficulty/?country=us&input=how%20to%20swap%20a%20face%20in%20another%20photo".
+0 AXWebArea Free Keyword Difficulty Checker - Ahrefs, URL: ahrefs.com/keyword-difficulty/?country=us&input=how%20to%20swap%20a%20face%20in%20another%20photo
+	1 container
+		2 container root
+			3 container
+				4 link Description: Letaido, Value: letaido.com/?utm_source=ahrefs_website&utm_content=header-letaido-stats-banner
+				5 text The only AI marketing platform built on Ahrefs’ proprietary web index.
+				6 link Description: Get Started, Value: signin.letaido.com/sign-up?utm_source=ahrefs_website&utm_content=header-letaido-stats-banner
+			7 container
+				8 link Description: Ahrefs, Value: ahrefs.com/
+				9 menu bar Main navigation
+					10 (collapsed) Product, Secondary Actions: Expand
+						11 container
+							12 text Product
+							13 image
+					14 link Description: Our data, Value: ahrefs.com/big-data
+					15 (collapsed) Resources, Secondary Actions: Expand
+						16 container
+							17 text Resources
+							18 image
+					19 link Description: Pricing, Value: ahrefs.com/pricing
+					20 link Description: Enterprise, Value: ahrefs.com/enterprise
+				21 button Search Ahrefs
+					22 image
+				23 image
+				24 link Description: Sign in, Value: app.ahrefs.com/user/login
+				25 link Description: Sign up, Value: ahrefs.com/pricing?utm_source=keyword-difficulty
+				26 text Ahrefs
+			27 link Description: Sign up, Value: ahrefs.com/pricing?utm_source=keyword-difficulty
+			28 container
+				29 container Breadcrumb
+					30 content list
+						31 link Description: Free SEO Tools, Value: ahrefs.com/free-seo-tools
+				32 heading Keyword Difficulty Checker, Value: 1
+					33 text Keyword Difficulty Checker
+				34 text See how hard it will be to get into top 10 search results for any keyword.
+				35 container
+					36 text field (settable) how to swap a face in another photo
+					37 text For example,
+					38 button keyword research
+						39 text keyword research
+					40 button   United States
+						41 text United States
+						42 image
+					43 button Check keyword
+			44 container
+				45 link Description: Ahrefs SEO Toolbar, Value: ahrefs.com/seo-toolbar?utm_source=free-tools&utm_campaign=keyword_ideas&utm_medium=keyword-difficulty
+				46 heading Find keyword ideas, right from your browser, Value: 2
+					47 text Find keyword ideas, right from your browser
+				48 text See fresh keyword suggestions directly in the search results for any query.
+				49 link Description: Add to Chrome, Value: chrome.google.com/webstore/detail/ahrefs-seo-toolbar/hgmoccdbjhknikckedaaebbpdeebhiei?utm_source=free-tools&utm_campaign=keyword_ideas&utm_medium=keyword-difficulty
+				50 container
+					51 text Also available for
+					52 link Description: Firefox, Value: addons.mozilla.org/en-US/firefox/addon/ahrefs-seo-toolbar/?utm_source=free-tools&utm_campaign=keyword_ideas&utm_medium=keyword-difficulty
+					53 text  and
+					54 link Description: Safari, Value: apps.apple.com/us/app/ahrefs-seo-toolbar/id6499265972?utm_source=free-tools&utm_campaign=keyword_ideas&utm_medium=keyword-difficulty
+					55 text .
+				56 link Description: Learn more →, Value: ahrefs.com/seo-toolbar?utm_source=free-tools&utm_campaign=keyword_ideas&utm_medium=keyword-difficulty
+				57 image
+			58 container
+				59 heading What is Keyword Difficulty?, Value: 2
+					60 text What is Keyword Difficulty?
+				61 text In the world of SEO, Keyword Difficulty is a handy metric which helps you understand how hard it would be to rank for a particular search query.
+				62 container
+					63 text People who are new to SEO may confuse ‘Keyword Difficulty’ with ‘Competition’ in the
+					64 link Description: Google Keyword Planner, Value: support.google.com/google-ads/answer/3022575
+					65 text . ‘Competition’ only refers to paid search results while ‘Keyword Difficulty’ applies to organic search results.
+				66 image
+			67 container
+				68 heading Ahrefs’ Keyword Difficulty metric, Value: 2
+					69 text Ahrefs’ Keyword Difficulty metric
+				70 container
+					71 text Google says that links and content relevance are the top ranking metrics for your site's placement in search results. The results of
+					72 link Description: our own study, Value: ahrefs.com/blog/on-page-seo/
+					73 text  of two million keywords confirm this statement. We see a strong correlation between the number of referring domains a web page has and its position in Google search results. ‘Competition’ only refers to paid search results while ‘Keyword Difficulty’ applies to organic search results.
+				74 text That is why, to calculate Keyword Difficulty, we analyze the search results for a keyword and look at the number of referring domains the top 10 ranking pages have. In simple terms, the more referring domains across the top ranking pages, the higher the Keyword Difficulty.
+				75 image
+				76 text Our metric is widely considered the most accurate one. Keyword Difficulty doesn't take into account any on-page factors.
+				77 text Keyword Difficulty evaluates the chances of getting into top 10 of search results (not top 3 or top 1). Apart from backlink profiles and content relevancy, many additional ranking factors come into play among the results of the first page of any search.
+			78 container
+				79 heading Keyword Difficulty scale, Value: 2
+					80 text Keyword Difficulty scale
+				81 text We measure Keyword Difficulty on a scale from 0 to 100, with the latter being the hardest.
+				82 image
+				83 text The scale is not linear. Each value on it corresponds to the estimated number of referring domains (RDs) a page needs in order to get to the first page of search results.
+				84 text Here’s the relation between the Keyword Difficulty and the number of RDs needed:
+				85 table
+					86 row
+						87 cell
+							88 heading Keyword Difficulty, Value: 4
+								89 text Keyword Difficulty
+						90 cell
+							91 text 0
+						92 cell
+							93 text 10
+						94 cell
+							95 text 20
+						96 cell
+							97 text 30
+						98 cell
+							99 text 40
+						100 cell
+							101 text 50
+						102 cell
+							103 text 60
+						104 cell
+							105 text 70
+						106 cell
+							107 text 80
+						108 cell
+							109 text 90
+					110 row
+						111 cell
+							112 heading Referring Domains, Value: 4
+								113 text Referring Domains
+						114 cell
+							115 text 0
+						116 cell
+							117 text 10
+						118 cell
+							119 text 22
+						120 cell
+							121 text 36
+						122 cell
+							123 text 56
+						124 cell
+							125 text 84
+						126 cell
+							127 text 129
+						128 cell
+							129 text 202
+						130 cell
+							131 text 353
+						132 cell
+							133 text 756
+				134 text If you’re aiming for a keyword with KD 40, you’re likely to need approximately 56 RDs to get into the top 10 search results.
+			135 container
+				136 heading Find easy-to-rank keywords from millions of ideas, Value: 2
+					137 text Find easy-to-rank keywords from millions of ideas
+				138 text Ahrefs’ keyword database has 19.2 billion keywords across hundreds of locations. It is already the biggest database on the web, and it’s growing steadily.
+				139 text Whether you are analyzing your own list of keywords or looking at the suggestions in Keywords Explorer, our Keyword Difficulty metric shows you the opportunities you can easily rank for.
+				140 image
+				141 text Combined with Search Volume, this metric will help you find keywords that can bring you very good organic traffic but don’t require much effort to rank for.
+				142 text However, despite its value, Keyword Difficulty should not be the only factor affecting your keyword choice. We recommend that you use it as the first filter to sort through the massive number of possible keywords.
+				143 container
+					144 text The further choice of keywords must be based on a complete and detailed
+					145 link Description: SERP analysis, Value: ahrefs.com/serp-checker
+					146 text . No SEO tool can do this work for you, because every case is unique. But you will find all the necessary data for analysis in the SERP overview Ahrefs provides.
+			147 container
+				148 heading Integration with other Ahrefs tools, Value: 2
+					149 text Integration with other Ahrefs tools
+				150 text The Keyword Difficulty metric integrates across all keyword reports in Ahrefs tools. Look into keyword suggestions, analyze your competitors' organic traffic, track your own keyword rankings - Keyword Difficulty will always be at hand.
+				151 container
+					152 text Keywords explorer —  Keyword Difficulty Checker has a prominent place in this tool. It helps you make informed decisions about the keywords to go after, whether you’re analyzing individual keywords, sorting through your keyword list or looking at
+					153 link Description: keyword suggestions, Value: ahrefs.com/keyword-generator
+					154 text .
+				155 container
+					156 text Site Explorer —  Discover keywords that bring organic traffic to any page of your competitors' websites and use the Keyword Difficulty metric to see if you will be able to rank in the top 10 for those keywords.
+				157 container
+					158 text Content Explorer —  This potent tool finds the most popular content on any topic for you. It also shows you the list of keywords a content page ranks for, along with their Keyword Difficulty.
+				159 container
+					160 text Rank Tracker —  This tool tracks your website ranking positions changes for any given keyword. Keyword Search Volume and Keyword Difficulty are not static numbers, so we update them regularly for each of your projects.
+			161 container
+				162 heading Keyword Research Guides, Value: 2
+					163 text Keyword Research Guides
+				164 link ahrefs.com/blog/keyword-difficulty/
+				165 link Description: Keyword Difficulty: How to Estimate Your Chances to Rank, Value: ahrefs.com/blog/keyword-difficulty/
+				166 text Keyword Difficulty (KD) is an SEO metric that estimates how hard it would be to rank on the first page of Google for a given keyword.
+				167 link ahrefs.com/blog/low-competition-keywords/
+				168 link Description: How to Find Low-Competition Keywords for SEO, Value: ahrefs.com/blog/low-competition-keywords/
+				169 text Learn how to find low-hanging keyword opportunities in a few steps, and how to make sure those keywords are truly low-competition and easy to rank for.
+				170 link ahrefs.com/blog/keyword-research/
+				171 link Description: Keyword Research: The Beginner’s Guide by Ahrefs, Value: ahrefs.com/blog/keyword-research/
+				172 text Keyword research is the process of finding keywords that you want to rank for in search engines. It’s about understanding what potential customers are searching for and why.
+			173 container
+				174 text Sign up for Ahrefs.  Stay discoverable—in search, AI, and beyond. 27,025 users joined Ahrefs in the last 7 days
+				175 heading Starter, Value: 3
+					176 text Starter
+				177 text See what people search and spy on competitors.
+				178 link Description: Learn more ↗, Value: ahrefs.com/blog/starter-plan/
+				179 image
+				180 container
+					181 text $ 29
+				182 container
+					183 text / mo
+				184 link Description: Get started, Value: ahrefs.com/signup?interval=monthly&plan=trial&return=KeywordDifficulty&utm_content=starter-banner&utm_medium=keyword-difficulty&utm_source=free-tools
+				185 heading Ahrefs Free, Value: 3
+					186 text Ahrefs Free
+				187 text Get Ahrefs data on your site and fix what matters.
+				188 link Description: Learn more ↗, Value: ahrefs.com/free
+				189 image
+				190 text Free
+				191 link Description: Get started, Value: ahrefs.com/signup?utm_source=free-tools&utm_content=awt-banner&utm_medium=keyword-difficulty&plan=awt&return=KeywordDifficulty
+			192 container
+				193 text CORE TOOLS
+				194 link Description: Brand Radar, Value: ahrefs.com/brand-radar
+				195 link Description: Dashboard, Value: ahrefs.com/dashboard
+				196 link Description: Site Explorer, Value: ahrefs.com/site-explorer
+				197 link Description: Keywords Explorer, Value: ahrefs.com/keywords-explorer
+				198 link Description: Site Audit, Value: ahrefs.com/site-audit
+				199 link Description: Rank Tracker, Value: ahrefs.com/rank-tracker
+				200 link Description: GSC Insights, Value: ahrefs.com/gsc-insights
+				201 link Description: Content Explorer, Value: ahrefs.com/content-explorer
+				202 link Description: Web Analytics, Value: ahrefs.com/web-analytics
+				203 link Description: Bot Analytics, Value: ahrefs.com/bot-analytics
+				204 link Description: GBP Monitor, Value: ahrefs.com/gbp-monitor
+				205 link Description: Social Media Manager, Value: ahrefs.com/social-media-manager
+				206 link Description: AI Content Helper, Value: ahrefs.com/ai-content-helper
+				207 link Description: Report Builder, Value: ahrefs.com/report-builder
+				208 link Description: USE CASES →, Value: ahrefs.com/use-cases
+				209 link Description: Competitive Intelligence, Value: ahrefs.com/use-cases/competitive-intelligence
+				210 link Description: PPC, Value: ahrefs.com/use-cases/ppc
+				211 link Description: SEO, Value: ahrefs.com/use-cases/seo
+				212 link Description: AEO, Value: ahrefs.com/use-cases/aeo
+				213 link Description: Content Marketing, Value: ahrefs.com/use-cases/content-marketing
+				214 link Description: Brand Marketing, Value: ahrefs.com/use-cases/brand-marketing
+				215 link Description: Investing, Value: ahrefs.com/use-cases/investing
+				216 text EXTRA TOOLS & FEATURES
+				217 link Description: Domain Comparison, Value: ahrefs.com/domain-comparison
+				218 link Description: Batch Analysis, Value: ahrefs.com/batch-analysis
+				219 link Description: Link Intersect, Value: ahrefs.com/link-intersect
+				220 link Description: Content Gap, Value: ahrefs.com/content-gap
+				221 link Description: Email Alerts, Value: ahrefs.com/alerts
+				222 link Description: SEO Checker, Value: ahrefs.com/seo-checker
+				223 link Description: Traffic Checker, Value: ahrefs.com/traffic-checker
+				224 link Description: Data Studio Connectors, Value: ahrefs.com/google-data-studio-connectors
+				225 link Description: Top Websites, Value: ahrefstop.com/websites
+				226 link Description: Patches, Value: ahrefs.com/patches
+				227 link Description: Portfolios, Value: ahrefs.com/portfolios
+				228 link Description: IndexNow, Value: ahrefs.com/index-now
+				229 link Description: AI Tech SEO, Value: ahrefs.com/ai-tech-seo
+				230 link Description: All tools, Value: ahrefs.com/all
+				231 text OTHER PRODUCTS
+				232 link Description: Letaido ↗, Value: letaido.com/
+				233 link Description: Firehose ↗, Value: firehose.com/
+				234 link Description: Yep ↗, Value: yep.com/
+				235 link Description: FREE SEO TOOLS →, Value: ahrefs.com/free-seo-tools
+				236 link Description: Ahrefs Free, Value: ahrefs.com/free
+				237 link Description: AI Mode Tracker, Value: ahrefs.com/ai-mode-tracker
+				238 link Description: AI Overviews Tracker, Value: ahrefs.com/ai-overviews-tracker
+				239 link Description: AI Visibility Checker, Value: ahrefs.com/ai-visibility-checker
+				240 link Description: AI Writing Tools, Value: ahrefs.com/writing-tools
+				241 link Description: Backlink Checker, Value: ahrefs.com/backlink-checker
+				242 link Description: Broken Link Checker, Value: ahrefs.com/broken-link-checker
+				243 link Description: Website Authority Checker, Value: ahrefs.com/website-authority-checker
+				244 link Description: Keyword Generator, Value: ahrefs.com/keyword-generator
+				245 link Description: SERP Checker, Value: ahrefs.com/serp-checker
+				246 link Description: SEO Toolbar, Value: ahrefs.com/seo-toolbar
+				247 link Description: Keyword Rank Checker, Value: ahrefs.com/keyword-rank-checker
+				248 text Keyword Difficulty Checker
+				249 link Description: Website Checker, Value: ahrefs.com/website-checker
+				250 link Description: SEO Audit Tool, Value: ahrefs.com/seo-audit-tool
+				251 link Description: Sitemap Generator, Value: ahrefs.com/sitemap-generator
+				252 link Description: Website Change Monitor, Value: ahrefs.com/website-change-monitor
+				253 link Description: Word Count, Value: wordcount.com/
+				254 link Description: ALTERNATIVES →, Value: ahrefs.com/vs
+				255 link Description: Ahrefs vs Semrush, Value: ahrefs.com/vs/semrush
+				256 link Description: Ahrefs vs Profound, Value: ahrefs.com/vs/profound
+				257 text PRODUCT
+				258 link Description: Pricing, Value: ahrefs.com/pricing
+				259 link Description: Our data, Value: ahrefs.com/big-data
+				260 link Description: AhrefsBot, Value: ahrefs.com/robot
+				261 link Description: API, Value: docs.ahrefs.com/api
+				262 link Description: Ask Ahrefs, Value: ahrefs.com/ask-ahrefs
+				263 link Description: SEO MCP, Value: ahrefs.com/seo-mcp
+				264 link Description: SEO API, Value: ahrefs.com/seo-api
+				265 link Description: Enterprise, Value: ahrefs.com/enterprise
+				266 link Description: What’s new?, Value: ahrefs.com/blog/category/product-blog/
+				267 text COMPANY
+				268 link Description: About, Value: ahrefs.com/about
+				269 link Description: Testimonials, Value: ahrefs.com/reviews
+				270 link Description: Events, Value: ahrefs.com/events
+				271 link Description: Team, Value: ahrefs.com/team
+				272 link Description: Careers, Value: ahrefs.com/careers
+				273 link Description: Tech, Value: ahrefs.com/tech
+				274 link Description: Media kit, Value: ahrefs.com/media-kit
+				275 link Description: FAQ, Value: ahrefs.com/faq
+				276 link Description: Contact us, Value: mailto:support@ahrefs.com
+				277 text RESOURCES
+				278 link Description: Blog, Value: ahrefs.com/blog/
+				279 link Description: Tech blog, Value: tech.ahrefs.com/
+				280 link Description: Podcast, Value: ahrefs.com/podcast
+				281 link Description: Webinars, Value: ahrefs.com/webinars
+				282 link Description: SEO Guide, Value: ahrefs.com/seo
+				283 link Description: AEO Guide, Value: ahrefs.com/aeo
+				284 link Description: Help center, Value: help.ahrefs.com/
+				285 link Description: Academy, Value: ahrefs.com/academy
+				286 link Description: Marketing Agencies, Value: ahrefs.com/agencies
+				287 link Description: Digest, Value: ahrefs.com/newsletter
+				288 link Description: Discoverable, Value: ahrefs.com/discoverable
+				289 text © 2026 Ahrefs Pte. Ltd. (201227417H) 16 Raffles Quay, #33-03 Hong Leong Building, Singapore 048581
+				290 link Description: Legal info, Value: ahrefs.com/legal
+				291 link Description: Privacy Policy, Value: ahrefs.com/legal/privacy-policy
+				292 button Cookie Settings
+				293 link Description: Terms of Service, Value: ahrefs.com/legal/terms
+				294 link x.com/ahrefs
+				295 link youtube.com/c/AhrefsCom
+				296 link instagram.com/ahrefs
+				297 link …
+				298 link …
+				299 button English
+					300 text English
+					301 image
+			302 link …
+		303 container
+			304 text No data for “how to swap a face in another photo”
+			305 button
+				306 image
+			307 text Sorry, we don’t have data for this keyword.
+			308 image Bearded man
+
+The focused UI element is 303 container

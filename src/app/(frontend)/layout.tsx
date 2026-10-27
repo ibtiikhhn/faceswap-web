@@ -6,6 +6,10 @@ import { AccountProvider } from '@/components/account-provider';
 
 export const metadata: Metadata = {
  metadataBase: new URL(siteOrigin()),
+ icons: {
+  icon: [{url:'/favicon-96.png',sizes:'96x96',type:'image/png'}],
+  apple: [{url:'/apple-touch-icon.png',sizes:'180x180',type:'image/png'}],
+ },
  title: { default: 'Photo Face Swap Online · SwapThisFace.com', template: '%s · SwapThisFace.com' },
  description: 'Upload a face photo and a target image in the SwapThisFace.com photo face swap studio. Manage your creations, downloads, and account in one place.',
  robots: publicIndexingEnabled() ? { index: true, follow: true } : { index: false, follow: false },

@@ -1,10 +1,10 @@
 import { DatabaseSync, type SQLInputValue } from 'node:sqlite';
-import { readFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import { D1Client, type D1Transport } from '@/server/db/d1/client';
 export function testD1() {
  const sqlite=new DatabaseSync(':memory:');
  sqlite.exec('PRAGMA foreign_keys=ON');
- sqlite.exec(readFileSync('migrations/d1/app/0001.sql','utf8'));
+ for(const file of readdirSync('migrations/d1/app').filter(f=>f.endsWith('.sql')).sort())sqlite.exec(readFileSync(`migrations/d1/app/${file}`,'utf8'));
  const transport:D1Transport=async statements=>{
   sqlite.exec('BEGIN');
   try {

@@ -1,5 +1,5 @@
 import { SwapStudio } from '@/components/swap-studio';
 import { PhotoSwapFaq } from '@/components/photo-swap-guide';
 import { pageMetadata } from '@/lib/seo';
-export const metadata = pageMetadata('Face Swap Photo Editor Online', 'Upload a source face and a target photo in our online face swap editor. JPG, PNG, and WebP supported. One guest trial; subscription required afterward.', '/face-swap');
-export default function FaceSwap(){return <div className="wrap studio-page"><div className="page-header"><div className="eyebrow"><span className="status-dot"/>TWO PHOTOS. ONE NEW LOOK.</div><h1>Face swap photo editor.</h1><p>Upload your face and a target photo. Create, compare, and download your result from your browser.</p></div><SwapStudio /><PhotoSwapFaq /></div>;}
+export const metadata = pageMetadata('Swap Faces Between Two Photos Online', 'Swap a face from one photo to another in your browser. Upload JPG, PNG, or WebP images and try one free photo face swap. No app download needed.', '/face-swap');
+export default function FaceSwap(){return <div className="wrap studio-page"><div className="page-header"><div className="eyebrow"><span className="status-dot"/>TWO PHOTOS. ONE NEW LOOK.</div><h1>Swap faces between two photos.</h1><p>Choose a clear source face and a target photo with one person. Our online face swap photo editor lets you create, compare, and download the result on your phone or desktop.</p></div><SwapStudio /><PhotoSwapFaq /></div>;}

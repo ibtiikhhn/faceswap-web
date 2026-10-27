@@ -28,15 +28,30 @@ export async function syncMembership(tx:DbClient,m:Whop.Membership) {
  const offer=whopOffers.find(o=>process.env[o.env]===m.plan_id && o.kind==='subscription');
  if(!offer)return;
  const existing=(await tx.query<{user_id:string}>('select user_id from app.whop_memberships where id=$1 and environment=$2',[m.id,environment])).rows[0];
- const checkoutId=typeof m.metadata.checkout_id==='string'?m.metadata.checkout_id:null;
+ const checkoutId=typeof m.metadata?.checkout_id==='string'?m.metadata.checkout_id:null;
  const intent=checkoutId?(await tx.query<Intent>('select * from app.whop_checkouts where id::text=$1 and environment=$2',[checkoutId,environment])).rows[0]:undefined;
- if(!existing && (!intent || intent.plan_id!==m.plan_id))throw new Error('Unbound membership');
+ if(!existing && (!intent || intent.plan_id!==m.plan_id || intent.kind!=='subscription'))throw new Error('Unbound membership');
  if(existing && intent && existing.user_id!==intent.user_id)throw new Error('Membership ownership mismatch');
  const userId=existing?.user_id??intent!.user_id;
  await tx.query(`insert into app.whop_memberships(id,user_id,environment,plan_id,code,status,period_start,period_end,cancel_at_period_end,updated_at)
  values($1,$2,$3,$4,$5,$6,$7,$8,$9,$10) on conflict(id) do update set plan_id=excluded.plan_id,code=excluded.code,status=excluded.status,period_start=excluded.period_start,period_end=excluded.period_end,cancel_at_period_end=excluded.cancel_at_period_end,updated_at=excluded.updated_at
- where app.whop_memberships.updated_at<=excluded.updated_at`,[m.id,userId,environment,m.plan_id,offer.code,m.status,m.current_period_start,m.current_period_end,m.cancel_at_period_end,m.updated_at]);
+ where app.whop_memberships.updated_at<=excluded.updated_at`,[m.id,userId,environment,m.plan_id,offer.code,m.status,iso(m.current_period_start),iso(m.current_period_end),m.cancel_at_period_end,iso(m.updated_at)]);
  return userId;
+}
+function iso(value:string|null):string|null {
+ if(value===null)return null;
+ const date=new Date(value);
+ if(!Number.isFinite(date.getTime()))throw new Error('Invalid provider timestamp');
+ return date.toISOString();
+}
+export async function syncDispute(tx:DbClient,dispute:Whop.Dispute) {
+ const {accountId,environment}=whopSettings();
+ if(dispute.account_id!==accountId)throw new Error('Wrong dispute account');
+ await tx.query('select id from app.whop_payments where id=$1 and environment=$2 for update',[dispute.payment.id,environment]);
+ await tx.query(`insert into app.whop_disputes(id,environment,payment_id,status,updated_at)
+ values($1,$2,$3,$4,$5) on conflict(id) do update set status=excluded.status,updated_at=excluded.updated_at
+ where app.whop_disputes.environment=excluded.environment and app.whop_disputes.payment_id=excluded.payment_id
+ and app.whop_disputes.updated_at<=excluded.updated_at`,[dispute.id,environment,dispute.payment.id,dispute.status,iso(dispute.updated_at)]);
 }
 function cents(m:Whop.Money|null) {
  if(!m || m.currency!=='usd' || !/^\d+(\.\d{1,2})?$/.test(m.amount))throw new Error('Unexpected payment money');
@@ -70,7 +85,7 @@ export async function settlePayment(tx:DbClient,p:Whop.Payment,m:Whop.Membership
   if(userId && userId!==memberUser)throw new Error('Payment ownership mismatch');
   userId=memberUser;
   if(!previous){
-   start=m.current_period_start;end=m.current_period_end;
+   start=iso(m.current_period_start);end=iso(m.current_period_end);
    // Never apply a delayed historic payment to a new allowance period.
    if(!start||!end||!p.paid_at||new Date(p.paid_at)<new Date(start)||new Date(p.paid_at)>=new Date(end))throw new Error('Payment period requires review');
    if(!['subscription_create','subscription_cycle','subscription'].includes(p.billing_reason??''))throw new Error('Unsupported subscription charge');
@@ -81,37 +96,36 @@ export async function settlePayment(tx:DbClient,p:Whop.Payment,m:Whop.Membership
  if(!previous){
   if(isPlanned(tx) && (await tx.query('select id from app.whop_payments where environment=$1 and membership_id=$2 and period_start=$3 and period_end=$4',[environment,offer.kind==='subscription'?p.membership_id:null,start,end])).rows.length)return;
   const inserted=await plannedReturning(tx,`insert into app.whop_payments(id,user_id,environment,checkout_id,membership_id,period_start,period_end,updated_at)
-   values($1,$2,$3,$4,$5,$6,$7,$8) on conflict do nothing returning id`,[p.id,userId,environment,intent?.id??null,offer.kind==='subscription'?p.membership_id:null,start,end,p.updated_at],async()=>[{id:p.id}]);
+   values($1,$2,$3,$4,$5,$6,$7,$8) on conflict do nothing returning id`,[p.id,userId,environment,intent?.id??null,offer.kind==='subscription'?p.membership_id:null,start,end,iso(p.updated_at)],async()=>[{id:p.id}]);
   if(!inserted.rows.length)return;
   const source=`whop_${environment}_${offer.kind}`;
   await grantCredits(tx,{userId,amount:offer.credits,source,sourceRef:p.id,expiresAt:end?new Date(end):null});
   await tx.query('update app.whop_payments set grant_id=(select id from app.credit_grants where source=$2 and source_ref=$1) where id=$1',[p.id,source]);
  }
- const refunded=p.refunded_amount?cents(p.refunded_amount):0;
- const revoke=Math.min(offer.credits,Math.ceil(offer.credits*refunded/cents(p.total)));
+ // Tax-only refunds do not reduce the purchased service allowance.
+ const refunded=Math.max(0,(p.refunded_amount?cents(p.refunded_amount):0)-(p.tax_refunded_amount?cents(p.tax_refunded_amount):0));
+ const netPaid=cents(p.total)-(p.tax_amount?cents(p.tax_amount):0);
+ if(netPaid<=0)throw new Error('Invalid net payment amount');
+ const revoke=Math.min(offer.credits,Math.ceil(offer.credits*refunded/netPaid));
  if(revoke>0){
   await tx.query(`update app.credit_grants set remaining_amount=greatest(0,remaining_amount-$2),expires_at=case when $3 then now() else expires_at end
    where id=(select grant_id from app.whop_payments where id=$1)`,[p.id,Math.max(0,revoke-(previous?.revoked_credits??0)),revoke===offer.credits]);
  }
- await tx.query('update app.whop_payments set revoked_credits=greatest(revoked_credits,$2),updated_at=$3 where id=$1',[p.id,revoke,p.updated_at]);
- await tx.query("update app.whop_payments set disputed=$2 where id=$1",[p.id,['dispute_needs_response','dispute_under_review','dispute_lost','open_dispute','resolution_lost'].includes(p.substatus)]);
+ await tx.query('update app.whop_payments set revoked_credits=greatest(revoked_credits,$2),updated_at=$3 where id=$1',[p.id,revoke,iso(p.updated_at)]);
+ await tx.query("update app.whop_payments set disputed=$2 where id=$1",[p.id,['dispute_warning','dispute_needs_response','dispute_warning_needs_response','dispute_under_review','dispute_warning_under_review','dispute_lost','dispute_closed','open_dispute','open_resolution','resolution_needs_response','resolution_under_review','resolution_lost'].includes(p.substatus)]);
  if(intent)await tx.query("update app.whop_checkouts set state='completed' where id=$1",[intent.id]);
 }
 
 export async function processWhopEvents(db:DbClient) {
  if(!process.env.WHOP_API_KEY || !process.env.WHOP_ACCOUNT_ID)return;
  const environment=whopEnvironment();
- const rows=(await db.query<{id:string;type:string;resource_id:string}>(`update app.whop_event_inbox set state='processing',attempts=attempts+1,next_attempt_at=now()+interval '2 minutes'
- where id in(select id from app.whop_event_inbox where environment=$1 and state in ('pending','failed','processing') and next_attempt_at<=now() and attempts<30 order by created_at limit 10 ${isD1(db)?'':'for update skip locked'}) returning id,type,resource_id`,[environment])).rows;
  const client=getWhop();
- // Stop completed hosted links from being reused. Retry cleanup independently of fulfillment.
- const completed=(await db.query<{id:string;configuration_id:string}>("select id,configuration_id from app.whop_checkouts where environment=$1 and state='completed' and not configuration_closed and configuration_id is not null limit 10",[environment])).rows;
- for(const checkout of completed){
-  try{await client.checkoutConfigurations.delete({id:checkout.configuration_id});}
-  catch(error){if(!(error && typeof error==='object' && 'statusCode' in error && error.statusCode===404))continue;}
-  await db.query('update app.whop_checkouts set configuration_closed=true where id=$1',[checkout.id]);
- }
- for(const row of rows){
+ // Claim only the next event. Queued events must not spend their lease waiting behind network calls.
+ for(let processed=0;processed<10;processed++){
+  const row=(await db.query<{id:string;type:string;resource_id:string;attempts:number}>(`update app.whop_event_inbox set state='processing',attempts=attempts+1,next_attempt_at=now()+interval '2 minutes'
+   where id in(select id from app.whop_event_inbox where environment=$1 and state in ('pending','failed','processing') and next_attempt_at<=now() and attempts<30 order by created_at limit 1 ${isD1(db)?'':'for update skip locked'}) returning id,type,resource_id,attempts`,[environment])).rows[0];
+  if(!row)break;
+
   try{
    if(row.type.startsWith('membership.')){
     const m=await client.memberships.retrieve({id:row.resource_id});
@@ -124,17 +138,21 @@ export async function processWhopEvents(db:DbClient) {
     const member=payment.membership_id?await client.memberships.retrieve({id:payment.membership_id}):null;
     await withTransaction(db,async tx=>{
      await settlePayment(tx,payment,member);
-     if(dispute){
-      if(dispute.account_id!==process.env.WHOP_ACCOUNT_ID)throw new Error('Wrong dispute account');
-      await tx.query('update app.whop_payments set disputed=$2 where id=$1',[payment.id,!['won','closed'].includes(dispute.status)]);
-     }
+     if(dispute)await syncDispute(tx,dispute);
     });
    }
-   await db.query("update app.whop_event_inbox set state='done' where id=$1",[row.id]);
+   await db.query("update app.whop_event_inbox set state='done' where id=$1 and state='processing' and attempts=$2",[row.id,row.attempts]);
   }catch{
    // Keep provider/customer details out of logs; durable event ID supports dashboard investigation.
    console.error('Whop event requires retry or review',{eventId:row.id,type:row.type});
-   await db.query("update app.whop_event_inbox set state='failed',next_attempt_at=now()+interval '30 seconds' where id=$1",[row.id]);
+   await db.query("update app.whop_event_inbox set state='failed',next_attempt_at=$3 where id=$1 and state='processing' and attempts=$2",[row.id,row.attempts,new Date(Date.now()+Math.min(3600,30*2**Math.min(row.attempts-1,7))*1000)]);
   }
+ }
+ // Stop completed hosted links from being reused. Retry cleanup independently of fulfillment.
+ const completed=(await db.query<{id:string;configuration_id:string}>("select id,configuration_id from app.whop_checkouts where environment=$1 and state='completed' and not configuration_closed and configuration_id is not null limit 10",[environment])).rows;
+ for(const checkout of completed){
+  try{await client.checkoutConfigurations.delete({id:checkout.configuration_id});}
+  catch(error){if(!(error && typeof error==='object' && 'statusCode' in error && error.statusCode===404))continue;}
+  await db.query('update app.whop_checkouts set configuration_closed=true where id=$1',[checkout.id]);
  }
 }

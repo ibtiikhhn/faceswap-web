@@ -54,3 +54,30 @@ Use production account/key/product/plan/webhook IDs, change `WHOP_ENVIRONMENT=pr
 - https://docs.whop.com/developer/guides/webhooks
 - https://docs.whop.com/payments-and-billing/fees/taxes
 - https://whop.com/buyer-terms/
+
+## Payment reliability changes (October 25, 2026)
+
+Run `npm run db:migrate` as the pre-deploy step before starting either updated service.
+D1 migration `0002_whop_disputes.sql` (PostgreSQL `0011_whop_disputes.sql`) adds durable dispute state.
+The migration is additive and restartable. Keep web and worker on the same commit and database.
+
+- Billing runs independently from photo processing, asset cleanup, and CMS jobs. Each lane retries startup failures and drains in-flight work on graceful shutdown.
+- Webhook processing claims one event at a time. Attempt-checked acknowledgments prevent an expired worker attempt from overwriting a newer attempt. Retries back off from 30 seconds to one hour, stopping after 30 attempts for operator review.
+- Every five minutes, a bounded reconciliation pass checks the latest 25 paid payments for the configured product/account. It queues only payments bound to an existing checkout, payment, or membership. Settlement retrieves the payment again and validates ownership, price, plan, and environment before granting credits. This is a safety net, **not a replacement for enabled webhooks**; older missing payments and changes to older payments require targeted reconciliation/support review.
+- Refunds revoke credits proportionally to the refunded service amount, excluding refunded tax. Cumulative revocation never decreases and repeated events cannot subtract twice.
+- Disputes are tracked independently per dispute ID and provider update timestamp. A payment update cannot clear an unresolved dispute; resolving one dispute cannot clear another. Won/closed-inquiry states release that dispute's hold, subject to current payment status and refunds.
+- A reserved credit is checked again when a swap result is committed. Refunded/disputed credits cannot deliver a result or reappear after failure. A credit reserved before natural expiry can still complete its job.
+- Confirmation screens distinguish completed, partially refunded, refunded, and disputed payments. A return URL never grants credits.
+
+Automated coverage includes D1 and PostgreSQL: duplicate fulfillment, ownership/environment isolation, wrong prices/quantities, refund-before-payment ordering, tax refunds, partial/full refunds, dispute ordering, renewal periods, failed renewals, cancellation preserving the paid allowance, missed-notification reconciliation, retry ownership, in-flight refund handling, and independent worker lanes.
+
+Before live billing, verify on the deployed **sandbox**:
+
+1. Web and worker migrations succeed; the Whop webhook is enabled for the deployed URL and its signing secret matches the web service.
+2. Buy each recurring offer and a credit pack. Confirm the return page updates automatically, the account receives the correct allowance once, and the inbox event reaches `done`.
+3. Replay a successful notification. The balance must not increase again.
+4. Cancel renewal and confirm access remains until paid-period expiry. Verify a subsequent paid renewal produces one new allowance and a failed charge produces none using provider-supported sandbox testing.
+5. Issue sandbox partial/full refunds and confirm credit adjustments. Check dispute behavior with provider-supported sandbox events where available.
+6. Check the worker logs and inbox for exhausted retries or payments requiring period/ownership review. Investigate these before collecting live payments.
+
+Immediate prorated plan upgrades remain unsupported. Historic subscription payments whose paid date falls outside the retrieved membership period are held for review rather than granted into the wrong period. The recent-payment fallback does not reconcile membership-only or dispute-only changes; reliable webhook delivery remains required. Switching providers/environments does not migrate old credit balances.

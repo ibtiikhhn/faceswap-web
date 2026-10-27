@@ -6,7 +6,7 @@ import type { DbClient } from "@/server/db";
 // A subscription grant belongs to one paid subscription; packs stand alone.
 function usableGrant() {
 if(usingWhop())return `(source in ('whop_${whopEnvironment()}_pack','whop_${whopEnvironment()}_subscription') and exists (
- select 1 from app.whop_payments p where p.grant_id=app.credit_grants.id and not p.disputed and p.revoked_credits<app.credit_grants.original_amount
+ select 1 from app.whop_payments p where p.grant_id=app.credit_grants.id and not p.disputed and not exists (select 1 from app.whop_disputes d where d.payment_id=p.id and d.environment=p.environment and d.status not in ('won','warning_closed')) and p.revoked_credits<app.credit_grants.original_amount
 ))`;
 
 const prefix=env().PADDLE_ENVIRONMENT==='sandbox'?'paddle_sandbox':'paddle';
@@ -122,6 +122,17 @@ export async function consumeReservation(client: DbClient, jobId: string) {
   );
   const reservation = result.rows[0];
   if (!reservation?.user_id) return;
+  if(usingWhop()) {
+    // Recheck at delivery: a refund/dispute may arrive while the provider is rendering.
+    // Expiry alone does not invalidate a credit that was reserved within its paid period.
+    await client.query('select id from app.whop_payments where grant_id=$1 for update',[reservation.grant_id]);
+    const eligible=await client.query(`select id from app.credit_grants
+      where id=$1 and ${usableGrant()}
+      and original_amount-coalesce((select revoked_credits from app.whop_payments where grant_id=app.credit_grants.id),0)
+        > coalesce((select sum(amount) from app.credit_reservations where grant_id=app.credit_grants.id and state='consumed'),0)
+      for update`,[reservation.grant_id]);
+    if(!eligible.rows.length)throw new HttpError(409,'The payment for this swap was refunded or disputed.','payment_revoked');
+  }
   await client.query("update app.credit_reservations set state = 'consumed', updated_at = now() where id = $1", [reservation.id]);
   await client.query("update app.credit_grants set reserved_amount = reserved_amount - 1 where id = $1", [reservation.grant_id]);
   await client.query(
