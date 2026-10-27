@@ -117,14 +117,16 @@ export async function settlePayment(tx:DbClient,p:Whop.Payment,m:Whop.Membership
 }
 
 export async function processWhopEvents(db:DbClient) {
- if(!process.env.WHOP_API_KEY || !process.env.WHOP_ACCOUNT_ID)return;
+ if(!process.env.WHOP_API_KEY || !process.env.WHOP_ACCOUNT_ID)return false;
  const environment=whopEnvironment();
  const client=getWhop();
+ let didWork=false;
  // Claim only the next event. Queued events must not spend their lease waiting behind network calls.
  for(let processed=0;processed<10;processed++){
   const row=(await db.query<{id:string;type:string;resource_id:string;attempts:number}>(`update app.whop_event_inbox set state='processing',attempts=attempts+1,next_attempt_at=now()+interval '2 minutes'
    where id in(select id from app.whop_event_inbox where environment=$1 and state in ('pending','failed','processing') and next_attempt_at<=now() and attempts<30 order by created_at limit 1 ${isD1(db)?'':'for update skip locked'}) returning id,type,resource_id,attempts`,[environment])).rows[0];
   if(!row)break;
+  didWork=true;
 
   try{
    if(row.type.startsWith('membership.')){
@@ -155,4 +157,5 @@ export async function processWhopEvents(db:DbClient) {
   catch(error){if(!(error && typeof error==='object' && 'statusCode' in error && error.statusCode===404))continue;}
   await db.query('update app.whop_checkouts set configuration_closed=true where id=$1',[checkout.id]);
  }
+ return didWork || completed.length > 0;
 }

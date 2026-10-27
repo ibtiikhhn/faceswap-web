@@ -1,56 +1,63 @@
-# SwapThisFace.com production launch — 8 October 2026
+# Production release — 27 October 2026
 
-Target: real single-face photo swaps at **https://swapthisface.com**, Google login, private R2 storage, and no purchases. Paddle integration follows later. Ibtihaj Uddin, trading as SwapThisFace.com operates from Pakistan; its business contact address is still needed.
+Target: https://swapthisface.com, real photo swaps, D1/R2 and Whop production billing.
 
-## Before the domain cutover
+## Release status
 
-1. Use `CUSTOM_SWAP_RESULT_HOSTS=img.theapi.app`, observed in the successful live API test on 8 October 2026. Use exact hostnames, including legitimate redirect destinations, not the API submission host unless it actually serves the output. See [Custom Swap setup](CUSTOM-SWAP-SETUP.md).
-2. Test a real guest swap on staging using photos you have permission to process. Confirm the output saves to R2, downloads through the app, and settles the free trial once. Confirm failed jobs release the trial. The direct provider call and secure download have passed with synthetic portraits; the complete deployed app/R2 flow still needs this check.
-3. Back up the current database. Decide whether to promote the existing data or create separate production database/buckets. Do not silently delete test users, jobs, or files. Keep staging isolated if it will continue to run.
-4. Commit and push the prepared code to the branch connected to Railway. Include `src`, `tests`, `docs`, `migrations`, and `.env.example`. Never commit `.env.local` or credentials.
+Live Whop product and all four plans have been created and remotely verified for ownership, USD prices and billing periods. Payment and membership reads work. Live webhook creation is blocked until the API key has `developer:manage_webhook`. The production credential file is git-ignored. No real payment has been attempted. Railway variables and deployed behavior have not been verified from this checkout.
 
-## Railway variables
+## 1. Finish live webhook preparation
 
-Set these on **web and worker**:
+After granting the live API permission:
+
+```sh
+node --env-file=.env.production.local --import tsx scripts/setup-whop-webhook.ts --production
+node --env-file=.env.production.local --import tsx scripts/verify-whop.ts
+```
+
+The setup creates a disabled webhook, saving its secret and ID in `.env.production.local`. Production verification reads the live catalog and basic settlement permissions; it does not create a paid checkout or charge a card. The four offers are $7.99/7 days for 100 swaps, $19.99/30 days for 500 swaps, $10/200 credits and $50/1000 credits. Packs need no subscription. Do not reuse sandbox IDs or the sandbox signing secret.
+
+## 2. Railway configuration on BOTH web and worker
+
+Keep existing production D1, R2, Google, auth and CMS secrets. Copy the live WHOP_API_KEY, WHOP_ACCOUNT_ID, WHOP_PRODUCT_ID, four WHOP_*_PLAN_ID values and WHOP_WEBHOOK_SECRET from `.env.production.local` privately into Railway.
 
 ```dotenv
 APP_ENV=production
 APP_URL=https://swapthisface.com
+DATABASE_DRIVER=d1
 SWAPS_ENABLED=true
 SWAP_PROVIDER=external
+MOCK_SWAP_ENABLED=false
+STORAGE_DRIVER=r2
 CUSTOM_SWAP_URL=https://faceswap-django.onrender.com/faceswap_file/
 CUSTOM_SWAP_RESULT_HOSTS=img.theapi.app
-STORAGE_DRIVER=r2
+BILLING_PROVIDER=whop
+WHOP_ENVIRONMENT=production
+WHOP_BILLING_ENABLED=false
+PADDLE_BILLING_ENABLED=false
+WORKER_POLL_MS=3000
+WORKER_IDLE_POLL_MS=30000
 ```
 
-If present, align `NEXT_PUBLIC_APP_URL` to `https://swapthisface.com` and remove or align the old `FACE_SWAP_PROVIDER=mock` alias. Keep database, R2, Google, auth and CMS settings configured for the selected production resources. Stripe keys/prices are no longer needed: checkout/credits/portal endpoints return 503 and Stripe webhooks return 410 even if old keys remain. The worker does not process Stripe inbox events.
+Align NEXT_PUBLIC_APP_URL if present. Remove the old FACE_SWAP_PROVIDER=mock alias. Do not replace existing D1/R2/Google secrets with local development settings. Keep one Railway worker replica.
 
-Set the web pre-deploy command to `npm run release`; this includes migration `0008_swap_provider_consent.sql`. Deploy web migrations before the new worker. Web starts with `npm run start`, worker with `npm run worker`. Rebuild after environment changes so canonical URLs and indexing reflect the production domain. The Dockerfile declares the public configuration build arguments needed for Railway to supply these values during `next build`; secrets remain runtime variables.
+## 3. Deploy and activate
 
-`SWAPS_ENABLED=false` is an optional maintenance switch that closes new uploads and jobs, pauses queued processing and permits a nonprocessing mock configuration. The requested launch uses `true`; production with active mock processing is rejected.
+1. Deploy the same commit to web and worker. The web pre-deploy command must be `npm run release`; this runs app and CMS migrations. Do not start the new worker before migrations succeed. The additive D1 dispute migration is `0002_whop_disputes.sql`.
+2. Web start: `npm run start`; worker start: `npm run worker`. Check `/api/health/ready` and both service logs. Do not use frequent external readiness polling; each readiness check queries D1.
+3. Confirm the live webhook secret and production environment are deployed, then enable the live Whop webhook for `https://swapthisface.com/api/webhooks/whop`. Disable the old sandbox endpoint for this production URL.
+4. Set WHOP_BILLING_ENABLED=true on both services and redeploy. Run `node --import tsx scripts/check-production.ts` inside the deployed environment. That check requires the full runtime configuration; the local production file contains Whop provisioning settings only and is not a complete Railway environment export.
+5. Check the production checkout shows the correct offer, currency and renewal terms. The owner must make any real payment personally. Verify one credit grant, automatic balance refresh, downloaded output, webhook processing reaching done, and cancellation retaining the paid allowance. A configuration check alone does not prove live fulfillment.
+6. Confirm Google sign-in, CMS login, real guest swap, private image storage, HTTPS/alternate-host redirect, policy links, robots, sitemap and favicon. Request homepage indexing after deployment.
 
-## Domain and sign-in
+## Request budget
 
-1. Railway → web service → Settings → Networking → Custom Domain: add `swapthisface.com`.
-2. Copy the exact CNAME and domain-verification TXT records Railway displays into your DNS provider. Do not guess the target. For Cloudflare's root domain use its CNAME flattening. Wait for Railway domain verification and HTTPS issuance.
-3. Configure `www.swapthisface.com` to redirect to `https://swapthisface.com`, preserving paths and query strings. If www serves Railway directly, attach it there too before configuring the redirect.
-4. In the Google OAuth web client, add authorized origin `https://swapthisface.com` and redirect URI `https://swapthisface.com/api/auth/callback/google`. Retain the staging callback only if staging remains in use. Check OAuth consent-screen authorized domain and publishing status.
-5. Remove the staging hostname from the promoted service after cutover, or point it to a separate staging service with `APP_ENV=staging`. Merely changing APP_URL does not isolate an old hostname.
+The worker now checks idle queues every 30 seconds and returns to the fast interval after work. Errors use the slower interval. Swap recovery runs every five minutes instead of every three seconds. Idle Whop checks cost about 5760 gateway requests/day and idle swap dispatch about 2880/day, plus recovery, cleanup, CMS, reconciliation, health checks and real traffic. These are code-based estimates for one worker, not measured account usage. First queued work can wait up to roughly 30 seconds. Monitor Cloudflare per-worker request counts and D1 row usage after deployment.
 
-## Verify on the public domain
+## Operational boundaries
 
-- `/api/health/ready` returns 200, Google sign-in returns to the production domain, CMS owner login works.
-- One real guest swap works; output is private and has no mock watermark. Invalid uploads and failed provider jobs are handled without consuming the trial.
-- Pricing says coming soon; purchases and billing portal cannot open. Stripe webhook returns 410.
-- Homepage, studio, blog, privacy, terms, and refunds pages load on mobile; canonicals use the root domain; `/robots.txt` and `/sitemap.xml` reflect production. Login/dashboard remain noindex.
-- Worker cleanup continues and expired photos become unavailable.
+Confirm Whop product eligibility and your account tax settings before accepting public payments; identity verification alone does not establish product approval. Existing policy/operator contact details and processor retention terms must remain accurate. Do not describe legal compliance or provider approval as established by automated tests.
 
-The existing entitlement model still permits only one guest trial. Account-based additional swaps require an eligible subscription and credits; new purchases remain unavailable until Paddle is integrated. Do not advertise unlimited free use.
+Keep sandbox history intact. Environment separation excludes sandbox billing credits automatically; never wipe customer data to switch modes. If problems arise, disable new purchases with WHOP_BILLING_ENABLED=false while keeping the production worker and webhook active to settle already-paid transactions. Do not switch credentials back to sandbox while production transactions are outstanding.
 
-## Paddle review still needs
-
-A live HTTPS site is one requirement, not an approval guarantee. Paddle also requests a clear product description, pricing details (a screenshot can be supplied if not published yet), included features, company name, and accessible terms, privacy and refund policies. The current refund page explains that no purchases are accepted; paid refund eligibility and pricing are still undecided. Finalize those before submitting a paid offering for review. Supply the business contact address and confirm the photo processor's retention/training terms; do not invent these details.
-
-References:
-- [Paddle domain review](https://www.paddle.com/help/start/account-verification/what-is-domain-verification)
-- [Railway custom domains](https://docs.railway.com/networking/domains/working-with-domains)
+Sources: [Whop production transition](https://whop.com/blog/whop-sandbox/), [Cloudflare Worker limits](https://developers.cloudflare.com/workers/platform/limits/).

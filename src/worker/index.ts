@@ -12,6 +12,7 @@ import { runIsolatedNodeTask } from './isolated-task'
 
 const SWAP_QUEUE = 'swap.process'
 const pollMs = Number(process.env.WORKER_POLL_MS ?? 3000)
+const idleMs = Math.max(pollMs, Number(process.env.WORKER_IDLE_POLL_MS ?? 30000))
 
 if (!featureState().database) {
   throw new Error('Database configuration is required to run the worker.')
@@ -36,7 +37,7 @@ await boss?.work<{ jobId: string }>(SWAP_QUEUE, { batchSize: 1 }, async ([job]) 
   await processSwapJob(getPool(), job.data.jobId)
 })
 
-async function dispatchOutbox() {
+async function recoverStaleJobs() {
   const pool = getPool()
   await queueStaleSwapJobs(pool)
   await pool.query(
@@ -47,6 +48,10 @@ async function dispatchOutbox() {
        and attempts < 10
        and updated_at < now() - interval '5 minutes'`
   )
+ }
+
+async function dispatchOutbox() {
+  const pool = getPool()
   const events = await pool.query<{ id: string; payload: { jobId: string } }>(
     `update app.outbox_events
      set state = 'processing', attempts = attempts + 1, updated_at = now()
@@ -72,6 +77,7 @@ async function dispatchOutbox() {
       await pool.query("update app.outbox_events set state = 'failed', updated_at = now() where id = $1", [event.id])
     }
   }
+  return events.rows.length > 0
 }
 
 async function cleanupExpiredAssets() {
@@ -108,9 +114,10 @@ async function processScheduledPosts() {
 // Billing must not wait for image generation, R2 cleanup, or CMS work.
 const stopLanes = [
   startPollLoop(async () => { await reconcileRecentWhopPayments(getPool()) }, 300_000, () => console.error('Payment reconciliation failed; retrying. Check provider permissions and availability.')),
-  startPollLoop(async () => { await processWhopEvents(getPool()) }, pollMs, () => console.error('Whop processing failed; retrying. Check the billing inbox and database availability.')),
+  startPollLoop(async () => processWhopEvents(getPool()), pollMs, () => console.error('Whop processing failed; retrying. Check the billing inbox and database availability.'), {idleMs}),
   startPollLoop(async () => { if (!usingD1()) await processPaddleEvents(getPool()) }, pollMs, error => console.error('Paddle processing failed; retrying.', error)),
-  startPollLoop(async () => { if (featureState().swapsEnabled) await dispatchOutbox() }, pollMs, error => console.error('Swap dispatch failed; retrying.', error)),
+  startPollLoop(async () => featureState().swapsEnabled ? dispatchOutbox() : false, pollMs, error => console.error('Swap dispatch failed; retrying.', error), {idleMs}),
+  startPollLoop(async () => { if (featureState().swapsEnabled) await recoverStaleJobs() }, 300_000, error => console.error('Swap recovery failed; retrying.', error)),
   startPollLoop(cleanupExpiredAssets, 60_000, error => console.error('Asset cleanup failed; retrying.', error)),
   startPollLoop(processScheduledPosts, 60_000, error => console.error('Scheduled publishing failed; retrying.', error)),
 ]

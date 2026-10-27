@@ -81,3 +81,9 @@ Before live billing, verify on the deployed **sandbox**:
 6. Check the worker logs and inbox for exhausted retries or payments requiring period/ownership review. Investigate these before collecting live payments.
 
 Immediate prorated plan upgrades remain unsupported. Historic subscription payments whose paid date falls outside the retrieved membership period are held for review rather than granted into the wrong period. The recent-payment fallback does not reconcile membership-only or dispute-only changes; reliable webhook delivery remains required. Switching providers/environments does not migrate old credit balances.
+
+## Production provisioning and idle polling
+
+See [the current production runbook](PRODUCTION-LAUNCH.md). Production provisioning uses `.env.production.local` explicitly; `npm run whop:setup` still loads the sandbox development file by default. Run `node --env-file=.env.production.local --import tsx scripts/setup-whop.ts --save` for live catalog creation/reuse. Run the webhook script with `--production`. It saves secrets privately and leaves the webhook and live billing disabled until the matching Railway configuration is deployed.
+
+Workers use WORKER_IDLE_POLL_MS=30000 when the billing/swap queue is empty or a lane errors; WORKER_POLL_MS=3000 applies after productive work. Swap recovery runs every five minutes. This reduces idle D1 gateway requests substantially; the first queued job can wait about 30 seconds. Keep only one worker replica and monitor actual Cloudflare usage.

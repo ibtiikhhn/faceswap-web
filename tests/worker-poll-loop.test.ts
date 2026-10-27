@@ -23,3 +23,19 @@ it('recovers from startup failure without overlapping attempts',async()=>{
  expect(error).toHaveBeenCalledTimes(1);expect(task).toHaveBeenCalledTimes(2);
  await stop();
 });
+
+it('uses slow idle checks and resumes fast polling after work',async()=>{
+ vi.useFakeTimers();
+ const task=vi.fn().mockResolvedValueOnce(false).mockResolvedValueOnce(true).mockResolvedValue(false);
+ const stop=startPollLoop(task,3000,vi.fn(),{idleMs:30000});
+ await vi.advanceTimersByTimeAsync(29999);expect(task).toHaveBeenCalledTimes(1);
+ await vi.advanceTimersByTimeAsync(1);expect(task).toHaveBeenCalledTimes(2);
+ await vi.advanceTimersByTimeAsync(3000);expect(task).toHaveBeenCalledTimes(3);
+ await stop();
+});
+it('backs off database failures instead of retrying at the busy rate',async()=>{
+ vi.useFakeTimers();const error=vi.fn();const task=vi.fn().mockRejectedValue(new Error('offline'));
+ const stop=startPollLoop(task,3000,error,{idleMs:30000});
+ await vi.advanceTimersByTimeAsync(29999);expect(task).toHaveBeenCalledTimes(1);
+ await vi.advanceTimersByTimeAsync(1);expect(task).toHaveBeenCalledTimes(2);await stop();
+});
