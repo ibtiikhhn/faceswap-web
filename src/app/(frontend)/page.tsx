@@ -7,10 +7,10 @@ import { StudioInvitation } from '@/components/site-shell';
 import { ArrowUpRight, ArrowRight, Sparkles, ShieldCheck, Layers, ImagePlus, Zap } from '@/components/icons';
 import { SwapStudio } from '@/components/swap-studio';
 
-export const metadata = pageMetadata('AI Photo Face Swap Online — Try 1 Free', 'Put your face on another picture with our AI photo face swap editor. Upload two photos, compare your result, and try one free swap without signing up.', '/');
+export const metadata = pageMetadata('AI Face Swap Online – Put Your Face in Any Photo', 'Recreate photos with your face using AI. Try a travel shot, a new portrait or a different look. Your first photo face swap is free, with no signup needed.', '/');
 
 export default function Home() {
- return <><script type="application/ld+json" dangerouslySetInnerHTML={{__html:serializeJsonLd({'@context':'https://schema.org','@type':'WebSite','@id':absoluteUrl('/#website'),name:'SwapThisFace.com',alternateName:'SwapThisFace',url:absoluteUrl('/'),inLanguage:'en',publisher:{'@type':'Person',name:'Ibtihaj Uddin'}})}}/>
+ return <><script type="application/ld+json" dangerouslySetInnerHTML={{__html:serializeJsonLd({'@context':'https://schema.org','@type':'WebSite','@id':absoluteUrl('/#website'),name:'SwapThisFace',alternateName:'SwapThisFace.com',url:absoluteUrl('/'),inLanguage:'en',publisher:{'@type':'Person',name:'Ibtihaj Uddin'}})}}/>
  <section className="hero wrap"><div className="hero-copy"><div className="eyebrow"><span className="status-dot" /> PHOTO FACE SWAP ONLINE</div><h1>Recreate any photo<br />with <span className="serif-word">your face.</span><span className="headline-spark" aria-hidden="true">✳</span></h1><p className="hero-description">Turn a photo you love into a moment starring you. Upload your selfie and swap faces in travel shots, portraits, and more with AI.</p><StudioInvitation /><div className="hero-benefits"><span><ShieldCheck size={16} /> Private by default</span><span><Zap size={16} /> A few simple steps</span></div></div>
  <FaceSwapShowcase /></section>
  <section className="studio-section" id="studio"><div className="wrap"><div className="section-heading"><div><div className="eyebrow">THE CREATIVE PART</div><h2>Your photo face swap starts here<span className="lime-text">.</span></h2></div><p>Two photos. One fresh perspective.</p></div><SwapStudio /></div></section>

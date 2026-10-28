@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { pageMetadata } from '@/lib/seo';
 import { ContactEmail, LegalLayout } from '@/components/legal-layout';
 
-export const metadata = pageMetadata('Refund policy', 'Refund eligibility, unused purchases, subscription cancellation, and payment support for SwapThisFace.com.', '/refunds');
+export const metadata = pageMetadata('Refund Policy | SwapThisFace', 'Find out when a SwapThisFace purchase qualifies for a refund, how to request one, and what happens when you cancel a subscription.', '/refunds');
 const sections = [['scope','Who handles payments'],['unused','Unused purchases'],['problems','Billing and service problems'],['cancel','Canceling renewal'],['request','Requesting a refund'],['rights','Your statutory rights'],['credits','Credits after refunds'],['sandbox','Free trials and sandbox']] as const;
 export default function Refunds(){
  return <LegalLayout title="Refund policy" description="This policy applies to SwapThisFace.com, operated by Ibtihaj Uddin, a sole proprietor in Pakistan. Read it alongside our terms and the payment terms shown at checkout." sections={sections}>

@@ -11,7 +11,7 @@ describe('search metadata safeguards', () => {
   it('uses each page URL rather than a shared home canonical', () => {
     vi.stubEnv('APP_URL', 'https://swapthisface.com/');
     const metadata = pageMetadata('Editor', 'Upload two photos.', '/face-swap');
-    expect(metadata.title).toEqual({ absolute: 'Editor · SwapThisFace.com' });
+    expect(metadata.title).toEqual({ absolute: 'Editor' });
     expect(metadata.alternates?.canonical).toBe('https://swapthisface.com/face-swap');
     expect(metadata.openGraph?.url).toBe('https://swapthisface.com/face-swap');
   });

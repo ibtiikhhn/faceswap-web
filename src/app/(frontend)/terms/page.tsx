@@ -1,7 +1,7 @@
 import { pageMetadata } from '@/lib/seo';
 import Link from 'next/link';
 import { ContactEmail, LegalLayout } from '@/components/legal-layout';
-export const metadata = pageMetadata('Terms & conditions', 'Terms for using SwapThisFace.com, including accounts, photo permissions, subscriptions, credits, cancellations, and service limits.', '/terms');
+export const metadata = pageMetadata('Terms of Use | SwapThisFace', 'Read the terms for using SwapThisFace, including photo permissions, acceptable use, purchases, cancellation and your responsibilities when creating face swaps.', '/terms');
 const sections = [['agreement','About these terms'],['service','The service'],['accounts','Accounts and eligibility'],['trial','Free guest access'],['billing','Subscriptions and payments'],['plan-changes','Plan changes'],['credits','How credits work'],['cancellation','Cancellation and refunds'],['content','Your photos and permissions'],['acceptable-use','Acceptable use'],['results','Results and storage'],['suspension','Suspension and closure'],['liability','Service limits and liability'],['disputes','Questions and disputes'],['changes','Changes and other terms']] as const;
 export default function Terms() {
   return <LegalLayout title="Terms & conditions" description="These terms explain the agreement between you and Ibtihaj Uddin, trading as SwapThisFace.com when you use SwapThisFace.com. Please read them alongside our privacy policy before uploading photos or creating an account." sections={sections}>

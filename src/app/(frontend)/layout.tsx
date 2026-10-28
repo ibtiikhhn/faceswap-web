@@ -10,8 +10,8 @@ export const metadata: Metadata = {
   icon: [{url:'/favicon-96.png',sizes:'96x96',type:'image/png'}],
   apple: [{url:'/apple-touch-icon.png',sizes:'180x180',type:'image/png'}],
  },
- title: { default: 'Photo Face Swap Online · SwapThisFace.com', template: '%s · SwapThisFace.com' },
- description: 'Upload a face photo and a target image in the SwapThisFace.com photo face swap studio. Manage your creations, downloads, and account in one place.',
+ title: { default: 'AI Face Swap Online – Put Your Face in Any Photo', template: '%s | SwapThisFace' },
+ description: 'Recreate photos with your face using AI. Try a travel shot, a new portrait or a different look. Your first photo face swap is free, with no signup needed.',
  robots: publicIndexingEnabled() ? { index: true, follow: true } : { index: false, follow: false },
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {

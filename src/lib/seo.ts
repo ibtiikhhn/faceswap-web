@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 
-export const siteName = 'SwapThisFace.com';
+export const siteName = 'SwapThisFace';
 export function siteOrigin() {
   return new URL(process.env.APP_URL ?? process.env.NEXT_PUBLIC_APP_URL ?? 'http://localhost:3000').origin;
 }
@@ -15,7 +15,8 @@ export function httpUrl(value: string | null | undefined) {
 }
 export function pageMetadata(title: string, description: string, path: string): Metadata {
   const url = absoluteUrl(path);
-  const fullTitle = `${title} · ${siteName}`;
+  // Keep editorial titles intact; the site name is supplied separately.
+  const fullTitle = title;
   return {
     title: { absolute: fullTitle }, description, alternates: { canonical: url },
     openGraph: { type: 'website', siteName, title: fullTitle, description, url, images: [{url:absoluteUrl('/social-preview.png'),width:1200,height:630,alt:'SwapThisFace.com — Recreate a photo with your face'}] },

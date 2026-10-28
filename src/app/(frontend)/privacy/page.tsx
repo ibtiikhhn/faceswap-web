@@ -1,6 +1,6 @@
 import { pageMetadata } from '@/lib/seo';
 import { ContactEmail, LegalLayout } from '@/components/legal-layout';
-export const metadata = pageMetadata('Privacy policy', 'How Ibtihaj Uddin, trading as SwapThisFace.com, handles account information, photo uploads, storage, cookies, and privacy requests at SwapThisFace.com.', '/privacy');
+export const metadata = pageMetadata('Privacy Policy | SwapThisFace', 'Learn how SwapThisFace handles your photos and personal information, how long uploads are kept, and how to request deletion or contact us about privacy.', '/privacy');
 const sections = [['operator','Who we are'],['data','Information we collect'],['purposes','How we use information'],['photos','Photos and face processing'],['sharing','Service providers and disclosures'],['retention','Storage and retention'],['cookies','Cookies and external content'],['security','Security and access'],['rights','Your choices and requests'],['children','Children’s information'],['transfers','International processing'],['changes','Policy updates']] as const;
 export default function Privacy() {
   return <LegalLayout title="Privacy policy" description="This policy explains how information is handled when you visit SwapThisFace.com, sign in, upload photos, create previews, or contact us. It covers the people using the service and people depicted in uploaded photos." sections={sections}>
