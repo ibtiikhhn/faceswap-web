@@ -1,6 +1,8 @@
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { featureState } from '@/server/env'
+import { photoSwapGuideSlug, photoSwapGuideScreenshot } from '@/lib/photo-swap-guide'
+import { absoluteUrl } from '@/lib/seo'
 
 export type PublishedPost = {
   title: string
@@ -17,6 +19,7 @@ export type PublishedPost = {
   socialImage?: string | null
   seoTitle?: string | null
   seoDescription?: string | null
+  authorName?: string | null
 }
 
 export type CmsListResult = {
@@ -75,8 +78,16 @@ export async function getPublishedPost(slug: string): Promise<CmsPostResult> {
 
   return {
     setupRequired: false,
-    post: response.docs[0] ? toPublishedPost(response.docs[0]) : null,
+    post: response.docs[0] ? { ...toPublishedPost(response.docs[0]), authorName: await publishedAuthorName(payload, response.docs[0].author) } : null,
   }
+}
+
+/** Owner records remain private. Only the credited author's display name is published. */
+async function publishedAuthorName(payload: Awaited<ReturnType<typeof getPayload>>, author: unknown): Promise<string | null> {
+  const id = typeof author === 'object' && author !== null && 'id' in author ? author.id : author;
+  if (typeof id !== 'number' && typeof id !== 'string') return null;
+  const owner = await payload.findByID({ collection: 'owners', id, depth: 0, overrideAccess: true, select: { name: true }, disableErrors: true });
+  return owner?.name?.trim() || null;
 }
 
 function toPublishedPost(doc: any): PublishedPost {
@@ -87,8 +98,8 @@ function toPublishedPost(doc: any): PublishedPost {
     publishedAt: doc.publishedAt ?? null,
     content: doc.content ?? null,
     cover: {
-      url: typeof doc.coverImage === 'object' ? doc.coverImage?.url ?? null : null,
-      alt: doc.coverAlt ?? (typeof doc.coverImage === 'object' ? doc.coverImage?.alt ?? null : null),
+      url: (typeof doc.coverImage === 'object' ? doc.coverImage?.url : null) ?? (doc.slug === photoSwapGuideSlug ? absoluteUrl(photoSwapGuideScreenshot) : null),
+      alt: doc.coverAlt ?? (typeof doc.coverImage === 'object' ? doc.coverImage?.alt : null) ?? (doc.slug === photoSwapGuideSlug ? 'The SwapThisFace editor with source photo, target photo, and result panels' : null),
     },
     updatedAt: doc.updatedAt ?? null,
     canonicalUrl: doc.canonicalUrl ?? null,

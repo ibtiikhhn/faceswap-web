@@ -5,15 +5,13 @@ import { Check, ArrowUpRight, LoaderCircle, CircleAlert, Zap } from './icons';
 import { api, ApiError, errorMessage } from './api-client';
 import { useAccount } from './account-provider';
 import { PlanChange } from './plan-change';
+import type { PricingCatalog as Catalog, PricingPlan as Plan } from '@/lib/pricing-catalog';
 
-type Plan={code:string;name:string;interval:string;configured:boolean;includedCredits:number|null;amount?:number|null;unitAmount?:number|null;currency?:string|null};
-type Pack={code:string;name:string;configured:boolean;credits:number|null;amount?:number|null;currency?:string|null};
-type Catalog={provider?:string;environment?:string;subscriptions:Plan[];creditPacks:Pack[]};
 const defaults:Plan[]=[{code:'weekly',name:'Weekly',interval:'week',configured:false,includedCredits:null},{code:'monthly',name:'Monthly',interval:'month',configured:false,includedCredits:null}];
 const descriptions:Record<string,string>={weekly:'For a little creative adventure.',monthly:'Make room for more possibilities.',yearly:'A full year of fresh perspectives.'};
-export function PricingCards({packsOnly=false}:{packsOnly?:boolean}={}){
+export function PricingCards({packsOnly=false,initialCatalog}:{packsOnly?:boolean;initialCatalog?:Catalog}={}){
  const {account,loading}=useAccount(); const subscription=account?.subscription; const hasSubscription=Boolean(subscription && ['active','trialing','past_due','paused'].includes(subscription.status??''));
- const [catalog,setCatalog]=useState<Catalog>({subscriptions:defaults,creditPacks:[]});const [busy,setBusy]=useState('');const [error,setError]=useState('');const [pending,setPending]=useState(false);
+ const [catalog,setCatalog]=useState<Catalog>(initialCatalog??{subscriptions:defaults,creditPacks:[]});const [busy,setBusy]=useState('');const [error,setError]=useState('');const [pending,setPending]=useState(false);
  useEffect(()=>{api<Catalog>('/api/billing/plans').then(setCatalog).catch(e=>setError(errorMessage(e)));},[]);
  async function checkout(code:string,kind:'plan'|'pack'){
   setBusy(code);setError('');setPending(false);try{const data=await api<{url:string}>(kind==='plan'?'/api/billing/checkout':'/api/billing/credits',{method:'POST',body:JSON.stringify(kind==='plan'?{planCode:code}:{packCode:code})});window.location.assign(data.url);}catch(e){if(e instanceof ApiError&&e.status===401){window.location.assign('/login?next=/pricing');return;}setPending(e instanceof ApiError&&e.code==='checkout_pending');setError(errorMessage(e));}finally{setBusy('');}
