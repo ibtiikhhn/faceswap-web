@@ -1,0 +1,23 @@
+import Link from 'next/link';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata = pageMetadata('Photo Face Swap Examples: Source, Target & Result', 'Compare three published SwapThisFace examples side by side. See the source portrait, original target and result, with a checklist for reviewing each image.', '/examples');
+const examples = [
+  { id: 'coast', title: 'Coastal portrait', width: 784, height: 1372, focus: 'Compare the direction of the face with the body pose. Inspect the face boundary and the transition toward the neck, then check the boat and coastline against the target.' },
+  { id: 'paris', title: 'Paris portrait', width: 736, height: 1075, focus: 'Look at the eyes and mouth at full size, not only the overall resemblance. Compare facial lighting with the surrounding scene and check the hairline against the original target.' },
+  { id: 'city', title: 'City café portrait', width: 900, height: 1200, focus: 'Compare the face angle and expression with the source. Check nearby hair, clothing and background details for unintended changes, as well as whether the face feels consistent with the target lighting.' },
+];
+export default function Examples() {
+  return <div className="wrap quality-page">
+    <header className="page-header"><div className="eyebrow">SOURCE → TARGET → RESULT</div><h1>Photo face swap examples you can inspect.</h1><p>One source portrait, three different target scenes. See the complete photo pairs behind our homepage examples and open each image at full size.</p></header>
+    <aside className="panel"><h2>What this gallery shows</h2><p>These are existing published examples, not new benchmark tests, customer uploads or a representative success-rate study. The same source portrait appears in each row. Your results will vary with the photos you choose.</p><p>The source supplies the face; the target supplies the scene. The review notes tell you what to look at, rather than assigning an unmeasured quality score.</p><Link href="/realistic-face-swap" className="text-link">Check what makes a face swap look realistic</Link></aside>
+    <nav className="example-nav" aria-label="Example scenes">{examples.map(example => <a key={example.id} href={`#${example.id}`}>{example.title}</a>)}</nav>
+    {examples.map(example => <section key={example.id} id={example.id} className="quality-section guide-figures"><h2>{example.title}</h2><div className="guide-example-grid">
+      <figure><a href="/images/examples/source.webp"><img src="/images/examples/source.webp" alt="Source portrait used for all three published face swaps" width="320" height="414" loading="lazy"/></a><figcaption>Source portrait · <a href="/images/examples/source.webp">Open full-size source</a></figcaption></figure>
+      <figure><a href={`/images/examples/${example.id}-target.webp`}><img src={`/images/examples/${example.id}-target.webp`} alt={`${example.title}: original target before the face swap`} width={example.width} height={example.height} loading="lazy"/></a><figcaption>Original target · <a href={`/images/examples/${example.id}-target.webp`}>Open full-size target</a></figcaption></figure>
+      <figure><a href={`/images/examples/${example.id}-result.webp`}><img src={`/images/examples/${example.id}-result.webp`} alt={`${example.title}: published face swap result`} width={example.width} height={example.height} loading="lazy"/></a><figcaption>Published result · <a href={`/images/examples/${example.id}-result.webp`}>Open full-size result</a></figcaption></figure>
+    </div><h3>What to inspect</h3><p>{example.focus}</p></section>)}
+    <section className="quality-section"><h2>Use the examples to choose your own inputs</h2><p>Choose the target for the composition you want before picking a source. Compare head angle, expression and lighting. A source that works with one scene may not be equally suitable for another.</p><p>The editor currently supports one visible face in each input. These examples do not demonstrate group face mapping, GIFs, video, live calls or body replacement.</p><p>To repeat the workflow with your own photos, follow the <Link href="/blog/how-to-swap-a-face-between-two-photos">two-photo face swap guide</Link>. For difficult inputs, use the <Link href="/realistic-face-swap">realism checklist and result review steps</Link>.</p></section>
+    <section className="panel"><h2>Try your own photo pair</h2><p>Upload two photos you have permission to use. Compare your output with the originals, and download only a result you want to keep.</p><Link href="/face-swap" className="button button-dark">Open the face swap editor</Link></section>
+  </div>;
+}
