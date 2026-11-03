@@ -1,5 +1,6 @@
 import type { CollectionConfig } from 'payload'
 import { publishedOnly, ownerOnly } from '@/cms/access'
+import { setPostPublicationDate } from '@/cms/post-publication'
 
 export const Posts: CollectionConfig = {
   slug: 'posts',
@@ -7,7 +8,9 @@ export const Posts: CollectionConfig = {
     useAsTitle: 'title',
     defaultColumns: ['title', 'slug', '_status', 'publishedAt'],
     group: 'Content',
+    components: { edit: { beforeDocumentControls: ['@/app/(payload)/admin/OpenPublishedPost'] } },
   },
+  hooks: { beforeChange: [setPostPublicationDate] },
   access: {
     read: publishedOnly,
     readVersions: ownerOnly,
@@ -65,6 +68,7 @@ export const Posts: CollectionConfig = {
       name: 'publishedAt',
       type: 'date',
       admin: {
+        description: 'If blank on first publication, today’s date is assigned. A future date hides the post until that time.',
         date: {
           pickerAppearance: 'dayAndTime',
         },

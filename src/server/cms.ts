@@ -1,3 +1,4 @@
+import { publishedPostWhere } from '@/cms/post-publication'
 import { getPayload } from 'payload'
 import config from '@payload-config'
 import { featureState } from '@/server/env'
@@ -43,12 +44,7 @@ export async function getPublishedPosts(): Promise<CmsListResult> {
     overrideAccess: false,
     limit: 20,
     sort: '-publishedAt',
-    where: {
-      and: [
-        { _status: { equals: 'published' } },
-        { publishedAt: { less_than_equal: new Date().toISOString() } },
-      ],
-    },
+    where: publishedPostWhere(),
   })
 
   return {
@@ -70,8 +66,7 @@ export async function getPublishedPost(slug: string): Promise<CmsPostResult> {
     where: {
       and: [
         { slug: { equals: slug } },
-        { _status: { equals: 'published' } },
-        { publishedAt: { less_than_equal: new Date().toISOString() } },
+        publishedPostWhere(),
       ],
     },
   })
@@ -128,7 +123,7 @@ export async function getPublishedPostSitemapEntries() {
   for (;;) {
     const result = await payload.find({ collection: 'posts', depth: 0, draft: false, overrideAccess: false,
       page, limit: 500, sort: 'id', select: { slug: true, updatedAt: true, canonicalUrl: true },
-      where: { and: [{ _status: { equals: 'published' } }, { publishedAt: { less_than_equal: new Date().toISOString() } }] },
+      where: publishedPostWhere(),
     });
     for (const post of result.docs) entries.push({ slug: post.slug, updatedAt: post.updatedAt, canonicalUrl: post.canonicalUrl });
     if (!result.hasNextPage) break;
