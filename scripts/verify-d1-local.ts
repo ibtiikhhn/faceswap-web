@@ -49,6 +49,9 @@ try {
  const sharp = (await import('sharp')).default;
  const image = await sharp({create:{width:1280,height:800,channels:3,background:'#336699'}}).png().toBuffer();
  const media = await payload.create({collection:'media',data:{alt:'Local upload verification'},file:{data:image,mimetype:'image/png',name:'local-upload-verification.png',size:image.length}});
+ assert.equal(media.prefix, 'blog-media');
+ const storedMedia = await payload.find({collection:'media',where:{and:[{filename:{equals:media.filename}},{prefix:{equals:'blog-media'}}]}});
+ assert.equal(storedMedia.docs[0]?.id,media.id);
  assert.ok(media.filename);
  assert.ok(media.sizes?.card?.filename);
  assert.ok(media.sizes?.social?.filename);

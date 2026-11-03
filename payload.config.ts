@@ -69,6 +69,8 @@ export default buildConfig({
   plugins: [
     s3Storage({
       enabled: hasR2,
+      // Keep the database schema identical in local, build, and cloud environments.
+      alwaysInsertFields: true,
       collections: {
         media: {
           prefix: 'blog-media',
