@@ -46,6 +46,14 @@ try {
  const publicPost=await payload.find({collection:'posts',overrideAccess:false,where:{slug:{equals:'d1-draft'}}});assert.equal(publicPost.docs.length,1);
  await payload.delete({collection:'posts',id:post.id});
  console.log('D1 CMS migrations, owner login, draft/publish/read/delete: passed');
+ const sharp = (await import('sharp')).default;
+ const image = await sharp({create:{width:1280,height:800,channels:3,background:'#336699'}}).png().toBuffer();
+ const media = await payload.create({collection:'media',data:{alt:'Local upload verification'},file:{data:image,mimetype:'image/png',name:'local-upload-verification.png',size:image.length}});
+ assert.ok(media.filename);
+ assert.ok(media.sizes?.card?.filename);
+ assert.ok(media.sizes?.social?.filename);
+ await payload.delete({collection:'media',id:media.id});
+ console.log('D1 CMS media upload, image resizing, and deletion: passed');
  await payload.destroy();
 } finally {
  server.closeAllConnections();await new Promise<void>(resolve=>server.close(()=>resolve()));app.close();cms.close();

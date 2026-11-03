@@ -223,6 +223,9 @@ export interface Post {
   coverAlt?: string | null;
   category?: (number | null) | Category;
   author: number | Owner;
+  /**
+   * If blank on first publication, today’s date is assigned. A future date hides the post until that time.
+   */
   publishedAt?: string | null;
   content: {
     root: {
