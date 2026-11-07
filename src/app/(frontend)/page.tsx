@@ -7,7 +7,7 @@ import { StudioInvitation } from '@/components/site-shell';
 import { ArrowUpRight, ArrowRight, Sparkles, ShieldCheck, Layers, ImagePlus, Zap } from '@/components/icons';
 import { SwapStudio } from '@/components/swap-studio';
 
-export const metadata = pageMetadata('AI Face Swap Online – Put Your Face in Any Photo', 'See yourself in a whole new picture. Swap faces online with AI and turn two photos into a travel portrait, a funny meme or a look you want to try.', '/');
+export const metadata = pageMetadata('AI Face Swap Online – Put Your Face in Any Photo', 'Your face. Any scene. Zero editing. Put your face on any photo you want to recreate. Turn 2 photos into a travel portrait, funny meme, or new look with AI.', '/');
 
 export default function Home() {
  return <><script type="application/ld+json" dangerouslySetInnerHTML={{__html:serializeJsonLd({'@context':'https://schema.org','@type':'WebSite','@id':absoluteUrl('/#website'),name:'SwapThisFace',alternateName:'SwapThisFace.com',url:absoluteUrl('/'),inLanguage:'en',publisher:{'@type':'Person',name:'Ibtihaj Uddin'}})}}/>
