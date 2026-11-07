@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   apple: [{url:'/apple-touch-icon.png',sizes:'180x180',type:'image/png'}],
  },
  title: { default: 'AI Face Swap Online – Put Your Face in Any Photo', template: '%s | SwapThisFace' },
- description: 'Recreate photos with your face using AI. Try a travel shot, a new portrait or a different look. Your first photo face swap is free, with no signup needed.',
+ description: 'See yourself in a whole new picture. Swap faces online with AI and turn two photos into a travel portrait, a funny meme or a look you want to try.',
  robots: publicIndexingEnabled() ? { index: true, follow: true } : { index: false, follow: false },
 };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
