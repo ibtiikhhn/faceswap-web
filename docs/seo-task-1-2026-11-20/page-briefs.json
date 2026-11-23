@@ -1,0 +1,805 @@
+[
+  {
+    "id": "ai",
+    "url": "/",
+    "primary": "ai face swap",
+    "terms": [
+      "ai face swap",
+      "face swap",
+      "face swap ai",
+      "ai face swap online",
+      "free ai face swap",
+      "face swap online",
+      "ai face swap free online",
+      "ai face swap no sign up",
+      "face swap without sign up",
+      "ai face swap tool",
+      "face swap generator",
+      "how does ai face swap work",
+      "is ai face swap safe"
+    ],
+    "purpose": "Broad AI photo swapping and the entry point for first-time users.",
+    "priority": "Task 2 · first",
+    "title": "AI Face Swap Online | SwapThisFace",
+    "h1": "AI Face Swap Online",
+    "meta": [
+      "ai face swap",
+      "photos",
+      "upload source and target",
+      "one successful guest trial"
+    ],
+    "headings": [
+      "How to use the AI face swap tool",
+      "AI face swap examples",
+      "Swap faces in photos online",
+      "Try an AI face swap without signing up"
+    ],
+    "faqs": [
+      "How does AI face swap work?",
+      "Can I try AI face swap for free?",
+      "Can AI face swap replace multiple faces?",
+      "Do I need an app to swap faces online?"
+    ],
+    "proof": "A real source → target → output sequence and a clear first-use path. Confirm the automatic multi-face behavior in Task 4.",
+    "alt": "For a genuine comparison image: “AI face swap showing the source portrait, target photo and finished result.” Describe each separate source/target image individually.",
+    "links": [
+      "/face-swap",
+      "/realistic-face-swap",
+      "/multiple-face-swap",
+      "/face-swap-for-memes",
+      "/templates"
+    ],
+    "incoming": [
+      "General AI explanation",
+      "Non-brand introductory tutorials",
+      "Relevant alternatives"
+    ],
+    "boundary": "Homepage owns AI/broad/free/no-sign-up queries. Do not create /ai-face-swap. Do not put adult positioning in its hero, FAQs or general gallery."
+  },
+  {
+    "id": "realistic",
+    "url": "/realistic-face-swap",
+    "primary": "realistic face swap",
+    "terms": [
+      "realistic face swap",
+      "realistic ai face swap",
+      "most realistic face swap",
+      "realistic face swap free",
+      "realistic face swap online",
+      "realistic face swap photo",
+      "hyper realistic face swap",
+      "ultra realistic face swap",
+      "high quality face swap",
+      "natural looking face swap",
+      "photorealistic face swap",
+      "realistic face swap online free",
+      "how to make face swap look realistic",
+      "why does my face swap look fake",
+      "face swap lighting",
+      "face swap skin tone",
+      "face swap blurry"
+    ],
+    "purpose": "Evaluate resemblance and visual quality before starting a swap.",
+    "priority": "Task 3 · high",
+    "title": "Realistic Face Swap for Photos | SwapThisFace",
+    "h1": "Realistic Face Swap",
+    "meta": [
+      "realistic face swap",
+      "compare photo examples",
+      "source and target quality",
+      "try the photo workflow"
+    ],
+    "headings": [
+      "Realistic AI face swap examples",
+      "Choose photos for a natural-looking result",
+      "Check lighting, expression and face edges",
+      "Can you try a realistic face swap for free?"
+    ],
+    "faqs": [
+      "What makes a face swap look realistic?",
+      "How can I get a high-quality face swap?",
+      "Why does my face swap look fake?",
+      "Can I make a realistic face swap online for free?",
+      "Does a larger photo improve face swap quality?"
+    ],
+    "proof": "At least one documented easy pair and difficult pair, plus a one-variable retry. Label real examples and avoid asserting universal superiority.",
+    "alt": "“Realistic face swap comparison showing the jawline and lighting in the original and result” only if those details are visible.",
+    "links": [
+      "/face-swap",
+      "/examples",
+      "/blog/how-to-make-face-swap-look-realistic",
+      "/blog/why-does-face-swap-look-fake"
+    ],
+    "incoming": [
+      "Existing preparation article",
+      "Existing fake-result diagnosis",
+      "Photo comparison/quality sections"
+    ],
+    "boundary": "Money page owns realistic/quality tool queries. Preparation and troubleshooting questions get short answers here and deeper treatment in existing articles. “Most realistic” belongs in an evaluation question, not an unsupported product claim."
+  },
+  {
+    "id": "photo",
+    "url": "/face-swap",
+    "primary": "photo face swap",
+    "terms": [
+      "photo face swap",
+      "ai photo face swap",
+      "photo swap",
+      "ai photo swap",
+      "free face swap photo",
+      "photo face swap online",
+      "face swap photo online free",
+      "online photo face swap",
+      "swap face from one photo to another",
+      "replace face in photo",
+      "swap faces between two photos",
+      "how to put your face on another picture",
+      "how to swap face on photo",
+      "copy face from one picture to another"
+    ],
+    "purpose": "Immediately perform a face swap between uploaded photos.",
+    "priority": "Task 3 · high",
+    "title": "Photo Face Swap — Swap Faces Between Photos | SwapThisFace",
+    "h1": "Photo Face Swap",
+    "meta": [
+      "photo face swap",
+      "two photos",
+      "upload and download",
+      "browser workflow"
+    ],
+    "headings": [
+      "Swap faces between two photos",
+      "Choose your source face and target photo",
+      "Photo face swap examples",
+      "Supported photo formats and downloads"
+    ],
+    "faqs": [
+      "How do I swap faces between two photos?",
+      "Can I replace a face in an existing photo?",
+      "Which photo formats can I upload?",
+      "Can I use photo face swap on my phone?"
+    ],
+    "proof": "Actual uploader, annotated source/target inputs and a downloaded output example.",
+    "alt": "“Photo face swap result beside the original target portrait” for a real comparison; do not repeat the same alt text across images.",
+    "links": [
+      "/realistic-face-swap",
+      "/custom-face-swap",
+      "/multiple-face-swap",
+      "/blog/how-to-swap-a-face-between-two-photos"
+    ],
+    "incoming": [
+      "Two-photo guide",
+      "iPhone and Android articles",
+      "Face-changing tutorials"
+    ],
+    "boundary": "Keep /face-swap as this owner; do not add a duplicate /photo-face-swap. Full how-to phrases belong primarily to the existing two-photo article."
+  },
+  {
+    "id": "changer",
+    "url": "/face-changer",
+    "primary": "face changer",
+    "terms": [
+      "face changer",
+      "ai face changer",
+      "photo face changer",
+      "online face changer",
+      "face changer online",
+      "free photo face changer online",
+      "photo editor face changer",
+      "change face in photo",
+      "change face in picture",
+      "face replacement",
+      "ai face replacement",
+      "change face online",
+      "how to change face in a photo",
+      "face changer app"
+    ],
+    "purpose": "Change the face in an existing picture through replacement.",
+    "priority": "Task 5",
+    "title": "Face Changer — Change a Face in a Photo | SwapThisFace",
+    "h1": "Online Face Changer",
+    "meta": [
+      "face changer",
+      "change face in photo",
+      "replacement portrait",
+      "actual workflow"
+    ],
+    "headings": [
+      "Change a face in a photo",
+      "How the AI face changer uses your pictures",
+      "Face replacement examples",
+      "Choose a photo for face replacement"
+    ],
+    "faqs": [
+      "How can I change a face in a photo?",
+      "Does the face changer replace the face or the whole head?",
+      "Can I change faces online without installing an app?",
+      "How is a face changer different from a face editor?"
+    ],
+    "proof": "Distinct replacement-focused examples and explanation of what changes. Do not invent facial-expression, age, body or hairstyle controls.",
+    "alt": "“Face replacement comparison with the original photo and changed face” only for a matching before/after asset.",
+    "links": [
+      "/face-swap",
+      "/custom-face-swap",
+      "/face-edit",
+      "/realistic-face-swap"
+    ],
+    "incoming": [
+      "Existing change/copy/paste tutorial sections",
+      "Replacement-vs-editing explainer",
+      "Relevant alternatives"
+    ],
+    "boundary": "High overlap with photo swap. Retain requested separate page, but own changer/replacement language rather than repeating the AI homepage. Revisit consolidation if distinct content and query ownership fail."
+  },
+  {
+    "id": "custom",
+    "url": "/custom-face-swap",
+    "primary": "custom face swap",
+    "terms": [
+      "custom face swap",
+      "custom photo face swap",
+      "face swap with own photos",
+      "face swap custom image",
+      "personalized face swap",
+      "upload your own face swap",
+      "face swap custom template",
+      "put my face on a picture",
+      "face swap with my face",
+      "how to face swap with your own photos",
+      "custom face swap online"
+    ],
+    "purpose": "Put the user's chosen identity into their own target image, with examples beyond preset templates.",
+    "priority": "Task 5 · lower measured demand",
+    "title": "Custom Face Swap with Your Own Photos | SwapThisFace",
+    "h1": "Custom Face Swap with Your Own Photos",
+    "meta": [
+      "custom face swap",
+      "own target photo",
+      "source portrait",
+      "personalized result"
+    ],
+    "headings": [
+      "Use your own photos for a custom face swap",
+      "Choose a target instead of a preset",
+      "Custom photo face swap examples",
+      "Prepare your source and target images"
+    ],
+    "faqs": [
+      "Can I face swap with my own photos?",
+      "Can I upload a custom target image?",
+      "Do I have to use a face swap template?",
+      "Can I reuse the same source portrait with different photos?"
+    ],
+    "proof": "A small set of different user-supplied target examples. Explain actual control through input selection, not nonexistent sliders or prompts.",
+    "alt": "“Custom face swap using an uploaded portrait and a café target photo” when the asset shows that exact scene.",
+    "links": [
+      "/face-swap",
+      "/templates",
+      "/realistic-face-swap"
+    ],
+    "incoming": [
+      "Own-photo tutorial section",
+      "Custom-scene inspiration",
+      "Template guide explaining own uploads"
+    ],
+    "boundary": "Head term measured at 10/month in Nov 1 research; most proposed long tails unknown. Do not label this a large-volume opportunity. General put-face-on-picture how-tos remain on the existing tutorial."
+  },
+  {
+    "id": "multiple",
+    "url": "/multiple-face-swap",
+    "primary": "multiple face swap",
+    "terms": [
+      "multiple face swap",
+      "multi face swap",
+      "ai multi face swap",
+      "multiple face swap online",
+      "multi face swap online",
+      "multi face swap photo",
+      "group face swap",
+      "group photo face swap",
+      "swap multiple faces in a photo",
+      "multiple face swap free",
+      "multi face swap online free",
+      "automatic multiple face swap",
+      "swap all faces in a photo",
+      "how to swap faces in a group photo",
+      "two face swap",
+      "couple face swap"
+    ],
+    "purpose": "Automatically swap multiple faces in one target photo; supported according to the owner.",
+    "priority": "Task 4 · high",
+    "title": "Multiple Face Swap for Group Photos | SwapThisFace",
+    "h1": "Multiple Face Swap",
+    "meta": [
+      "multiple face swap",
+      "group photos",
+      "automatic workflow",
+      "verified result behavior"
+    ],
+    "headings": [
+      "Automatic multiple face swap in group photos",
+      "How group photo face swapping works",
+      "Multi-face swap examples",
+      "Choose a clear group photo"
+    ],
+    "faqs": [
+      "Can I swap multiple faces in one photo?",
+      "Does the tool swap all faces automatically?",
+      "Can I choose which faces get replaced?",
+      "Can each person receive a different source face?",
+      "How is multiple face swap different from batch face swap?"
+    ],
+    "proof": "Owner confirms automatic multi-face support. Task 4 must demonstrate which faces are replaced, one-source versus multi-source behavior and any limits; do not infer selectable mapping.",
+    "alt": "“Multiple face swap before and after showing three people in a group photo” only for an actual three-person output.",
+    "links": [
+      "/face-swap",
+      "/realistic-face-swap",
+      "/custom-face-swap"
+    ],
+    "incoming": [
+      "New group-photo tutorial",
+      "Couple/friends workflow where supported",
+      "Relevant alternatives and tool comparisons"
+    ],
+    "boundary": "One image with several faces is not batch processing across files. Video/GIF terms are outside this photo page. Keep automatic behavior distinct from manual source-to-face mapping."
+  },
+  {
+    "id": "morph",
+    "url": "/face-morph",
+    "primary": "face morph",
+    "terms": [
+      "face morph",
+      "ai face morph",
+      "face morph online",
+      "face morph free",
+      "face morph two faces",
+      "face blend",
+      "face blender",
+      "face merger",
+      "combine two faces",
+      "merge two faces",
+      "blend two faces",
+      "face mixer",
+      "face morph website",
+      "face swap vs face morph",
+      "how to morph two faces together",
+      "face morph video"
+    ],
+    "purpose": "Combine facial features into a blended identity; distinguish still blending from animated morph transitions.",
+    "priority": "Task 6 · workflow-dependent",
+    "title": "Face Morph — Blend Two Faces Online | SwapThisFace",
+    "h1": "AI Face Morph",
+    "meta": [
+      "face morph",
+      "blend two faces",
+      "actual output type",
+      "real controls only"
+    ],
+    "headings": [
+      "Blend two faces into one",
+      "Face morph examples",
+      "Face morph vs face swap",
+      "Choose photos for a face blend"
+    ],
+    "faqs": [
+      "How do I morph two faces together?",
+      "What is the difference between face morph and face swap?",
+      "Can I choose how much each face contributes?",
+      "Does the tool create a still image or an animated morph?"
+    ],
+    "proof": "A real blended output. Percentage controls, animation and multi-face blending can be described only if present in the implemented experience.",
+    "alt": "“Face morph blending features from two source portraits into one face” for genuine blend output.",
+    "links": [
+      "/face-swap",
+      "/face-edit",
+      "/realistic-face-swap"
+    ],
+    "incoming": [
+      "New swap-vs-morph explainer",
+      "New blending tutorial",
+      "Relevant editing comparison"
+    ],
+    "boundary": "Morph is not a synonym for replacement. Keep the requested page in the plan; Task 6 includes the actual workflow before writing it as a functioning tool."
+  },
+  {
+    "id": "edit",
+    "url": "/face-edit",
+    "primary": "face edit",
+    "terms": [
+      "face edit",
+      "face editor",
+      "ai face editor",
+      "edit face online",
+      "edit face ai",
+      "photo face editor",
+      "face editing tool",
+      "edit face picture online",
+      "photo edit swap face",
+      "face retouch",
+      "how to edit face in picture",
+      "edit face onto another photo",
+      "face shape editor",
+      "face edit online"
+    ],
+    "purpose": "Face editing, with the exact supported operations clearly defined.",
+    "priority": "Task 6 · workflow-dependent",
+    "title": "Face Edit Online — AI Face Editor | SwapThisFace",
+    "h1": "AI Face Editor",
+    "meta": [
+      "face edit",
+      "face editor",
+      "supported operations",
+      "image workflow"
+    ],
+    "headings": [
+      "Edit a face in a photo",
+      "What this face editor changes",
+      "Face editing examples",
+      "Face editing vs face replacement"
+    ],
+    "faqs": [
+      "How can I edit a face in a picture?",
+      "Can I replace a face or retouch the existing one?",
+      "Which face-editing controls are available?",
+      "Can I edit a face online on my phone?"
+    ],
+    "proof": "An honest operation list and matching examples. Searchers may expect skin, shape, expression or retouch controls; do not claim these based on face replacement alone.",
+    "alt": "Describe the specific visible edit, for example “Portrait before and after face replacement”; do not call replacement skin retouching.",
+    "links": [
+      "/face-changer",
+      "/face-morph",
+      "/face-swap"
+    ],
+    "incoming": [
+      "New editing-vs-replacement explainer",
+      "Actual editing tutorials",
+      "Relevant alternatives"
+    ],
+    "boundary": "Broad face editor intent includes retouching and reshaping. Keep /face-edit as requested, but narrow its promise to actual capabilities until Task 6 adds more."
+  },
+  {
+    "id": "nsfw",
+    "url": "/nsfw-face-swap",
+    "primary": "nsfw face swap",
+    "terms": [
+      "nsfw face swap",
+      "ai nsfw face swap",
+      "nsfw ai face swap",
+      "nsfw face swap online",
+      "nsfw photo face swap",
+      "nsfw face swap free",
+      "uncensored face swap",
+      "uncensored ai face swap",
+      "face swap no filter",
+      "what is the ai face swap that allows nsfw"
+    ],
+    "purpose": "Separate, non-graphic adult-topic acquisition page for consenting-adult use.",
+    "priority": "Task 7 · research uncertainty",
+    "title": "NSFW Face Swap — Photo Tool and Usage Details | SwapThisFace",
+    "h1": "NSFW Face Swap",
+    "meta": [
+      "nsfw face swap",
+      "photo scope",
+      "accurate access and usage details"
+    ],
+    "headings": [
+      "NSFW photo face swap: supported workflow",
+      "What inputs and outputs are supported",
+      "Upload privacy and result handling",
+      "NSFW face swap questions"
+    ],
+    "faqs": [
+      "What does NSFW face swap mean here?",
+      "Which photo content and inputs does the tool support?",
+      "Are uploaded photos displayed publicly?",
+      "What does uncensored face swap mean, and does it describe this tool?"
+    ],
+    "proof": "Non-graphic interface examples and verified service details. No celebrity sexual targeting, non-consensual imagery, or unsupported no-filter promises.",
+    "alt": "Describe non-graphic interface images, for example “Photo upload controls on the NSFW face swap page.” No keyword lists or invented explicit scenes.",
+    "links": [
+      "/adult-face-swap",
+      "/privacy"
+    ],
+    "incoming": [
+      "Separate relevant adult-topic guides",
+      "Relevant adult-tool comparison sections"
+    ],
+    "boundary": "Keep adult positioning outside homepage and general galleries. NSFW and uncensored metrics are unknown. Use uncensored as a clearly answered query, not an unverified promise. High overlap with adult; no third /uncensored-face-swap page initially."
+  },
+  {
+    "id": "adult",
+    "url": "/adult-face-swap",
+    "primary": "adult face swap",
+    "terms": [
+      "adult face swap",
+      "face swap ai adult",
+      "adult ai face swap",
+      "adult face swap online",
+      "adult photo face swap",
+      "adult face swap tool",
+      "adult face swap free"
+    ],
+    "purpose": "Separate adult photo-use landing page focused on its defined workflow and requirements.",
+    "priority": "Task 7 · overlap review",
+    "title": "Adult Face Swap — Photo Workflow | SwapThisFace",
+    "h1": "Adult Face Swap",
+    "meta": [
+      "adult face swap",
+      "AI photo workflow",
+      "accurate requirements"
+    ],
+    "headings": [
+      "Adult photo face swap workflow",
+      "Prepare permitted source and target photos",
+      "What to expect from the result",
+      "Adult face swap questions"
+    ],
+    "faqs": [
+      "How does adult face swap work?",
+      "Is adult face swap available for photos or video?",
+      "What source and target photos are needed?",
+      "How are uploaded photos and results handled?"
+    ],
+    "proof": "A distinct non-graphic workflow explanation and accurate functionality. This is a proposed page brief, not certification that a service supports all adult content.",
+    "alt": "Describe the real non-graphic illustration or upload workflow; do not force adult modifiers into unrelated images.",
+    "links": [
+      "/nsfw-face-swap",
+      "/privacy"
+    ],
+    "incoming": [
+      "Adult-topic photo guides",
+      "Relevant adult comparison"
+    ],
+    "boundary": "Keep this requested URL in the plan, but a distinct search intent from NSFW is not established. If Task 7 cannot produce materially different useful content, recommend one combined owner instead of publishing near-identical pages."
+  },
+  {
+    "id": "meme",
+    "url": "/face-swap-for-memes",
+    "primary": "face swap meme",
+    "terms": [
+      "face swap meme",
+      "face swap meme generator",
+      "ai meme face swap",
+      "meme face swap free",
+      "funny face swap",
+      "face swap memes online",
+      "put face on meme",
+      "how to make a face swap meme",
+      "face swap reaction meme"
+    ],
+    "purpose": "Make a recognizable photo meme using the user's face.",
+    "priority": "Task 9 · existing page",
+    "title": "Face Swap Meme — Put Your Face on a Meme | SwapThisFace",
+    "h1": "Face Swap Memes",
+    "meta": [
+      "face swap meme",
+      "own portrait",
+      "scene selection",
+      "caption step"
+    ],
+    "headings": [
+      "Put your face on a meme",
+      "Funny face swap examples",
+      "Choose a meme template",
+      "Add a caption after your face swap"
+    ],
+    "faqs": [
+      "How do I put my face on a meme?",
+      "Can I make a face swap meme on my phone?",
+      "Does this tool add captions?",
+      "Can I use my own meme picture?"
+    ],
+    "proof": "Original finished examples showing the generated swap and separate caption step. No native text-editor claims unless implemented.",
+    "alt": "“Face swap meme showing a café portrait with a coffee-break caption” only for that exact image.",
+    "links": [
+      "/templates",
+      "/face-swap",
+      "/custom-face-swap",
+      "/blog/how-to-make-face-swap-meme"
+    ],
+    "incoming": [
+      "Existing meme tutorial",
+      "Social post ideas",
+      "Relevant funny-photo guides"
+    ],
+    "boundary": "Own transactional meme/funny swap queries. Detailed how-to stays on the existing meme tutorial. No celebrity trend page proliferation."
+  },
+  {
+    "id": "templates",
+    "url": "/templates",
+    "primary": "face swap templates",
+    "terms": [
+      "face swap templates",
+      "face swap photo templates",
+      "free face swap templates",
+      "face swap template images",
+      "face swap meme templates",
+      "face swap costume templates",
+      "face swap examples",
+      "face swap before and after",
+      "face swap templates free",
+      "ai face swap templates"
+    ],
+    "purpose": "Choose a usable target photo and enter the editor with it selected.",
+    "priority": "Task 9 · existing hub",
+    "title": "Face Swap Templates — Choose a Photo | SwapThisFace",
+    "h1": "Face Swap Templates",
+    "meta": [
+      "face swap templates",
+      "ready target photos",
+      "upload a selfie",
+      "preselected editor"
+    ],
+    "headings": [
+      "Choose a photo face swap template",
+      "Meme and portrait template ideas",
+      "Match your face angle to the template",
+      "Use your own target photo instead"
+    ],
+    "faqs": [
+      "What is a face swap template?",
+      "How do I use a template with my own face?",
+      "Can I upload my own target photo?",
+      "Can I use a face swap template for a meme?"
+    ],
+    "proof": "Working selected-target links, actual target descriptions and real sample outputs.",
+    "alt": "Describe the scene and usable pose: “Café face swap template with a seated subject facing slightly left” if accurate.",
+    "links": [
+      "/face-swap",
+      "/custom-face-swap",
+      "/face-swap-for-memes",
+      "/examples"
+    ],
+    "incoming": [
+      "Meme guide",
+      "Custom-photo guide",
+      "Costume/social ideas"
+    ],
+    "boundary": "/templates owns template selection. /examples owns source-target-output evidence and before/after queries."
+  },
+  {
+    "id": "deepswap",
+    "url": "/deepswap-alternative",
+    "primary": "deepswap alternative",
+    "terms": [
+      "deepswap alternative",
+      "deepswap alternatives",
+      "deepswap free alternative",
+      "deepswap alternative for photos",
+      "deepswap vs remaker"
+    ],
+    "purpose": "Help a DeepSwap user decide whether this photo workflow fits their needs.",
+    "priority": "Task 8",
+    "title": "DeepSwap Alternative for Photo Face Swaps | SwapThisFace",
+    "h1": "DeepSwap Alternative for Photo Face Swaps",
+    "meta": [
+      "deepswap alternative",
+      "specific switching reason",
+      "photo workflow",
+      "accurate limitations"
+    ],
+    "headings": [
+      "Why consider a DeepSwap alternative?",
+      "Compare the photo workflow",
+      "Where SwapThisFace fits",
+      "When the other tool fits better"
+    ],
+    "faqs": [
+      "What is an alternative to DeepSwap for photos?",
+      "Can I try this DeepSwap alternative for free?",
+      "Can it handle multiple faces?",
+      "Which features are different?"
+    ],
+    "proof": "Dated official feature references and original testing for any quality or speed comparisons. Keep existing best-tools article unchanged.",
+    "alt": "Describe genuine comparison screenshots, such as “Source and target upload controls in the DeepSwap alternative walkthrough.”",
+    "links": [
+      "/",
+      "/face-swap",
+      "/realistic-face-swap",
+      "/multiple-face-swap"
+    ],
+    "incoming": [
+      "New competitor-specific tutorials",
+      "New relevant comparisons",
+      "New alternatives hub links when useful"
+    ],
+    "boundary": "One page per competitor owns singular/plural/free-alternative variants. Rival-vs-rival terms are separate research, not target phrases for this landing page."
+  },
+  {
+    "id": "remaker",
+    "url": "/remaker-alternative",
+    "primary": "remaker alternative",
+    "terms": [
+      "remaker alternative",
+      "remaker ai alternative",
+      "remaker alternatives",
+      "remaker face swap alternative",
+      "remaker ai free alternative",
+      "remaker vs deepswap"
+    ],
+    "purpose": "Help a Remaker user decide whether this photo workflow fits their needs.",
+    "priority": "Task 8",
+    "title": "Remaker Alternative for Photo Face Swaps | SwapThisFace",
+    "h1": "Remaker Alternative for Photo Face Swaps",
+    "meta": [
+      "remaker alternative",
+      "specific switching reason",
+      "photo workflow",
+      "accurate limitations"
+    ],
+    "headings": [
+      "Why consider a Remaker alternative?",
+      "Compare the photo workflow",
+      "Where SwapThisFace fits",
+      "When the other tool fits better"
+    ],
+    "faqs": [
+      "What is an alternative to Remaker for photos?",
+      "Can I try this Remaker alternative for free?",
+      "Can it handle multiple faces?",
+      "Which features are different?"
+    ],
+    "proof": "Dated official feature references and original testing for any quality or speed comparisons. Keep existing best-tools article unchanged.",
+    "alt": "Describe genuine comparison screenshots, such as “Source and target upload controls in the Remaker alternative walkthrough.”",
+    "links": [
+      "/",
+      "/face-swap",
+      "/realistic-face-swap",
+      "/multiple-face-swap"
+    ],
+    "incoming": [
+      "New competitor-specific tutorials",
+      "New relevant comparisons",
+      "New alternatives hub links when useful"
+    ],
+    "boundary": "One page per competitor owns singular/plural/free-alternative variants. Rival-vs-rival terms are separate research, not target phrases for this landing page."
+  },
+  {
+    "id": "reface",
+    "url": "/reface-alternative",
+    "primary": "reface alternative",
+    "terms": [
+      "reface alternative",
+      "reface alternatives",
+      "reface app alternative",
+      "reface alternative online",
+      "reface free alternative"
+    ],
+    "purpose": "Help a Reface user decide whether this photo workflow fits their needs.",
+    "priority": "Task 8",
+    "title": "Reface Alternative for Photo Face Swaps | SwapThisFace",
+    "h1": "Reface Alternative for Photo Face Swaps",
+    "meta": [
+      "reface alternative",
+      "specific switching reason",
+      "photo workflow",
+      "accurate limitations"
+    ],
+    "headings": [
+      "Why consider a Reface alternative?",
+      "Compare the photo workflow",
+      "Where SwapThisFace fits",
+      "When the other tool fits better"
+    ],
+    "faqs": [
+      "What is an alternative to Reface for photos?",
+      "Can I try this Reface alternative for free?",
+      "Can it handle multiple faces?",
+      "Which features are different?"
+    ],
+    "proof": "Dated official feature references and original testing for any quality or speed comparisons. Keep existing best-tools article unchanged.",
+    "alt": "Describe genuine comparison screenshots, such as “Source and target upload controls in the Reface alternative walkthrough.”",
+    "links": [
+      "/",
+      "/face-swap",
+      "/realistic-face-swap",
+      "/multiple-face-swap"
+    ],
+    "incoming": [
+      "New competitor-specific tutorials",
+      "New relevant comparisons",
+      "New alternatives hub links when useful"
+    ],
+    "boundary": "One page per competitor owns singular/plural/free-alternative variants. Rival-vs-rival terms are separate research, not target phrases for this landing page."
+  }
+]

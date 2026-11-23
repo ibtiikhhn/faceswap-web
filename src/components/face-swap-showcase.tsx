@@ -4,14 +4,14 @@ import { useEffect, useRef, useState } from 'react';
 import { Sparkles } from './icons';
 
 const examples = [
-  { id: 'coast', label: 'Coastal escape', scene: 'A boat trip along a tropical coastline', note: 'Same scene. A new you.' },
+  { id: 'mirror', label: 'Mirror portrait', scene: 'A mirror selfie beside a sunlit window', note: 'Same scene. A new you.' },
   { id: 'paris', label: 'A day in Paris', scene: 'A portrait beside the Eiffel Tower', note: 'Your face. A different story.' },
   { id: 'city', label: 'City afternoons', scene: 'An outdoor café beneath a historic tower', note: 'Make the moment your own.' },
 ];
 
 export function FaceSwapShowcase() {
   const [selected, setSelected] = useState(0);
-  const [position, setPosition] = useState(100);
+  const [position, setPosition] = useState(50);
   const [playing, setPlaying] = useState(false);
   const [visible, setVisible] = useState(false);
   const [loaded, setLoaded] = useState<string[]>([]);
@@ -22,8 +22,7 @@ export function FaceSwapShowcase() {
 
   useEffect(() => {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    setPlaying(!motion.matches);
-    const preferenceChanged = () => { setPlaying(!motion.matches); setPosition(100); phase.current = 0; };
+    const preferenceChanged = () => { setPlaying(false); setPosition(50); phase.current = 0; };
     const observer = new IntersectionObserver(([entry]) => setVisible(entry.isIntersecting));
     if (root.current) observer.observe(root.current);
     motion.addEventListener('change', preferenceChanged);
@@ -49,16 +48,16 @@ export function FaceSwapShowcase() {
     return () => cancelAnimationFrame(frame);
   }, [playing, visible, ready, selected]);
 
-  function choose(index: number) { setSelected(index); phase.current = 0; setPosition(100); }
+  function choose(index: number) { setSelected(index); phase.current = 0; setPlaying(false); setPosition(50); }
   function imageLoaded(key: string) { setLoaded(current => current.includes(key) ? current : [...current, key]); }
 
-  return <div className="swap-showcase" ref={root} aria-label="Photo face swap examples">
+  return <div className="swap-showcase" ref={root} aria-label="AI photo face swap examples">
     <div className="showcase-stage">
-      <div className="showcase-source"><div className="showcase-source-photo"><img src="/images/examples/source.webp" width="320" height="400" alt="Source selfie used in all three face swap examples" /></div><div className="showcase-source-caption"><span>Your selfie</span></div></div>
+      <div className="showcase-source"><div className="showcase-source-photo"><img src={example.id === 'mirror' ? '/images/examples/mirror-source.webp' : '/images/examples/source.webp'} width="320" height="400" alt="Source selfie used for this face swap example" /></div><div className="showcase-source-caption"><span>Your selfie</span></div></div>
       <div className="showcase-comparison">
         <div className="showcase-photo-stack">
-          <img key={`${example.id}-target`} className="showcase-photo" src={`/images/examples/${example.id}-target.webp`} width="900" height="1125" alt={`Target photo: ${example.scene}`} fetchPriority={selected === 0 ? 'high' : 'auto'} onLoad={() => imageLoaded(`${example.id}-target`)} />
-          <img key={`${example.id}-result`} className="showcase-photo showcase-result" src={`/images/examples/${example.id}-result.webp`} width="900" height="1125" alt={`Face swap result: the source person's face in ${example.scene.toLowerCase()}`} style={{clipPath: `inset(0 ${100 - position}% 0 0)`}} onLoad={() => imageLoaded(`${example.id}-result`)} />
+          <img key={`${example.id}-target`} className="showcase-photo" src={`/images/examples/${example.id}-target.webp`} width="900" height="1125" alt={`Target photo: ${example.scene}`} style={{objectPosition: example.id === 'mirror' ? '50% 85%' : undefined}} fetchPriority={selected === 0 ? 'high' : 'auto'} onLoad={() => imageLoaded(`${example.id}-target`)} />
+          <img key={`${example.id}-result`} className="showcase-photo showcase-result" src={`/images/examples/${example.id}-result.webp`} width="900" height="1125" alt={`AI face swap result: the source person's face in ${example.scene.toLowerCase()}`} style={{objectPosition: example.id === 'mirror' ? '50% 85%' : undefined, clipPath: `inset(0 ${100 - position}% 0 0)`}} onLoad={() => imageLoaded(`${example.id}-result`)} />
           <div className="showcase-photo-labels" aria-hidden="true"><span style={{opacity: position > 20 ? 1 : 0}}>YOUR RESULT</span><span style={{opacity: position < 80 ? 1 : 0}}>ORIGINAL</span></div>
           <div className="showcase-divider" style={{left: `${position}%`, opacity: position > 1 && position < 99 ? 1 : 0}} aria-hidden="true"><span>‹ ›</span></div>
           <input className="showcase-scrubber" type="range" min="0" max="100" value={Math.round(position)} aria-label="Compare target photo and face swap result" aria-valuetext={`${Math.round(position)} percent result revealed`} onPointerDown={() => setPlaying(false)} onKeyDown={() => setPlaying(false)} onChange={event => { setPlaying(false); setPosition(Number(event.target.value)); }} />

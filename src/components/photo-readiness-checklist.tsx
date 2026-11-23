@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Link from 'next/link';
 
 const checks = [
-  { label: 'One visible face in each photo', advice: 'Choose a single-person target and a source portrait. Group face mapping is not supported by this editor.' },
+  { label: 'A clear source portrait and visible target faces', advice: 'Choose one clear source face. In a group target, check each face for small size, blur or obstructions.' },
   { label: 'Both faces are sharp at their original size', advice: 'Use the original image rather than a screenshot. A large file can still contain a tiny or blurred face.' },
   { label: 'Head angles and expressions are similar', advice: 'Match a turned target with a similarly turned source. A relaxed mouth is easier to compare with another relaxed mouth than an exaggerated smile.' },
   { label: 'Eyes, nose and mouth are unobstructed', advice: 'Try a photo without dark glasses, hands across the mouth, or hair hiding the eyes.' },

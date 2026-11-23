@@ -43,7 +43,7 @@ export function Header() {
 export function StudioInvitation() {
   const state = useAccount();
   const view = accountPresentation(state.account, state.loading, state.error);
-  return <div className="hero-actions"><Link href={view.href === '/face-swap' ? '#studio' : view.href} className="button button-dark">{view.label}<ArrowUpRight size={18}/></Link><span className="subtle-note">{view.note}</span></div>;
+  return <div className="hero-actions"><Link href={view.href === '/face-swap' ? '#studio' : view.href} className="button button-dark">{view.label === 'Try for free' ? 'Try AI face swap free' : view.label}<ArrowUpRight size={18}/></Link>{view.label !== 'Try for free' && <span className="subtle-note">{view.note}</span>}</div>;
 }
 
 export function Footer() {

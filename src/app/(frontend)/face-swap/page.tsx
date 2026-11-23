@@ -1,9 +1,19 @@
+import Link from 'next/link';
 import { findFaceSwapTemplate } from '@/lib/face-swap-templates';
 import { SwapStudio } from '@/components/swap-studio';
-import { PhotoSwapFaq } from '@/components/photo-swap-guide';
+import { PhotoSwapFaq, PhotoSwapWorkflow } from '@/components/photo-swap-guide';
 import { pageMetadata } from '@/lib/seo';
-export const metadata = pageMetadata('Photo Face Swap Editor – Swap Faces Online', 'Put your face on another picture with our online AI face swap editor. Upload two photos, create your new look and download it. Try your face swap for free.', '/face-swap');
-export default async function FaceSwap({searchParams}:{searchParams:Promise<{template?:string}>}){
- const {template}=await searchParams;
- const initialTarget=findFaceSwapTemplate(template);
- return <div className="wrap studio-page"><div className="page-header"><div className="eyebrow"><span className="status-dot"/>TWO PHOTOS. ONE NEW LOOK.</div><h1>Swap faces between two photos.</h1><p>Choose a clear source face and a target photo with one person. Our online face swap photo editor lets you create, compare, and download the result on your phone or desktop.</p></div><SwapStudio key={initialTarget?.id ?? "custom"} initialTarget={initialTarget} /><PhotoSwapFaq /></div>;}
+
+export const metadata = pageMetadata('Photo Face Swap — Swap Faces Between Photos | SwapThisFace', 'Create a photo face swap online with your own pictures. Upload a source portrait and target photo, compare the result, and download it in your browser.', '/face-swap');
+
+export default async function FaceSwap({searchParams}:{searchParams:Promise<{template?:string}>}) {
+  const {template}=await searchParams;
+  const initialTarget=findFaceSwapTemplate(template);
+  return <div className="wrap studio-page">
+    <header className="page-header"><div className="eyebrow"><span className="status-dot"/>YOUR FACE. YOUR CHOICE OF PHOTO.</div><h1>Photo Face Swap</h1><p>Swap faces between two photos in your browser. Upload the face you want to use and the picture you want to appear in, then compare and download your result.</p></header>
+    <SwapStudio key={initialTarget?.id ?? 'custom'} initialTarget={initialTarget}/>
+    <PhotoSwapWorkflow/>
+    <PhotoSwapFaq/>
+    <section className="panel"><h2>Choose photos that work together</h2><p>A clear portrait and a target with a similar head angle give you a better starting point. Use the <Link href="/realistic-face-swap">realistic face swap guide</Link> to check lighting, expression and facial detail before your next attempt.</p><Link href="/templates" className="text-link">Choose a target from the photo templates</Link></section>
+  </div>;
+}
