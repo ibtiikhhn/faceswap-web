@@ -295,7 +295,7 @@ describe('external swap settlement', () => {
       const saved=(await client.query<{state:string;provider_mode:string;provider_consent_at:string}>("select state,provider_mode,provider_consent_at from app.swap_jobs where id=$1",[job.id])).rows[0];
       expect(saved.state).toBe(failure?'failed':'succeeded');expect(saved.provider_mode).toBe('external');expect(saved.provider_consent_at).toBeTruthy();
       expect((await client.query<{trial_state:string}>('select trial_state from app.guest_sessions where id=$1',[guest])).rows[0].trial_state).toBe(failure?'available':'consumed');
-      if(!failure){const asset=(await client.query<{metadata:{mock:boolean};object_key:string}>('select a.metadata,a.object_key from app.assets a join app.swap_jobs j on a.id=j.result_asset_id where j.id=$1',[job.id])).rows[0];expect(asset.metadata.mock).toBe(false);expect(await getObject(asset.object_key)).toEqual(bytes);}
+      if(!failure){const asset=(await client.query<{metadata:{mock:boolean};object_key:string;expires_at:string|null}>('select a.metadata,a.object_key,a.expires_at from app.assets a join app.swap_jobs j on a.id=j.result_asset_id where j.id=$1',[job.id])).rows[0];expect(asset.metadata.mock).toBe(false);expect(asset.expires_at).toBeNull();expect(await getObject(asset.object_key)).toEqual(bytes);}
     } finally {submit.mockRestore();process.env.SWAP_PROVIDER='mock';await client.close();}
   });
 });

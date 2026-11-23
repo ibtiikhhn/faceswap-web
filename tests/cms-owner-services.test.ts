@@ -3,7 +3,7 @@ import path from 'node:path'
 import assert from 'node:assert/strict'
 import { PGlite } from '@electric-sql/pglite'
 import { describe, it } from 'vitest'
-import { grantOwnerCredits, listOwnerSaasOverview, setOwnerUserSuspension } from '@/cms/owner-services'
+import { grantOwnerCredits, listOwnerSaasOverview, setOwnerUserSuspension, listOwnerGenerations } from '@/cms/owner-services'
 import type { DbClient } from '@/server/db'
 
 async function db() {
@@ -16,7 +16,7 @@ async function db() {
     )
     .replace('create schema if not exists app;', 'create schema if not exists app; create sequence if not exists app.test_uuid_seq;')
   await client.exec(migration)
-  for (const file of ['0004_security.sql', '0007_owner_audit.sql']) {
+  for (const file of ['0004_security.sql', '0007_owner_audit.sql', '0008_swap_provider_consent.sql']) {
     await client.exec((await fs.readFile(path.join(process.cwd(), 'migrations/app', file), 'utf8')).replaceAll('default gen_random_uuid()', "default ('00000000-0000-4000-8000-' || lpad(nextval('app.test_uuid_seq')::text, 12, '0'))::uuid"))
   }
   return client as unknown as DbClient & PGlite
@@ -60,3 +60,33 @@ describe('CMS owner services', () => {
     assert.equal(ledger.rows[0].metadata.reason, 'Launch make-good')
   })
 })
+
+it('counts all customers beyond the page and searches without narrowing totals', async () => {
+ const client=await db();
+ try {
+  for(let i=0;i<28;i++)await client.query('insert into app.users(email) values($1)',[`customer${i}@example.com`]);
+  const first=await listOwnerSaasOverview(client);
+  assert.equal(first.users.length,25);assert.equal(first.totals.users,28);
+  const second=await listOwnerSaasOverview(client,{page:2});assert.equal(second.users.length,3);
+  const found=await listOwnerSaasOverview(client,{search:'customer27@'});
+  assert.equal(found.matchedUsers,1);assert.equal(found.users[0].email,'customer27@example.com');assert.equal(found.totals.users,28);
+ } finally {await client.close();}
+});
+it('isolates a customer generation history and returns source, target and result states',async()=>{
+ const client=await db();
+ try {
+  const u=(await client.query<{id:string}>("insert into app.users(email) values('jobs@example.com') returning id")).rows[0].id;
+  const other=(await client.query<{id:string}>("insert into app.users(email) values('other@example.com') returning id")).rows[0].id;
+  const assets=[];
+  for(const kind of ['source','target','result'])assets.push((await client.query<{id:string}>("insert into app.assets(user_id,kind,object_key,content_type,width,height,byte_count) values($1,$2,$2,'image/webp',100,100,10) returning id",[u,kind])).rows[0].id);
+  await client.query("insert into app.swap_jobs(user_id,source_asset_id,target_asset_id,result_asset_id,state,request_key) values($1,$2,$3,$4,'succeeded','job1')",[u,...assets]);
+  await client.query("insert into app.swap_jobs(user_id,source_asset_id,target_asset_id,state,request_key) values($1,$2,$3,'failed','job2')",[other,assets[0],assets[1]]);
+  const list=await listOwnerGenerations({userId:u},client);
+  assert.equal(list.total,1);assert.equal(list.jobs[0].result_asset_id,assets[2]);assert.equal(list.jobs[0].source_status,'active');
+  assert.equal((await listOwnerGenerations({userId:u,state:'failed'},client)).total,0);
+  await client.query("update app.assets set expires_at=now()-interval '1 day' where id=$1",[assets[0]]);
+  await client.query("update app.assets set status='deleted' where id=$1",[assets[1]]);
+  await client.exec(await fs.readFile('migrations/app/0012_keep_photos.sql','utf8'));
+  const after=await listOwnerGenerations({userId:u},client);assert.equal(after.jobs[0].source_expires,null);assert.equal(after.jobs[0].target_status,'deleted');
+ } finally {await client.close();}
+});

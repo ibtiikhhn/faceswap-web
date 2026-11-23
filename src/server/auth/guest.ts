@@ -57,7 +57,7 @@ export async function claimGuestForUser(client: DbClient, input: { guestId: stri
   );
   if (!result.rowCount) return false;
   await client.query(`update app.assets set user_id=$2,
-    expires_at=case when kind='result' then greatest(expires_at,now()+interval '30 days') else expires_at end
+    expires_at=null
     where guest_id=$1 and user_id is null and status='active'`, [input.guestId,input.userId]);
   await client.query('update app.swap_jobs set user_id=$2 where guest_id=$1 and user_id is null', [input.guestId,input.userId]);
   return true;

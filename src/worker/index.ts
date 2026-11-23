@@ -80,14 +80,14 @@ async function dispatchOutbox() {
   return events.rows.length > 0
 }
 
-async function cleanupExpiredAssets() {
+async function cleanupDeletedAssets() {
   const pool = getPool()
   const assets = await pool.query<{ id: string; object_key: string }>(
     `select id, object_key
      from app.assets
      where object_deleted_at is null
-       and (status = 'deleted' or expires_at < now())
-     order by expires_at
+       and status = 'deleted'
+     order by created_at
      limit 100`
   )
   for (const asset of assets.rows) {
@@ -118,7 +118,7 @@ const stopLanes = [
   startPollLoop(async () => { if (!usingD1()) await processPaddleEvents(getPool()) }, pollMs, error => console.error('Paddle processing failed; retrying.', error)),
   startPollLoop(async () => featureState().swapsEnabled ? dispatchOutbox() : false, pollMs, error => console.error('Swap dispatch failed; retrying.', error), {idleMs}),
   startPollLoop(async () => { if (featureState().swapsEnabled) await recoverStaleJobs() }, 300_000, error => console.error('Swap recovery failed; retrying.', error)),
-  startPollLoop(cleanupExpiredAssets, 60_000, error => console.error('Asset cleanup failed; retrying.', error)),
+  startPollLoop(cleanupDeletedAssets, 60_000, error => console.error('Asset cleanup failed; retrying.', error)),
   startPollLoop(processScheduledPosts, 60_000, error => console.error('Scheduled publishing failed; retrying.', error)),
 ]
 let stopping = false

@@ -171,7 +171,7 @@ export async function storeUploadedAsset(client: DbClient = getPool(), input: {
     guestId: input.guestId,
     kind: input.kind,
     key,
-    expiresAt: new Date(Date.now() + 24 * 3600_000)
+    expiresAt: null
   });
   } catch(error) {await deleteObject(key).catch(()=>{});throw error;}
   return { assetId, key, ...normalized };

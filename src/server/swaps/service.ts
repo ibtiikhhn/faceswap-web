@@ -304,7 +304,7 @@ export async function processSwapJob(client: DbClient, jobId: string) {
         width: metadata.width ?? 1,
         height: metadata.height ?? 1,
         byteCount: stamped.byteLength,
-        expiresAt: current.user_id ? new Date(Date.now() + 30 * 24 * 3600_000) : new Date(Date.now() + 24 * 3600_000),
+        expiresAt: null,
         metadata: provider.isMock ? { mock: true, label: "DEVELOPMENT PREVIEW - no face swap was performed." } : { mock: false, provider: "custom-swap" }
       });
       await tx.query(

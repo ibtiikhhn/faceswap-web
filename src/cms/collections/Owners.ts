@@ -1,51 +1,70 @@
-import type { CollectionConfig } from 'payload'
-import { assertOrigin, boundedBody, HttpError } from '@/server/http'
-import { grantOwnerCredits, listOwnerSaasOverview, setOwnerUserSuspension } from '@/cms/owner-services'
+import { assertCmsOwner, ownerAssetResponse } from '@/cms/owner-media';
+import type { CollectionConfig } from 'payload';
+import { assertOrigin, boundedBody, HttpError } from '@/server/http';
+import {
+  grantOwnerCredits,
+  listOwnerSaasOverview,
+  setOwnerUserSuspension,
+} from '@/cms/owner-services';
 
 function requireOwner(req: { user?: any }) {
+  assertCmsOwner(req.user);
   if (!req.user) {
-    throw new HttpError(401, 'Owner login required.', 'owner_login_required')
+    throw new HttpError(401, 'Owner login required.', 'owner_login_required');
   }
   return {
     id: req.user.id,
     email: req.user.email,
-  }
+  };
 }
 
 function errorResponse(error: unknown) {
   if (error instanceof HttpError) {
-    return Response.json({ error: { code: error.code, message: error.message } }, { status: error.status })
+    return Response.json(
+      { error: { code: error.code, message: error.message } },
+      { status: error.status },
+    );
   }
-  console.error(error)
-  return Response.json({ error: { code: 'internal_error', message: 'Something went wrong.' } }, { status: 500 })
+  console.error(error);
+  return Response.json(
+    { error: { code: 'internal_error', message: 'Something went wrong.' } },
+    { status: 500 },
+  );
 }
 
 function adminRedirect(req: { origin?: string }, search: URLSearchParams) {
-  const baseURL = process.env.APP_URL ?? req.origin ?? 'http://localhost:3000'
-  return Response.redirect(new URL(`/admin/saas?${search.toString()}`, baseURL), 303)
+  const baseURL = process.env.APP_URL ?? req.origin ?? 'http://localhost:3000';
+  return Response.redirect(
+    new URL(`/admin/saas?${search.toString()}`, baseURL),
+    303,
+  );
 }
 
 async function readCreditGrantBody(req: Request) {
-  const bytes = await boundedBody(req, 8192)
-  const parsed = new Response(bytes, { headers: req.headers })
-  const contentType = req.headers.get('content-type') ?? ''
+  const bytes = await boundedBody(req, 8192);
+  const parsed = new Response(bytes, { headers: req.headers });
+  const contentType = req.headers.get('content-type') ?? '';
   if (contentType.includes('application/json')) {
-    const body = await parsed.json()
+    const body = await parsed.json();
     return {
       userId: String(body.userId ?? ''),
       amount: Number(body.amount),
       reason: String(body.reason ?? ''),
+      requestKey: body.requestKey ? String(body.requestKey) : undefined,
       wantsHTML: false,
-    }
+    };
   }
 
-  const form = await parsed.formData()
+  const form = await parsed.formData();
   return {
     userId: String(form.get('userId') ?? ''),
     amount: Number(form.get('amount')),
     reason: String(form.get('reason') ?? ''),
+    requestKey: form.get('requestKey')
+      ? String(form.get('requestKey'))
+      : undefined,
     wantsHTML: true,
-  }
+  };
 }
 
 export const Owners: CollectionConfig = {
@@ -64,12 +83,29 @@ export const Owners: CollectionConfig = {
   },
   endpoints: [
     {
+      method: 'get',
+      path: '/saas/asset/:id',
+      handler: async (req) => {
+        try {
+          return await ownerAssetResponse(
+            req.user,
+            String(req.routeParams?.id || ''),
+          );
+        } catch (error) {
+          const response = errorResponse(error);
+          response.headers.set('Cache-Control', 'private, no-store');
+          return response;
+        }
+      },
+    },
+    {
       method: 'post',
       path: '/first-register',
       handler: async () =>
         Response.json(
           {
-            message: 'Owner bootstrap is invite-only. Run the seed admin CLI instead.',
+            message:
+              'Owner bootstrap is invite-only. Run the seed admin CLI instead.',
           },
           { status: 404 },
         ),
@@ -79,53 +115,82 @@ export const Owners: CollectionConfig = {
       path: '/saas/overview',
       handler: async (req) => {
         try {
-          requireOwner(req)
-          return Response.json(await listOwnerSaasOverview())
+          requireOwner(req);
+          return Response.json(await listOwnerSaasOverview(), {
+            headers: { 'Cache-Control': 'private, no-store' },
+          });
         } catch (error) {
-          return errorResponse(error)
+          return errorResponse(error);
         }
       },
     },
     {
       method: 'post',
       path: '/saas/suspension',
-      handler: async req => {
+      handler: async (req) => {
         try {
-          const actor = requireOwner(req)
-          assertOrigin(req as Request)
-          const bytes = await boundedBody(req as Request, 8192)
-          const form = await new Response(bytes, { headers: req.headers }).formData()
-          const action = form.get('action')
-          if (action !== 'suspend' && action !== 'restore') throw new HttpError(400, 'Invalid action.', 'invalid_action')
-          await setOwnerUserSuspension({ actor, userId: String(form.get('userId') ?? ''), suspended: action === 'suspend', reason: String(form.get('reason') ?? '') })
-          return adminRedirect(req, new URLSearchParams({ updated: 'account' }))
-        } catch (error) { return errorResponse(error) }
+          const actor = requireOwner(req);
+          assertOrigin(req as Request);
+          const bytes = await boundedBody(req as Request, 8192);
+          const form = await new Response(bytes, {
+            headers: req.headers,
+          }).formData();
+          const action = form.get('action');
+          if (action !== 'suspend' && action !== 'restore')
+            throw new HttpError(400, 'Invalid action.', 'invalid_action');
+          await setOwnerUserSuspension({
+            actor,
+            userId: String(form.get('userId') ?? ''),
+            suspended: action === 'suspend',
+            reason: String(form.get('reason') ?? ''),
+          });
+          if (req.headers.get('accept')?.includes('application/json'))
+            return Response.json({ ok: true });
+          return adminRedirect(
+            req,
+            new URLSearchParams({
+              updated: 'account',
+              customer: String(form.get('userId') ?? ''),
+            }),
+          );
+        } catch (error) {
+          return errorResponse(error);
+        }
       },
     },
     {
       method: 'post',
       path: '/saas/credits',
       handler: async (req) => {
-        let wantsHTML = false
+        let wantsHTML = false;
         try {
-          const actor = requireOwner(req)
-          assertOrigin(req as Request)
-          const body = await readCreditGrantBody(req as Request)
-          wantsHTML = body.wantsHTML
+          const actor = requireOwner(req);
+          assertOrigin(req as Request);
+          const body = await readCreditGrantBody(req as Request);
+          wantsHTML = body.wantsHTML;
           await grantOwnerCredits({
             actor,
             userId: body.userId,
             amount: body.amount,
+            requestKey: body.requestKey,
             reason: body.reason,
-          })
-          if (body.wantsHTML) return adminRedirect(req, new URLSearchParams({ updated: 'credits' }))
-          return Response.json({ ok: true })
+          });
+          if (body.wantsHTML)
+            return adminRedirect(
+              req,
+              new URLSearchParams({
+                updated: 'credits',
+                customer: body.userId,
+              }),
+            );
+          return Response.json({ ok: true });
         } catch (error) {
           if (wantsHTML) {
-            const message = error instanceof Error ? error.message : 'Credit grant failed.'
-            return adminRedirect(req, new URLSearchParams({ error: message }))
+            const message =
+              error instanceof Error ? error.message : 'Credit grant failed.';
+            return adminRedirect(req, new URLSearchParams({ error: message }));
           }
-          return errorResponse(error)
+          return errorResponse(error);
         }
       },
     },
@@ -147,4 +212,4 @@ export const Owners: CollectionConfig = {
       },
     },
   ],
-}
+};
