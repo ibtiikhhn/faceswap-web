@@ -14,7 +14,7 @@ export const photoSwapGuide = {
   seoDescription: 'Learn how to put your face on another picture with two photos. Follow the upload, comparison and download steps, plus practical photo-selection tips.',
   content: { root: { type: 'root', version: 1, direction: null, format: '' as const, indent: 0, children: [
     paragraph('To swap a face from one photo to another, upload the face you want to use as the source and the picture you want to appear in as the target. Create the swap, inspect the result, and download it. You do not need Photoshop, manual cutouts, or a text prompt.'),
-    paragraph('This guide covers SwapThisFace’s single-face photo editor. It does not cover group-photo swaps, video, GIFs, or live camera effects. The illustration above shows an existing homepage example; the instructions below describe the current editor rather than a newly measured quality test.'),
+    paragraph('This guide illustrates SwapThisFace’s photo editor with a single-person target. Automatic group-photo swaps are also supported; video, GIFs and live camera effects are outside this workflow. The illustration above shows an existing homepage example; the instructions below describe the current editor rather than a newly measured quality test.'),
 
     heading('How a photo face swap works: source versus target'),
     paragraph('A photo face swap uses two different inputs. The source is the person whose facial identity you want in the finished picture. The target is the photograph you want to edit. Choosing the right target matters because it establishes the scene, framing, clothing, and head position that the swap starts from.'),
@@ -85,7 +85,7 @@ export const photoSwapGuide = {
     subheading('Why does my face swap look fake or blurry?'),
     paragraph('Common things to check are facial detail, head-angle mismatch, lighting differences, and objects crossing the face. Inspect the original inputs before trying again. Keep the target fixed and test a clearer source, or keep a good source and replace a difficult target. AI output varies, so some pairs may remain unsuitable even after several attempts.'),
     subheading('Can I swap multiple faces in a group photo?'),
-    paragraph('This version of SwapThisFace is a single-face photo workflow. It does not provide controls for assigning different source faces to several people in a group picture. Choose a single-person target for this guide. If you need a group swap, use a workflow that explicitly supports selecting and mapping each face rather than assuming a single-face editor will do it.'),
+    linkedParagraph('Yes. Use the ', 'multiple face swap workflow', '/multiple-face-swap', ' with a clear source portrait and a group target. The tool automatically chooses the face or faces that fit best, so some may stay unchanged. The editor does not provide controls for assigning a different source to each person. Review every face in the result.'),
     subheading('Will a face swap keep the original background and outfit?'),
     paragraph('The target establishes the composition, including the outfit and background, but you should inspect the output for unintended changes. Do not assume every surrounding pixel will remain identical. If your main goal is changing clothes or scenery, start with a target that already has the look you want; the photo face swap editor does not expose separate outfit or background editing controls.'),
     subheading('Can I use a face swap photo as a professional headshot?'),

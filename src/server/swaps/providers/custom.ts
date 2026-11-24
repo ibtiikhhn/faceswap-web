@@ -50,7 +50,7 @@ export async function customSwap(input:{source:Buffer;target:Buffer;endpoint:str
     if(!response.ok) {
       // Never expose arbitrary provider response text (which may contain URLs or credentials).
       await response.body?.cancel().catch(()=>undefined);
-      throw new CustomSwapError('provider_rejected','The face-swap service could not process these photos. Try clear photos with one visible face each.');
+      throw new CustomSwapError('provider_rejected','The face-swap service could not process these photos. Try a clear source portrait and a target photo with unobstructed faces.');
     }
     try {
       const body=await readJson(response);

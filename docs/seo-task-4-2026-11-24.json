@@ -1,0 +1,41 @@
+{
+  "task": 4,
+  "status": "Implementation verified; owner confirmed automatic best-fit face selection; prepared for Git push",
+  "url": "/multiple-face-swap",
+  "research": {
+    "reused": "Task 1 OpenSEO US keyword cluster, Nov20; context log checked Nov24",
+    "terms": {
+      "multiple face swap": 2400,
+      "multi face swap": 1300,
+      "ai multi face swap": 210,
+      "multiple face swap free": 140,
+      "group photo face swap": 40
+    },
+    "primary_sources": [
+      "https://piapi.ai/docs/faceswap-api/create-task",
+      "https://piapi.ai/docs/multi-face-swap/create-task",
+      "https://remaker.ai/multiple-face-swap/"
+    ]
+  },
+  "implementation": [
+    "Working shared uploader, metadata, H1, subheadings and nine FAQs",
+    "Sitemap and footer",
+    "Contextual incoming links from homepage, photo editor, realism, examples and memes",
+    "Single-face-only copy corrected in service, billing descriptions and provider error",
+    "Tutorial seed copy corrected; existing CMS article not republished"
+  ],
+  "checks": [
+    "Typecheck passed",
+    "40 existing tests passed: SEO, custom provider and billing catalog",
+    "HTTP200; unique metadata and one H1",
+    "Two upload inputs; FAQ expands",
+    "1440px desktop and390px mobile reviewed; no horizontal overflow",
+    "Incoming contextual links verified on five routes"
+  ],
+  "limitations": [
+    "Owner confirms automatic selection of whichever faces fit best. Some faces may stay unchanged; manual selection and per-person assignment are unavailable.",
+    "Gateway internals not independently tested; selection behavior is owner-confirmed.",
+    "No existing group before/after assets and no live generation run. Page does not invent a result or numerical face limit.",
+    "Live deployment and GSC submission remain separate from Git push."
+  ]
+}

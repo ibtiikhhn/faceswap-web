@@ -14,7 +14,7 @@ export function whopPlanInput(offer:typeof whopOffers[number],accountId:string,p
   initial_price:recurring?0:offer.amount/100,renewal_price:recurring?offer.amount/100:0,
   trial_period_days:0,release_method:'buy_now',visibility:'hidden',unlimited_stock:true,
   adaptive_pricing_enabled:false,metadata:{app:'swapthisface',offer:offer.code,credits:offer.credits},
-  description:recurring?`${offer.credits} single-face photo swaps every ${offer.days} days. Renews automatically until canceled. Unused period credits expire.`:`One-time purchase of ${offer.credits} single-face photo swap credits. No subscription required.`,
+  description:recurring?`${offer.credits} photo swaps every ${offer.days} days. Renews automatically until canceled. Unused period credits expire.`:`One-time purchase of ${offer.credits} photo swap credits. No subscription required.`,
  };
 }
 

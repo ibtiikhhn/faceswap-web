@@ -26,7 +26,7 @@ export default function MemeFaceSwaps() {
     </section>
     <section className="quality-section"><h2>From two photos to a finished meme</h2>
       <ol className="quality-steps">
-        <li><h3>Prepare the face and the target</h3><p>Pick a clear selfie and a target picture with one visible face. If the template already has text, make sure the letters leave the eyes and mouth visible. You can start from one of the photos above or upload a picture you have permission to edit.</p></li>
+        <li><h3>Prepare the face and the target</h3><p>Pick a clear selfie and a target picture with visible, unobstructed faces. If the template already has text, make sure the letters leave the eyes and mouth visible. You can start from one of the photos above or upload a picture you have permission to edit.</p></li>
         <li><h3>Generate the face swap</h3><p>Upload your portrait under “Your face.” The meme photo belongs under “Your new look.” Review the processing notice, create the swap, and compare it with the target. A recognizable face and the right expression do more for the joke than extra decoration.</p></li>
         <li><h3>Write and place the caption</h3><p>Download the photo and use a text tool to add the words. Give the setup and punchline separate lines if that helps. In our example, the face swap comes from the editor and the caption is a separate finishing step.</p></li>
         <li><h3>Check it at phone size</h3><p>Look at the whole meme without zooming. Can you read the caption and recognize the face? If either disappears, shorten the joke, enlarge the caption area or choose a closer portrait.</p></li>
@@ -42,7 +42,7 @@ export default function MemeFaceSwaps() {
       <h3>Does the editor add the joke automatically?</h3><p>You write and add the caption with a text-capable image editor after downloading the face swap. The example on this page shows that complete workflow, with the caption placed above the result.</p>
       <h3>Can I make a face swap meme on my phone?</h3><p>Yes. Open the photo editor in your mobile browser, choose your two files, and download the result. You can then add text using a photo editing tool on the same device.</p>
       <h3>Can I use a friend’s face?</h3><p>Use their portrait with their permission and let them review the final caption. Present the image as an edited joke when the scene could otherwise be mistaken for a real event.</p>
-      <h3>Can I swap several people in a meme?</h3><p>This editor uses one face per input. Choose a template with one visible face, or prepare a crop around the person you want if the joke still works within that crop.</p>
+      <h3>Can I swap several people in a meme?</h3><p>Yes. Use the <Link href="/multiple-face-swap">automatic multiple face swap workflow</Link> with a group target photo. Review every face in the result; the editor has no manual controls for selecting individual people.</p>
       <h3>Can I try it for free?</h3><p>The current guest offer includes one successful photo swap. Additional attempts require credits. <Link href="/pricing">See the available options</Link> before creating several versions.</p>
     </section>
     <section className="panel"><h2>Pick your scene and make it personal</h2><p>Start with the hillside photo or browse the full collection for a pose that fits your selfie.</p><Link href="/templates" className="button button-dark">Browse face swap templates</Link></section>
