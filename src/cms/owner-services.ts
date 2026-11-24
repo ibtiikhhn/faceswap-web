@@ -378,6 +378,7 @@ export async function listOwnerGenerations(
     state?: string;
     search?: string;
     stale?: boolean;
+    mode?: string;
   } = {},
   client: DbClient = getPool(),
 ) {
@@ -387,8 +388,11 @@ export async function listOwnerGenerations(
     options.state || '',
     `%${(options.search || '').trim().toLowerCase().slice(0, 200)}%`,
     Boolean(options.stale),
+    ['guest_trial', 'paid_credit'].includes(options.mode || '')
+      ? options.mode
+      : '',
   ];
-  const filter = `where ($1='' or j.user_id=nullif($1,'')::uuid) and ($2='' or j.state=$2) and (lower(cast(j.id as text)) like $3 or lower(coalesce(u.email,'')) like $3) and (not $4 or (j.state in ('queued','validating','processing','saving','retry_wait','reconciling') and j.updated_at<now()-interval '15 minutes'))`;
+  const filter = `where ($1='' or j.user_id=nullif($1,'')::uuid) and ($2='' or j.state=$2) and (lower(cast(j.id as text)) like $3 or lower(coalesce(u.email,'')) like $3) and (not $4 or (j.state in ('queued','validating','processing','saving','retry_wait','reconciling') and j.updated_at<now()-interval '15 minutes')) and ($5='' or j.mode=$5)`;
   const [jobs, count] = await Promise.all([
     client.query<OwnerJob>(
       `select j.id,j.user_id,u.email,j.state,j.mode,j.provider_mode,j.provider_request_id,j.updated_at,j.created_at,j.finished_at,j.error_message,j.error_code,
@@ -399,7 +403,7 @@ export async function listOwnerGenerations(
       from app.swap_jobs j left join app.users u on u.id=j.user_id
       left join app.assets a on a.id=j.source_asset_id left join app.assets b on b.id=j.target_asset_id
       left join app.assets c on c.id=j.result_asset_id left join app.credit_reservations r on r.job_id=j.id
-      ${filter} order by j.created_at desc,j.id limit 12 offset $5`,
+      ${filter} order by j.created_at desc,j.id limit 12 offset $6`,
       [...params, (page - 1) * 12],
     ),
     client.query<{ count: number | string }>(

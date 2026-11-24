@@ -114,6 +114,35 @@ describe.each(['d1', 'postgres'])('Owner operations on %s', (backend) => {
         "insert into app.swap_jobs(user_id,source_asset_id,target_asset_id,request_key,state,created_at,updated_at) values($1,$2,$3,'oldjob','processing','2026-11-23T11:00:00Z','2020-01-01T00:00:00Z')",
         [u, ...ids],
       );
+      // Guest-origin jobs remain trials even after being linked to a registered user.
+      await db.query(
+        "update app.swap_jobs set mode='paid_credit' where request_key='oldjob'",
+      );
+      expect(
+        (await listOwnerGenerations({ mode: 'guest_trial' }, db)).total,
+      ).toBe(1);
+      expect(
+        (await listOwnerGenerations({ mode: 'paid_credit' }, db)).total,
+      ).toBe(1);
+      expect(
+        (
+          await listOwnerGenerations(
+            { mode: 'guest_trial', state: 'processing' },
+            db,
+          )
+        ).total,
+      ).toBe(0);
+      expect(
+        (
+          await listOwnerGenerations(
+            { mode: 'guest_trial', userId: u, search: 'support@' },
+            db,
+          )
+        ).jobs[0].mode,
+      ).toBe('guest_trial');
+      expect((await listOwnerGenerations({ mode: 'invalid' }, db)).total).toBe(
+        2,
+      );
       const info = await ownerInsights(7, db, new Date('2026-11-24T12:00:00Z'));
       expect(info.daily).toHaveLength(7);
       expect(info.daily[5]).toMatchObject({

@@ -191,6 +191,7 @@ export default async function SaaSOverview({
             state,
             search: value('jobSearch'),
             stale: value('stale') === '1',
+            mode: value('mode'),
           })
         : Promise.resolve(null),
       customer ? getOwnerCustomerActivity(customer) : Promise.resolve(null),
@@ -491,6 +492,14 @@ export default async function SaaSOverview({
                 defaultValue={value('jobSearch')}
                 placeholder="Job ID or customer email"
               />
+              <label className="cms-saas__sr" htmlFor="job-mode">
+                Generation type
+              </label>
+              <select id="job-mode" name="mode" defaultValue={value('mode')}>
+                <option value="">All generation types</option>
+                <option value="guest_trial">Guest trials</option>
+                <option value="paid_credit">Paid credits</option>
+              </select>
               <select
                 name="stale"
                 aria-label="Job freshness"
@@ -541,6 +550,7 @@ export default async function SaaSOverview({
               state,
               jobSearch: value('jobSearch'),
               stale: value('stale'),
+              mode: value('mode'),
             }}
           />
         </section>
