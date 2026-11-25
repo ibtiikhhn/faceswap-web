@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-25",
+  "pages": [
+    "/face-changer",
+    "/custom-face-swap"
+  ],
+  "keywords": 25,
+  "googleSuggestionRows": 76,
+  "qa": {
+    "typecheck": "pass",
+    "seoTests": "3 passed",
+    "desktop1440": "HTTP200, one H1 each, all example images loaded, no horizontal overflow, no page errors",
+    "mobile390": "no horizontal overflow; screenshots reviewed",
+    "faqInteractions": "pass: 10 and 12 FAQs",
+    "canonical": "correct route; local origin follows local APP_URL localhost:3099",
+    "generation": "Not run; reused existing tested editor; local service is in mock mode"
+  },
+  "reportUpload": "Saved to OpenSEO with explicit user approval",
+  "deployment": "Not yet verified",
+  "internalLinks": [
+    "homepage",
+    "photo guide",
+    "templates",
+    "two-photo tutorial",
+    "footer",
+    "sitemap"
+  ],
+  "unrelatedComparisonChanged": false,
+  "reportUrl": "https://app.openseo.so/p/2d414b2c-f24f-4b0a-a038-a552b0c1142c/reports/bab46c76-2570-4d86-b035-c09b44b969b3"
+}
