@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "face-changer",
+    "status": 200,
+    "title": "Face Changer — Change a Face in a Photo Online | SwapThisFace",
+    "h1": 1,
+    "headings": [
+      "Change a face in a picture, using another portrait",
+      "How to use the photo face changer",
+      "Face replacement example: a café portrait",
+      "Read the before and after: what did the face changer change?",
+      "Choose a replacement face that fits the photo",
+      "Face changer, face filter or photo retouching?",
+      "If the changed face does not look right",
+      "Check a face replacement before you download it",
+      "Try the face changer with your own picture",
+      "Face changer FAQs"
+    ],
+    "words": 1607,
+    "images": [
+      {
+        "alt": "Source portrait supplying the replacement face for the café photo",
+        "loaded": true
+      },
+      {
+        "alt": "Original café portrait beneath a stone tower before face replacement",
+        "loaded": true
+      },
+      {
+        "alt": "Face changer result using the source portrait in the café scene",
+        "loaded": true
+      }
+    ],
+    "desktopOverflow": false,
+    "errors": [],
+    "mobileOverflow": false,
+    "faqOpens": true
+  },
+  {
+    "slug": "custom-face-swap",
+    "status": 200,
+    "title": "Custom Face Swap with Your Own Photos | SwapThisFace",
+    "h1": 1,
+    "headings": [
+      "Face swap with your own photos, instead of a preset",
+      "Custom photo face swap example: choose a coastal scene",
+      "Same source portrait, different custom target photos",
+      "Choose a custom target for the picture you want to make",
+      "Make a custom face swap, then compare variations",
+      "Prepare your own target before the face swap",
+      "Which photo should you change if the custom swap looks wrong?",
+      "What you can customize through your uploads",
+      "Try a custom face swap without signing up",
+      "Custom face swap FAQs"
+    ],
+    "words": 1805,
+    "images": [
+      {
+        "alt": "Source portrait used for the custom coastal face swap",
+        "loaded": true
+      },
+      {
+        "alt": "Custom target photo of a person in a red top on a boat beside coastal cliffs",
+        "loaded": true
+      },
+      {
+        "alt": "Custom face swap result in the boat portrait with a flower beside the face",
+        "loaded": true
+      },
+      {
+        "alt": "Hillside target photo with a smiling person beneath a wide blue sky",
+        "loaded": true
+      },
+      {
+        "alt": "Custom hillside face swap result using the same source portrait as the coastal example",
+        "loaded": true
+      },
+      {
+        "alt": "Woodland target portrait with an over-the-shoulder head turn and a brown scarf",
+        "loaded": true
+      },
+      {
+        "alt": "Custom woodland face swap result with the source face in the turned portrait",
+        "loaded": true
+      }
+    ],
+    "desktopOverflow": false,
+    "errors": [],
+    "mobileOverflow": false,
+    "faqOpens": true
+  }
+]
