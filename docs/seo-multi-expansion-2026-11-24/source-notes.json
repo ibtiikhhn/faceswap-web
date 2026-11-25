@@ -1,0 +1,31 @@
+{
+  "reportDate": "2026-11-25",
+  "sources": [
+    {
+      "url": "https://remaker.ai/multiple-face-swap/",
+      "title": "Remaker: multiple face swap"
+    },
+    {
+      "url": "https://remaker.ai/features/batche-face-swap/",
+      "title": "Remaker: batch face swap"
+    },
+    {
+      "url": "https://helpx.adobe.com/photoshop/desktop/create-masks/blend-images/combine-multiple-images-into-group-portrait.html",
+      "title": "Adobe: combine group portraits"
+    },
+    {
+      "url": "https://www.adobe.com/in/creativecloud/photography/discover/face-swap.html",
+      "title": "Adobe: face-swap preparation"
+    }
+  ],
+  "additionalMetrics": "Unavailable: usage approval limit, followed by approval timeout.",
+  "implementation": "/multiple-face-swap",
+  "liveGroupOutputTested": false,
+  "validation": {
+    "typecheck": "passed",
+    "seoTests": "3 passed",
+    "diffCheck": "passed",
+    "browser": "Blocked: automatic approval timeout; no new visual verification",
+    "openseoReportSave": "Unavailable: connector transport failure; local report saved"
+  }
+}

@@ -1,0 +1,2274 @@
+{
+  "status": "success",
+  "data": {
+    "keyword": "face swap",
+    "prompts": [
+      {
+        "text": "How can i put my face on a meme?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.capcut.com",
+            "url": "https://www.capcut.com/tools/ai-face-swap?utm_source=chatgpt.com",
+            "title": "Free AI Face Swap Online for Realistic & Viral Photo Refacing in 2026",
+            "own": false
+          },
+          {
+            "domain": "www.canva.com",
+            "url": "https://www.canva.com/features/face-swap/?msockid=1ee6ee128aa0615f25f3f8558b7d6025&utm_source=chatgpt.com",
+            "title": "Face swap: Transform faces in a few clicks | Canva",
+            "own": false
+          },
+          {
+            "domain": "www.canva.com",
+            "url": "https://www.canva.com/features/face-swap/",
+            "title": "Canva Face Swap",
+            "own": false
+          },
+          {
+            "domain": "www.adobe.com",
+            "url": "https://www.adobe.com/uk/products/photoshop/face-swap.html?utm_source=chatgpt.com",
+            "title": "How to swap faces in Photoshop - Adobe | Adobe UK",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Can chatgpt swap faces in photos?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "help.openai.com",
+            "url": "https://help.openai.com/en/articles/11084440-chatgpt-images-faq?utm_source=chatgpt.com",
+            "title": "Images in ChatGPT | OpenAI Help Center",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How to put a face in a meme?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "meme.am",
+            "url": "https://meme.am/blog/how-to-swap-faces-on-memes?utm_source=chatgpt.com",
+            "title": "How to Swap Faces on Memes | meme.am",
+            "own": false
+          },
+          {
+            "domain": "faceswapxz.com",
+            "url": "https://faceswapxz.com/face-swap-meme?utm_source=chatgpt.com",
+            "title": "Face Swap Meme Generator — Free, No Signup | FaceSwapXZ",
+            "own": false
+          },
+          {
+            "domain": "magicmeme.com",
+            "url": "https://magicmeme.com/tools/face-swap-meme",
+            "title": "MagicMeme face-swap meme generator",
+            "own": false
+          },
+          {
+            "domain": "magicmeme.com",
+            "url": "https://magicmeme.com/tools/face-swap-meme?template=They-dont-know&utm_source=chatgpt.com",
+            "title": "How to Make a Face Swap Meme (2,000+ Templates)",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the most realistic face swap?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "inksem.com",
+            "url": "https://inksem.com/resource/best-realistic-ai-face-swap-apps/?utm_source=chatgpt.com",
+            "title": "Best 5 Realistic AI Face Swap Apps in 2026",
+            "own": false
+          },
+          {
+            "domain": "aiswapface.app",
+            "url": "https://aiswapface.app/blog/best-face-swap-apps-pc-desktop?utm_source=chatgpt.com",
+            "title": "Best Face Swap Apps for PC and Desktop in 2026 | Face Swap AI",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Can chatgpt do face swap?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "help.openai.com",
+            "url": "https://help.openai.com/en/articles/11084440-chatgpt-images-faq?utm_source=chatgpt.com",
+            "title": "Images in ChatGPT | OpenAI Help Center",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free tool for swapping faces?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "dupple.com",
+            "url": "https://dupple.com/learn/best-free-ai-face-swap-tools?utm_source=chatgpt.com",
+            "title": "Best Free AI Face Swap Tools in 2026: Free Limits Compared",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/blog/best-free-ai-face-swap-tools-2026?utm_source=chatgpt.com",
+            "title": "5 best free AI face swap tools (2027): web & open source",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Try Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "www.scriptbyai.com",
+            "url": "https://www.scriptbyai.com/best-free-ai-face-swap-tools/?utm_source=chatgpt.com",
+            "title": "10 Best Free AI Face Swap Tools in 2026",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Try Remaker AI",
+            "own": false
+          },
+          {
+            "domain": "aiswapface.ai",
+            "url": "https://aiswapface.ai/?utm_source=chatgpt.com",
+            "title": "AI face swap online. Your photo. Your video. — Free access",
+            "own": false
+          },
+          {
+            "domain": "aiswapface.ai",
+            "url": "https://aiswapface.ai/",
+            "title": "Try AISWAPFACE",
+            "own": false
+          },
+          {
+            "domain": "nanopocket.ai",
+            "url": "https://nanopocket.ai/face-swap?utm_source=chatgpt.com",
+            "title": "Free Online AI Face Swap — No Install, No Subscription | NanoPocket",
+            "own": false
+          },
+          {
+            "domain": "nanopocket.ai",
+            "url": "https://nanopocket.ai/face-swap",
+            "title": "Try NanoPocket",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free face swapping app?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Try Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "reface.ai",
+            "url": "https://reface.ai/",
+            "title": "Try Reface",
+            "own": false
+          },
+          {
+            "domain": "play.google.com",
+            "url": "https://play.google.com/store/search?q=Cupace&c=apps",
+            "title": "Find Cupace",
+            "own": false
+          },
+          {
+            "domain": "www.snapchat.com",
+            "url": "https://www.snapchat.com/",
+            "title": "Get Snapchat",
+            "own": false
+          },
+          {
+            "domain": "expertphotography.com",
+            "url": "https://expertphotography.com/face-swap-apps?utm_source=chatgpt.com",
+            "title": "9 Best Face Swap Apps for iPhone and Android in 2026",
+            "own": false
+          },
+          {
+            "domain": "dupple.com",
+            "url": "https://dupple.com/learn/best-free-ai-face-swap-tools?utm_source=chatgpt.com",
+            "title": "Best Free AI Face Swap Tools in 2026: Free Limits Compared",
+            "own": false
+          },
+          {
+            "domain": "www.itechguides.com",
+            "url": "https://www.itechguides.com/7-best-face-swap-apps-for-android-and-iphone/?utm_source=chatgpt.com",
+            "title": "7 Best Face Swap Apps for iPhone and Android (2026)",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the best ai tool for swapping faces?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "akool.com",
+            "url": "https://akool.com/",
+            "title": "Visit AKOOL",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Visit Remaker AI",
+            "own": false
+          },
+          {
+            "domain": "www.deepswap.ai",
+            "url": "https://www.deepswap.ai/",
+            "title": "Visit DeepSwap",
+            "own": false
+          },
+          {
+            "domain": "github.com",
+            "url": "https://github.com/facefusion/facefusion",
+            "title": "Visit FaceFusion",
+            "own": false
+          },
+          {
+            "domain": "reface.ai",
+            "url": "https://reface.ai/",
+            "title": "Visit Reface",
+            "own": false
+          },
+          {
+            "domain": "the-ai-future.com",
+            "url": "https://the-ai-future.com/tools/ai-face-swap-video?utm_source=chatgpt.com",
+            "title": "7 best AI face swap video tools in 2026: free and paid, ranked",
+            "own": false
+          },
+          {
+            "domain": "rankite.com",
+            "url": "https://rankite.com/blog/best-face-swap-software?utm_source=chatgpt.com",
+            "title": "Best Face Swap Software in 2026: 9 Tools Compared",
+            "own": false
+          },
+          {
+            "domain": "diyai.io",
+            "url": "https://diyai.io/ai-tools/image-generation/best-ai-face-swap-apps/?utm_source=chatgpt.com",
+            "title": "Best AI Face Swap Apps in 2026: Photo & Video Tested",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free ai face swap without limit?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "voidmagic.ai",
+            "url": "https://voidmagic.ai/ai-face-swap?utm_source=chatgpt.com",
+            "title": "VoidMagic",
+            "own": false
+          },
+          {
+            "domain": "faceswapfree.io",
+            "url": "https://faceswapfree.io/?utm_source=chatgpt.com",
+            "title": "FaceSwapFree",
+            "own": false
+          },
+          {
+            "domain": "ezfaceswap.com",
+            "url": "https://ezfaceswap.com/?utm_source=chatgpt.com",
+            "title": "EZFaceSwap",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free app that can swap faces?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "apps.apple.com",
+            "url": "https://apps.apple.com/us/app/reface-ai-face-swap-editor/id1488782587?utm_source=chatgpt.com",
+            "title": "Download for iPhone",
+            "own": false
+          },
+          {
+            "domain": "apps.apple.com",
+            "url": "https://apps.apple.com/us/app/face-swap-booth-photo-changer/id826921329?platform=watch&utm_source=chatgpt.com",
+            "title": "Download for iPhone",
+            "own": false
+          },
+          {
+            "domain": "apps.apple.com",
+            "url": "https://apps.apple.com/us/app/swapto-face-swap/id6745184949?platform=ipad&utm_source=chatgpt.com",
+            "title": "Download for iPhone",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the most realistic face swap app?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.photoaistudio.com",
+            "url": "https://www.photoaistudio.com/blog/best-face-swap-apps-free-2026?utm_source=chatgpt.com",
+            "title": "10 Free Face Swap Apps I Tested on Real Photos (2026)",
+            "own": false
+          },
+          {
+            "domain": "reswap.me",
+            "url": "https://reswap.me/blog/best-face-swap-apps-2026?utm_source=chatgpt.com",
+            "title": "Best Face Swap Apps in 2026: Complete Comparison Guide | Reswap",
+            "own": false
+          },
+          {
+            "domain": "expertphotography.com",
+            "url": "https://expertphotography.com/face-swap-apps?utm_source=chatgpt.com",
+            "title": "9 Best Face Swap Apps for iPhone and Android in 2026",
+            "own": false
+          },
+          {
+            "domain": "play.google.com",
+            "url": "https://play.google.com/store/apps/details?hl=en_US&id=com.photoeditor.remakemefaceswapaigenerator&utm_source=chatgpt.com",
+            "title": "RemakeFace : AI Face Swap - Apps on Google Play",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What's the best app for face swapping?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "apps.apple.com",
+            "url": "https://apps.apple.com/us/app/reface-ai-face-swap-editor/id1488782587?utm_source=chatgpt.com",
+            "title": "‎Reface: AI Face Swap & Editor App - App Store",
+            "own": false
+          },
+          {
+            "domain": "www.reswap.me",
+            "url": "https://www.reswap.me/blog/reface-vs-faceapp-vs-reswap?utm_source=chatgpt.com",
+            "title": "Reface vs FaceApp vs Reswap (2026): Which Face Swap Wins? | Reswap",
+            "own": false
+          },
+          {
+            "domain": "reswap.me",
+            "url": "https://reswap.me/blog/how-to-face-swap-without-faceapp?utm_source=chatgpt.com",
+            "title": "How to Face Swap Now That FaceApp Doesn't (2026 Guide) | Reswap",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the best face swap website?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "www.admodito.com",
+            "url": "https://www.admodito.com/best-face-swap-online-tools-2026/?utm_source=chatgpt.com",
+            "title": "Best Face Swap Online Tools of 2026: Tested, Compared, and Ranked - Admodito",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Remaker AI",
+            "own": false
+          },
+          {
+            "domain": "www.itechguides.com",
+            "url": "https://www.itechguides.com/best/face-swap-software/?utm_source=chatgpt.com",
+            "title": "Best Face Swap Software in 2026: Researched & Ranked",
+            "own": false
+          },
+          {
+            "domain": "reface.ai",
+            "url": "https://reface.ai/",
+            "title": "Reface",
+            "own": false
+          },
+          {
+            "domain": "toolchase.com",
+            "url": "https://toolchase.com/blog/best-ai-face-swap-tools-2026/?utm_source=chatgpt.com",
+            "title": "Best AI Face Swap Tools 2026: Tested & Compared | ToolChase",
+            "own": false
+          },
+          {
+            "domain": "www.deepswap.ai",
+            "url": "https://www.deepswap.ai/",
+            "title": "DeepSwap",
+            "own": false
+          },
+          {
+            "domain": "www.facefusion.co",
+            "url": "https://www.facefusion.co/best-ai-face-swap-tools?utm_source=chatgpt.com",
+            "title": "What Is The Best AI Face Swap Tool To Use? (Comprehensive Guide 2026)",
+            "own": false
+          },
+          {
+            "domain": "akool.com",
+            "url": "https://akool.com/?utm_source=chatgpt.com",
+            "title": "Akool",
+            "own": false
+          },
+          {
+            "domain": "aideepfake.io",
+            "url": "https://aideepfake.io/blog/best-face-swap-tools-compared?utm_source=chatgpt.com",
+            "title": "Best Face Swap Tools in 2026: 10 Tools Compared | aideepfake.io",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free ai video face swap?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.visionstory.ai",
+            "url": "https://www.visionstory.ai/en-us/tools/face-swap-video?utm_source=chatgpt.com",
+            "title": "VisionStory",
+            "own": false
+          },
+          {
+            "domain": "www.videofaceswap.video",
+            "url": "https://www.videofaceswap.video/free?utm_source=chatgpt.com",
+            "title": "VideoFaceSwap",
+            "own": false
+          },
+          {
+            "domain": "nanopocket.ai",
+            "url": "https://nanopocket.ai/face-swap?utm_source=chatgpt.com",
+            "title": "NanoPocket Face Swap",
+            "own": false
+          },
+          {
+            "domain": "askai.free",
+            "url": "https://askai.free/face-swap/video?utm_source=chatgpt.com",
+            "title": "AskAI Video Face Swap",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Can faceswaps be detected?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.nist.gov",
+            "url": "https://www.nist.gov/news-events/news/2025/08/nist-guidelines-can-help-organizations-detect-face-photo-morphs-deter?utm_source=chatgpt.com",
+            "title": "NIST Guidelines Can Help Organizations Detect Face Photo Morphs, Deter Identity Fraud | NIST",
+            "own": false
+          },
+          {
+            "domain": "www.nist.gov",
+            "url": "https://www.nist.gov/publications/considerations-implementing-morph-detection-operations?utm_source=chatgpt.com",
+            "title": "Considerations for Implementing Morph Detection in Operations | NIST",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free video face swap?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.videofaceswap.video",
+            "url": "https://www.videofaceswap.video/free?utm_source=chatgpt.com",
+            "title": "Face Swap Video Free No Watermark - AI Video Face Swap | VideoFaceSwap",
+            "own": false
+          },
+          {
+            "domain": "www.videofaceswap.video",
+            "url": "https://www.videofaceswap.video/?utm_source=chatgpt.com",
+            "title": "VideoFaceSwap",
+            "own": false
+          },
+          {
+            "domain": "www.facefusion.co",
+            "url": "https://www.facefusion.co/video-face-swap?utm_source=chatgpt.com",
+            "title": "AI Video Face Swap Online Free — Swap Faces in Any Video | FaceFusion",
+            "own": false
+          },
+          {
+            "domain": "faceswap.dev",
+            "url": "https://faceswap.dev/download/?utm_source=chatgpt.com",
+            "title": "Download - Faceswap",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the best body swap ai?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "toolchase.com",
+            "url": "https://toolchase.com/blog/best-ai-face-swap-tools-2026/?utm_source=chatgpt.com",
+            "title": "Best AI Face Swap Tools 2026: Tested & Compared | ToolChase",
+            "own": false
+          },
+          {
+            "domain": "michaelleva.com",
+            "url": "https://michaelleva.com/the-best-ai-face-swap-video-tools-of-2026/?utm_source=chatgpt.com",
+            "title": "The Best AI Face Swap Video Tools of 2026 - Michael Leva",
+            "own": false
+          },
+          {
+            "domain": "en.ai-pedias.com",
+            "url": "https://en.ai-pedias.com/compare/remaker-vs-akool-vs-vidnoz?utm_source=chatgpt.com",
+            "title": "Remaker vs Akool vs Vidnoz: In-Depth Comparison [2026] — The Definitive AI Face Swap Tool Guide | AIpedia",
+            "own": false
+          },
+          {
+            "domain": "appscribed.com",
+            "url": "https://appscribed.com/software_cat/face-swap/?utm_source=chatgpt.com",
+            "title": "13 Best Tools For Face Swap - 2026",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How do you put someone's face on a meme?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "editthispic.com",
+            "url": "https://editthispic.com/edit/ai-meme-face-swapper?utm_source=chatgpt.com",
+            "title": "AI Meme Face Swapper - Free AI Tool | EditThisPic",
+            "own": false
+          },
+          {
+            "domain": "www.adobe.com",
+            "url": "https://www.adobe.com/products/photoshop/face-swap.html?utm_source=chatgpt.com",
+            "title": "How to swap faces in Photoshop - Adobe",
+            "own": false
+          },
+          {
+            "domain": "www.fotor.com",
+            "url": "https://www.fotor.com/features/face-in-hole/?utm_source=chatgpt.com",
+            "title": "Face in Hole: Insert Face into Picture Online Free | Fotor",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free face swap?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/products/face-swap?utm_source=chatgpt.com",
+            "title": "Magic Hour Face Swap",
+            "own": false
+          },
+          {
+            "domain": "faceswapit.com",
+            "url": "https://faceswapit.com/?utm_source=chatgpt.com",
+            "title": "FaceSwapIt",
+            "own": false
+          },
+          {
+            "domain": "www.swapdatface.com",
+            "url": "https://www.swapdatface.com/free-face-swap-no-account?utm_source=chatgpt.com",
+            "title": "Swap Dat Face",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/face-swap-free/?utm_source=chatgpt.com",
+            "title": "Face Swap Online Free",
+            "own": false
+          },
+          {
+            "domain": "pixlr.com",
+            "url": "https://pixlr.com/face-swap/?utm_source=chatgpt.com",
+            "title": "Free AI Face Swap Online — Swap Faces in Photos | Pixlr",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is ai face swapping legal?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.congress.gov",
+            "url": "https://www.congress.gov/119/plaws/publ12/PLAW-119publ12.pdf?utm_source=chatgpt.com",
+            "title": "139 STAT. 55",
+            "own": false
+          },
+          {
+            "domain": "www.everycrsreport.com",
+            "url": "https://www.everycrsreport.com/reports/LSB11314.html?utm_source=chatgpt.com",
+            "title": "The TAKE IT DOWN Act: A Federal Law Prohibiting the Nonconsensual Publication of Intimate Images",
+            "own": false
+          },
+          {
+            "domain": "law.lis.virginia.gov",
+            "url": "https://law.lis.virginia.gov/vacode/title18.2/chapter8/section18.2-386.1/",
+            "title": "Virginia Code § 18.2-386.1",
+            "own": false
+          },
+          {
+            "domain": "law.lis.virginia.gov",
+            "url": "https://law.lis.virginia.gov/vacode/title18.2/chapter4/section18.2-386.1/?utm_source=chatgpt.com",
+            "title": "Title 18.2. Crimes and Offenses Generally",
+            "own": false
+          },
+          {
+            "domain": "law.lis.virginia.gov",
+            "url": "https://law.lis.virginia.gov/vacode/title8.01/chapter3/section8.01-46.2/?utm_source=chatgpt.com",
+            "title": "Title 8.01. Civil Remedies and Procedure",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Can chatgpt swap faces?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "help.openai.com",
+            "url": "https://help.openai.com/en/articles/11084440-images-in-chatgpt?utm_source=chatgpt.com",
+            "title": "Images in ChatGPT | OpenAI Help Center",
+            "own": false
+          },
+          {
+            "domain": "openai.com",
+            "url": "https://openai.com/index/new-chatgpt-images-is-here/?utm_source=chatgpt.com",
+            "title": "The new ChatGPT Images is here | OpenAI",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How do you put your picture on a gif?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "faceswap.free",
+            "url": "https://faceswap.free/blog/how-to-put-your-face-on-a-gif?utm_source=chatgpt.com",
+            "title": "step-by-step GIF face swap guide",
+            "own": false
+          },
+          {
+            "domain": "www.capcut.com",
+            "url": "https://www.capcut.com/tools/free-online-gif-editor?utm_source=chatgpt.com",
+            "title": "Open CapCut's GIF editor",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Which are the five types of deepfakes?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.mdpi.com",
+            "url": "https://www.mdpi.com/2073-431x/12/10/216?utm_source=chatgpt.com",
+            "title": "Deepfake Attacks: Generation, Detection, Datasets, Challenges, and Research Directions",
+            "own": false
+          },
+          {
+            "domain": "www.mdpi.com",
+            "url": "https://www.mdpi.com/2673-8392/6/8/165?utm_source=chatgpt.com",
+            "title": "Deepfakes and Synthetic Media: Generation, Detection, and Governance | MDPI",
+            "own": false
+          },
+          {
+            "domain": "pmc.ncbi.nlm.nih.gov",
+            "url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC10114207/?utm_source=chatgpt.com",
+            "title": "Deepfakes as a threat to a speaker and facial recognition: An overview of tools and attack vectors - PMC",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Which ai face swap tool is the best?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "akool.com",
+            "url": "https://akool.com/",
+            "title": "Akool",
+            "own": false
+          },
+          {
+            "domain": "www.deepswap.ai",
+            "url": "https://www.deepswap.ai/",
+            "title": "DeepSwap",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Remaker AI",
+            "own": false
+          },
+          {
+            "domain": "facefusion.io",
+            "url": "https://facefusion.io/",
+            "title": "FaceFusion",
+            "own": false
+          },
+          {
+            "domain": "reface.ai",
+            "url": "https://reface.ai/",
+            "title": "Reface",
+            "own": false
+          },
+          {
+            "domain": "toolchase.com",
+            "url": "https://toolchase.com/blog/best-ai-face-swap-tools-2026/?utm_source=chatgpt.com",
+            "title": "Best AI Face Swap Tools 2026: Tested & Compared",
+            "own": false
+          },
+          {
+            "domain": "www.itechguides.com",
+            "url": "https://www.itechguides.com/best/ai-face-swap-tools/?utm_source=chatgpt.com",
+            "title": "Best AI Face Swap Tools in 2026: Researched & Ranked",
+            "own": false
+          },
+          {
+            "domain": "vidwip.com",
+            "url": "https://vidwip.com/blog/ai-face-swap-tools?utm_source=chatgpt.com",
+            "title": "9 Best AI Face Swap Tools for Photos and Video, Ranked 2026",
+            "own": false
+          },
+          {
+            "domain": "rottenwifi.com",
+            "url": "https://rottenwifi.com/11-best-ai-face-swap-tools-to-try-now/?utm_source=chatgpt.com",
+            "title": "11 Best AI Face Swap Tools for Photos, Video & Local Use",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How do i put a face into a gif?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.heygen.com",
+            "url": "https://www.heygen.com/tool/face-swap-video",
+            "title": "HeyGen",
+            "own": false
+          },
+          {
+            "domain": "www.heygen.com",
+            "url": "https://www.heygen.com/tool/face-swap-video?utm_source=chatgpt.com",
+            "title": "Free AI Face Swap: Swap Faces in Photos & Videos | HeyGen",
+            "own": false
+          },
+          {
+            "domain": "giffaceswap.org",
+            "url": "https://giffaceswap.org/blog/how-to-face-swap-a-gif?utm_source=chatgpt.com",
+            "title": "How to Face Swap a GIF | GIF Face Swap AI",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/blog/how-to-face-swap-a-gif?utm_source=chatgpt.com",
+            "title": "How to Face Swap a GIF (2026): Best Tools + Step-by-Step",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free deepfake ai photo generator available?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Try Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "www.deepswapper.com",
+            "url": "https://www.deepswapper.com/",
+            "title": "Try DeepSwapper",
+            "own": false
+          },
+          {
+            "domain": "github.com",
+            "url": "https://github.com/facefusion/facefusion",
+            "title": "Download FaceFusion",
+            "own": false
+          },
+          {
+            "domain": "pixlr.com",
+            "url": "https://pixlr.com/",
+            "title": "Try Pixlr",
+            "own": false
+          },
+          {
+            "domain": "dupple.com",
+            "url": "https://dupple.com/learn/best-free-ai-face-swap-tools?utm_source=chatgpt.com",
+            "title": "Best Free AI Face Swap Tools in 2026: Free Limits Compared",
+            "own": false
+          },
+          {
+            "domain": "fancies.ai",
+            "url": "https://fancies.ai/free-ai-face-swap-tools-no-sign-up/?utm_source=chatgpt.com",
+            "title": "Top Free AI face swap tools with no sign-up",
+            "own": false
+          },
+          {
+            "domain": "blog.deepswap.ai",
+            "url": "https://blog.deepswap.ai/the-best-free-ai-face-swap-tools-in-2026/?utm_source=chatgpt.com",
+            "title": "The Best Free AI Face Swap Tools in 2026",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the best free ai deepfake generator?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Visit Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "github.com",
+            "url": "https://github.com/facefusion/facefusion",
+            "title": "Visit FaceFusion",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Visit Remaker",
+            "own": false
+          },
+          {
+            "domain": "www.vidnoz.com",
+            "url": "https://www.vidnoz.com/",
+            "title": "Visit Vidnoz",
+            "own": false
+          },
+          {
+            "domain": "dupple.com",
+            "url": "https://dupple.com/learn/best-free-ai-face-swap-tools?utm_source=chatgpt.com",
+            "title": "Best Free AI Face Swap Tools in 2026: Free Limits Compared",
+            "own": false
+          },
+          {
+            "domain": "the-ai-future.com",
+            "url": "https://the-ai-future.com/tools/ai-face-swap-video?utm_source=chatgpt.com",
+            "title": "7 best AI face swap video tools in 2026: free and paid, ranked",
+            "own": false
+          },
+          {
+            "domain": "rankite.com",
+            "url": "https://rankite.com/blog/best-free-ai-face-swap-tools-march?utm_source=chatgpt.com",
+            "title": "Best Free AI Face Swap Tools in 2026: 7 Tools Compared",
+            "own": false
+          },
+          {
+            "domain": "diyai.io",
+            "url": "https://diyai.io/ai-tools/image-generation/best-ai-face-swap-apps/?utm_source=chatgpt.com",
+            "title": "Best AI Face Swap Apps for Photos and Video in 2026",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What are some nsfw face swap apps?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "nightanalytics.com",
+            "url": "https://nightanalytics.com/nsfw-ai/ai-face-swap-porn-video-tools/?utm_source=chatgpt.com",
+            "title": "11 Best AI Face Swap Tools for Porn Videos (2026)",
+            "own": false
+          },
+          {
+            "domain": "aipornguide.com",
+            "url": "https://aipornguide.com/blog/best-nsfw-face-swap-tools/?utm_source=chatgpt.com",
+            "title": "Best NSFW Face Swap Tools in 2026 [Tested & Compared]",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How can i morph my photos for free?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "faceswaponline.com",
+            "url": "https://faceswaponline.com/morph?utm_source=chatgpt.com",
+            "title": "Face Morph Online",
+            "own": false
+          },
+          {
+            "domain": "www.ailabtools.com",
+            "url": "https://www.ailabtools.com/features/face-morph/?utm_source=chatgpt.com",
+            "title": "AILabTools Face Morph",
+            "own": false
+          },
+          {
+            "domain": "www.morphstudio.com",
+            "url": "https://www.morphstudio.com/face-swap?utm_source=chatgpt.com",
+            "title": "Morph Studio",
+            "own": false
+          },
+          {
+            "domain": "dreamina.capcut.com",
+            "url": "https://dreamina.capcut.com/ai-image/face-morph?utm_source=chatgpt.com",
+            "title": "Dreamina Face Morph",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free ai face changer available?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Try Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Try Remaker AI",
+            "own": false
+          },
+          {
+            "domain": "pixlr.com",
+            "url": "https://pixlr.com/",
+            "title": "Try Pixlr",
+            "own": false
+          },
+          {
+            "domain": "github.com",
+            "url": "https://github.com/facefusion/facefusion",
+            "title": "Get FaceFusion",
+            "own": false
+          },
+          {
+            "domain": "snappyit.ai",
+            "url": "https://snappyit.ai/blog/best-free-face-swap-app?utm_source=chatgpt.com",
+            "title": "Best AI Face Swap Tools 2026: 6 Free Apps Tested",
+            "own": false
+          },
+          {
+            "domain": "fancies.ai",
+            "url": "https://fancies.ai/free-ai-face-swap-tools-no-sign-up/?utm_source=chatgpt.com",
+            "title": "Top Free AI face swap tools with no sign-up",
+            "own": false
+          },
+          {
+            "domain": "dupple.com",
+            "url": "https://dupple.com/learn/best-free-ai-face-swap-tools?utm_source=chatgpt.com",
+            "title": "Best Free AI Face Swap Tools in 2026: Free Limits Compared",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the best face swapping software?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "github.com",
+            "url": "https://github.com/facefusion/facefusion",
+            "title": "GitHub - facefusion/facefusion: Industry leading face manipulation platform",
+            "own": false
+          },
+          {
+            "domain": "facefusion.io",
+            "url": "https://facefusion.io/",
+            "title": "FaceFusion",
+            "own": false
+          },
+          {
+            "domain": "apps.apple.com",
+            "url": "https://apps.apple.com/us/app/reface-ai-face-swap-editor/id1488782587",
+            "title": "‎Reface: AI Face Swap & Editor App",
+            "own": false
+          },
+          {
+            "domain": "reface.app",
+            "url": "https://reface.app/",
+            "title": "Reface",
+            "own": false
+          },
+          {
+            "domain": "www.itechguides.com",
+            "url": "https://www.itechguides.com/best/face-swap-software/",
+            "title": "Best Face Swap Software in 2026: Researched & Ranked",
+            "own": false
+          },
+          {
+            "domain": "diyai.io",
+            "url": "https://diyai.io/ai-tools/image-generation/best-ai-face-swap-apps/",
+            "title": "Best AI Face Swap Apps in 2026: Photo & Video Tested",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Official website",
+            "own": false
+          },
+          {
+            "domain": "www.deepswap.ai",
+            "url": "https://www.deepswap.ai/",
+            "title": "Official website",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Can i swap faces in photoshop 2026?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.adobe.com",
+            "url": "https://www.adobe.com/products/photoshop/face-swap.html?msockid=304ad89640146fa21becce13419b6ee8&utm_source=chatgpt.com",
+            "title": "Adobe's official face-swapping tutorial",
+            "own": false
+          },
+          {
+            "domain": "www.adobe.com",
+            "url": "https://www.adobe.com/products/photoshop/face-swap.html",
+            "title": "Adobe Face Swap",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Which ai is the best for face swapping?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magicshot.ai",
+            "url": "https://magicshot.ai/blog/best-ai-face-swap-tools-in-2026-ranked-and-tested",
+            "title": "Best AI Face Swap Tools in 2026",
+            "own": false
+          },
+          {
+            "domain": "diyai.io",
+            "url": "https://diyai.io/ai-tools/image-generation/best-ai-face-swap-apps/",
+            "title": "Best AI Face Swap Apps in 2026: Photo & Video Tested",
+            "own": false
+          },
+          {
+            "domain": "www.toolworthy.ai",
+            "url": "https://www.toolworthy.ai/blog/best-ai-face-swap",
+            "title": "12 Best AI Face Swap Tools for Photos & Video (2026)",
+            "own": false
+          },
+          {
+            "domain": "www.itechfaqs.com",
+            "url": "https://www.itechfaqs.com/best/ai-face-swap-tools/",
+            "title": "Best AI Face Swap Tools in 2026",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Visit Remaker AI",
+            "own": false
+          },
+          {
+            "domain": "www.itechguides.com",
+            "url": "https://www.itechguides.com/best/face-swap-software/",
+            "title": "Best Face Swap Software in 2026: Researched & Ranked",
+            "own": false
+          },
+          {
+            "domain": "github.com",
+            "url": "https://github.com/facefusion/facefusion",
+            "title": "Visit FaceFusion on GitHub",
+            "own": false
+          },
+          {
+            "domain": "play.google.com",
+            "url": "https://play.google.com/store/apps/details?id=video.reface.app",
+            "title": "Reface: Face Swap AI Generator",
+            "own": false
+          },
+          {
+            "domain": "www.daylox.com",
+            "url": "https://www.daylox.com/blog/the-10-best-face-swap-tools-of-2026/",
+            "title": "The 10 Best Face Swap Tools of 2026",
+            "own": false
+          },
+          {
+            "domain": "reface.ai",
+            "url": "https://reface.ai/",
+            "title": "Visit Reface",
+            "own": false
+          },
+          {
+            "domain": "www.deepswap.ai",
+            "url": "https://www.deepswap.ai/",
+            "title": "Visit DeepSwap",
+            "own": false
+          },
+          {
+            "domain": "www.ezbusinesssites.com",
+            "url": "https://www.ezbusinesssites.com/tools-best-ai-face-swap-video-tools.html",
+            "title": "Best AI Face Swap Video Tools in 2026 (Free & Paid Compared)",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Visit Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "arxiv.org",
+            "url": "https://arxiv.org/abs/2605.24735",
+            "title": "Dual-Use AI Face Swap Apps Are Mostly Unsafe: A Systematic Safety Audit",
+            "own": false
+          },
+          {
+            "domain": "aideepfake.io",
+            "url": "https://aideepfake.io/blog/best-face-swap-tools-compared",
+            "title": "Best Face Swap Tools in 2026: 10 Tools Compared",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the best app for face swapping photos?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "expertphotography.com",
+            "url": "https://expertphotography.com/face-swap-apps?utm_source=chatgpt.com",
+            "title": "9 Best Face Swap Apps for iPhone and Android in 2026",
+            "own": false
+          },
+          {
+            "domain": "www.itechguides.com",
+            "url": "https://www.itechguides.com/7-best-face-swap-apps-for-android-and-iphone/?utm_source=chatgpt.com",
+            "title": "7 Best Face Swap Apps for iPhone and Android (2026)",
+            "own": false
+          },
+          {
+            "domain": "www.itechguides.com",
+            "url": "https://www.itechguides.com/best-face-swap-apps-for-iphone-ipad-in-2026-change-face-body-parts/?utm_source=chatgpt.com",
+            "title": "Best Face Swap apps for iPhone, iPad in 2026, Change Face, Body Parts",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free ai face swap tool for adult images?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "aihaven.com",
+            "url": "https://aihaven.com/guides/ai-face-swap-porn/?utm_source=chatgpt.com",
+            "title": "AI Face Swap Porn Tools 2026: Best Free & NSFW Deepfakes",
+            "own": false
+          },
+          {
+            "domain": "www.deepswapper.com",
+            "url": "https://www.deepswapper.com/",
+            "title": "Visit DeepSwapper",
+            "own": false
+          },
+          {
+            "domain": "medux.io",
+            "url": "https://medux.io/workshop/image-face-swap?utm_source=chatgpt.com",
+            "title": "NSFW & Uncensored AI Image Face Swap — Free Trial",
+            "own": false
+          },
+          {
+            "domain": "medux.io",
+            "url": "https://medux.io/workshop/image-face-swap",
+            "title": "Try Medux",
+            "own": false
+          },
+          {
+            "domain": "www.fanscreator.ai",
+            "url": "https://www.fanscreator.ai/ai-face-swap?utm_source=chatgpt.com",
+            "title": "AI Face Swap for Adult Creators",
+            "own": false
+          },
+          {
+            "domain": "www.fanscreator.ai",
+            "url": "https://www.fanscreator.ai/ai-face-swap",
+            "title": "Visit FansCreator",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How to do face swap filter?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.snapchat.com",
+            "url": "https://www.snapchat.com/topic/how-to-do-face-swap-on-snapchat?utm_source=chatgpt.com",
+            "title": "How To Do Face Swap On Snapchat Videos",
+            "own": false
+          },
+          {
+            "domain": "rottenwifi.com",
+            "url": "https://rottenwifi.com/how-to-get-gender-swap-filters-for-tiktok-snapchat-and-more/?utm_source=chatgpt.com",
+            "title": "How to Get Gender-Swap Filters on TikTok, Snapchat and CapCut",
+            "own": false
+          },
+          {
+            "domain": "www.capcut.com",
+            "url": "https://www.capcut.com/resource/gender-swap-filters?utm_source=chatgpt.com",
+            "title": "Using Gender Swap Filters: 4 Tools to Transform Your Appearance",
+            "own": false
+          },
+          {
+            "domain": "www.snapchat.com",
+            "url": "https://www.snapchat.com/topic/capcut-face-filter-tutorial?utm_source=chatgpt.com",
+            "title": "Capcut Face Filter Tutorial Videos",
+            "own": false
+          },
+          {
+            "domain": "thatpainter.com",
+            "url": "https://thatpainter.com/6-best-face-swap-apps-for-mobile-or-pc/?utm_source=chatgpt.com",
+            "title": "6 Best Face Swap Apps for Mobile and PC",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is face swap ai free?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Try Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Try Remaker AI",
+            "own": false
+          },
+          {
+            "domain": "www.vidnoz.com",
+            "url": "https://www.vidnoz.com/",
+            "title": "Try Vidnoz",
+            "own": false
+          },
+          {
+            "domain": "faceswapper.ai",
+            "url": "https://faceswapper.ai/",
+            "title": "Try FaceSwapper.ai",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the face swap app for nsfw?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "aipornguide.com",
+            "url": "https://aipornguide.com/blog/best-nsfw-face-swap-tools/",
+            "title": "Best NSFW Face Swap Tools in 2026 [Tested & Compared]",
+            "own": false
+          },
+          {
+            "domain": "aihaven.com",
+            "url": "https://aihaven.com/guides/ai-face-swap-porn/",
+            "title": "AI Face Swap Porn Tools 2026: Best Free & NSFW Deepfakes",
+            "own": false
+          },
+          {
+            "domain": "www.deepswap.ai",
+            "url": "https://www.deepswap.ai/",
+            "title": "Visit DeepSwap",
+            "own": false
+          },
+          {
+            "domain": "github.com",
+            "url": "https://github.com/iperov/DeepFaceLab",
+            "title": "View on GitHub",
+            "own": false
+          },
+          {
+            "domain": "www.seduced.ai",
+            "url": "https://www.seduced.ai/",
+            "title": "Visit website",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Which is the best morphing app?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "expertphotography.com",
+            "url": "https://expertphotography.com/face-swap-apps",
+            "title": "9 Best Face Swap Apps for iPhone and Android in 2026",
+            "own": false
+          },
+          {
+            "domain": "contentmavericks.com",
+            "url": "https://contentmavericks.com/best-face-morph-app/",
+            "title": "7 Best Face Morph Apps 2026 (Morph Two Faces Together)",
+            "own": false
+          },
+          {
+            "domain": "appshunter.io",
+            "url": "https://appshunter.io/ios/topics/photo-morph",
+            "title": "238+ Best Photo Morph Apps for iPhone (2026)",
+            "own": false
+          },
+          {
+            "domain": "www.itechguides.com",
+            "url": "https://www.itechguides.com/best-face-swap-apps-for-iphone-ipad-in-2026-change-face-body-parts/",
+            "title": "Best Face Swap apps for iPhone, iPad in 2026, Change Face, Body Parts",
+            "own": false
+          },
+          {
+            "domain": "appshunter.io",
+            "url": "https://appshunter.io/ios/topics/face-morph",
+            "title": "246+ Best Face Morph Apps for iPhone (2026)",
+            "own": false
+          },
+          {
+            "domain": "appshunter.io",
+            "url": "https://appshunter.io/ios/topics/morphing-faces-video",
+            "title": "228+ Best Morphing Faces Video Apps for iPhone (2026)",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How do i put someone's face on another picture on my iphone?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "apps.apple.com",
+            "url": "https://apps.apple.com/us/app/faceover-ai-photo-face-swap/id393476155",
+            "title": "Get Faceover in the App Store",
+            "own": false
+          },
+          {
+            "domain": "support.picsart.com",
+            "url": "https://support.picsart.com/hc/en-us/articles/9813819557021-How-do-I-use-AI-Replace",
+            "title": "Get Picsart instructions",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Which app is best for face swap?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "apps.apple.com",
+            "url": "https://apps.apple.com/us/app/reface-faceswap-ai-photo-app/id1488782587?utm_source=chatgpt.com",
+            "title": "‎Reface: Face Edit AI Photo App App - App Store",
+            "own": false
+          },
+          {
+            "domain": "www.facemagic.ai",
+            "url": "https://www.facemagic.ai/download?utm_source=chatgpt.com",
+            "title": "FaceMagic app-AI face swap reface videos",
+            "own": false
+          },
+          {
+            "domain": "www.reddit.com",
+            "url": "https://www.reddit.com/r/generativeAI/comments/1r8xy7n/ai_face_swap_tools_to_try_in_2026/?utm_source=chatgpt.com",
+            "title": "AI Face Swap tools to try in 2026?",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How to put a face on a meme?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.reddit.com",
+            "url": "https://www.reddit.com/r/pixlr/comments/1shjs0l/i_need_help/?utm_source=chatgpt.com",
+            "title": "I need help",
+            "own": false
+          },
+          {
+            "domain": "editthispic.com",
+            "url": "https://editthispic.com/edit/ai-meme-face-swapper?utm_source=chatgpt.com",
+            "title": "AI Meme Face Swapper - Free AI Tool | EditThisPic",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How to kirkify images for free?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.kirkify.net",
+            "url": "https://www.kirkify.net/free?utm_source=chatgpt.com",
+            "title": "Try Kirkify free",
+            "own": false
+          },
+          {
+            "domain": "kirkifyit.com",
+            "url": "https://kirkifyit.com/how-to-kirkify?utm_source=chatgpt.com",
+            "title": "Try Kirkify It",
+            "own": false
+          },
+          {
+            "domain": "aiswapface.app",
+            "url": "https://aiswapface.app/blog/how-to-kirkify-a-photo?utm_source=chatgpt.com",
+            "title": "Try AI Swap Face",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How can i add a face to a gif?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.facecam.ai",
+            "url": "https://www.facecam.ai/gif-face-swap?utm_source=chatgpt.com",
+            "title": "Try Facecam",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/blog/how-to-face-swap-a-gif?utm_source=chatgpt.com",
+            "title": "Try Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "www.adobe.com",
+            "url": "https://www.adobe.com/creativecloud/photography/discover/overlay-image-on-gif.html?utm_source=chatgpt.com",
+            "title": "See Adobe's tutorial",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the best face swap site?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Visit Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "www.deepswap.ai",
+            "url": "https://www.deepswap.ai/",
+            "title": "Visit DeepSwap",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Visit Remaker",
+            "own": false
+          },
+          {
+            "domain": "www.vidnoz.com",
+            "url": "https://www.vidnoz.com/",
+            "title": "Visit Vidnoz",
+            "own": false
+          },
+          {
+            "domain": "github.com",
+            "url": "https://github.com/facefusion/facefusion",
+            "title": "Visit FaceFusion",
+            "own": false
+          },
+          {
+            "domain": "sortbusiness.com",
+            "url": "https://sortbusiness.com/blog/the-10-best-ai-face-swap-tools-of-2026/?utm_source=chatgpt.com",
+            "title": "The 10 Best AI Face Swap Tools of 2026",
+            "own": false
+          },
+          {
+            "domain": "guideaitools.com",
+            "url": "https://guideaitools.com/ai-toolkits/best-ai-face-swap-tools/?utm_source=chatgpt.com",
+            "title": "12 Best AI Face Swap Tools in 2026",
+            "own": false
+          },
+          {
+            "domain": "www.itechguides.com",
+            "url": "https://www.itechguides.com/best/ai-face-swap-tools/?utm_source=chatgpt.com",
+            "title": "Best AI Face Swap Tools in 2026: Researched & Ranked",
+            "own": false
+          },
+          {
+            "domain": "aideepfake.io",
+            "url": "https://aideepfake.io/blog/best-face-swap-tools-compared?utm_source=chatgpt.com",
+            "title": "Best Face Swap Tools 2026: 10 Compared",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How much does an ai face swap cost?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "faceswapai.com",
+            "url": "https://faceswapai.com/face-swap-price-index-2026?utm_source=chatgpt.com",
+            "title": "AI Face Swap Price Index 2026: 15 Tools Compared",
+            "own": false
+          },
+          {
+            "domain": "vidwip.com",
+            "url": "https://vidwip.com/blog/ai-face-swap-tools?utm_source=chatgpt.com",
+            "title": "9 Best AI Face Swap Tools for Photos and Video, Ranked 2026",
+            "own": false
+          },
+          {
+            "domain": "ovideo.io",
+            "url": "https://ovideo.io/resources/best-face-swap-apps?utm_source=chatgpt.com",
+            "title": "Best Face Swap Apps (2026): 7 Photo Tools Compared",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Website",
+            "own": false
+          },
+          {
+            "domain": "akool.com",
+            "url": "https://akool.com/",
+            "title": "Website",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Website",
+            "own": false
+          },
+          {
+            "domain": "github.com",
+            "url": "https://github.com/facefusion/facefusion",
+            "title": "Website",
+            "own": false
+          },
+          {
+            "domain": "dupple.com",
+            "url": "https://dupple.com/learn/best-free-ai-face-swap-tools?utm_source=chatgpt.com",
+            "title": "Best Free AI Face Swap Tools in 2026: Free Limits Compared",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Where can i do face swap for free?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "wavespeed.ai",
+            "url": "https://wavespeed.ai/free-tools/face-swapper",
+            "title": "Free AI Face Swap Online – Realistic, No Upload, No Watermark",
+            "own": false
+          },
+          {
+            "domain": "face-swapper.org",
+            "url": "https://face-swapper.org/",
+            "title": "Face Swapper - Free AI Face Swap & Photo Tools",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/blog/best-free-ai-face-swap-tools-2026",
+            "title": "5 best free AI face swap tools (2026): web & open source",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Try Remaker AI",
+            "own": false
+          },
+          {
+            "domain": "apps.apple.com",
+            "url": "https://apps.apple.com/us/app/reface-ai-face-swap-editor/id1488782587",
+            "title": "‎Reface: AI Face Swap & Editor App",
+            "own": false
+          },
+          {
+            "domain": "reface.ai",
+            "url": "https://reface.ai/",
+            "title": "Try Reface",
+            "own": false
+          },
+          {
+            "domain": "faceswap.dev",
+            "url": "https://faceswap.dev/",
+            "title": "Welcome",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Are face swaps legal?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "legalclarity.org",
+            "url": "https://legalclarity.org/is-making-deepfakes-illegal-criminal-and-civil-liability/?utm_source=chatgpt.com",
+            "title": "Is Making Deepfakes Illegal? Laws and Penalties - LegalClarity",
+            "own": false
+          },
+          {
+            "domain": "legalclarity.org",
+            "url": "https://legalclarity.org/deepfake-law-state-statutes-and-federal-protections/?utm_source=chatgpt.com",
+            "title": "What Is Deepfake Law? Federal and State Rules Explained - LegalClarity",
+            "own": false
+          },
+          {
+            "domain": "faceswapai.com",
+            "url": "https://faceswapai.com/guide/deepfake-ethics?utm_source=chatgpt.com",
+            "title": "Deepfake Ethics: Responsible AI Face Swap Guide 2026 | Consent & Legal",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How can i put my face on a gif?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/blog/how-to-face-swap-a-gif",
+            "title": "How to face swap a GIF: free steps, tools and export tips",
+            "own": false
+          },
+          {
+            "domain": "giffaceswap.org",
+            "url": "https://giffaceswap.org/blog/how-to-face-swap-a-gif",
+            "title": "How to Face Swap a GIF Online: Step-by-Step Guide",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/tools/gif-face-swap",
+            "title": "Try Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "youinmeme.com",
+            "url": "https://youinmeme.com/gif-meme-maker",
+            "title": "GIF Meme Maker — Put Your Face in Any GIF",
+            "own": false
+          },
+          {
+            "domain": "www.kapwing.com",
+            "url": "https://www.kapwing.com/tools/add-image/gif",
+            "title": "Add Image To GIF — Add Watermark Or Logo To GIF",
+            "own": false
+          },
+          {
+            "domain": "www.kapwing.com",
+            "url": "https://www.kapwing.com/ai/face-swap",
+            "title": "AI Face Swap",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How can i put my face in gifs?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "reface.ai",
+            "url": "https://reface.ai/",
+            "title": "Try Reface",
+            "own": false
+          },
+          {
+            "domain": "expertphotography.com",
+            "url": "https://expertphotography.com/face-swap-apps?utm_source=chatgpt.com",
+            "title": "9 Best Face Swap Apps for iPhone and Android in 2026",
+            "own": false
+          },
+          {
+            "domain": "www.itechguides.com",
+            "url": "https://www.itechguides.com/7-best-face-swap-apps-for-android-and-iphone/?utm_source=chatgpt.com",
+            "title": "7 Best Face Swap Apps for iPhone and Android (2026)",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Try Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/blog/how-to-face-swap-a-gif?utm_source=chatgpt.com",
+            "title": "How to face swap a GIF: free steps, tools and export tips",
+            "own": false
+          },
+          {
+            "domain": "www.heygen.com",
+            "url": "https://www.heygen.com/tool/face-swap-video",
+            "title": "Try HeyGen",
+            "own": false
+          },
+          {
+            "domain": "www.heygen.com",
+            "url": "https://www.heygen.com/tool/face-swap-video?utm_source=chatgpt.com",
+            "title": "Free AI Face Swap for Photos, Videos and GIFs",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the best app for face swap?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "reface.ai",
+            "url": "https://reface.ai/",
+            "title": "Visit Reface",
+            "own": false
+          },
+          {
+            "domain": "www.perfectcorp.com",
+            "url": "https://www.perfectcorp.com/consumer/apps/ycv",
+            "title": "Visit YouCam Video",
+            "own": false
+          },
+          {
+            "domain": "www.faceplay.com",
+            "url": "https://www.faceplay.com/",
+            "title": "Visit FacePlay",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Visit Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "expertphotography.com",
+            "url": "https://expertphotography.com/face-swap-apps?utm_source=chatgpt.com",
+            "title": "9 Best Face Swap Apps for iPhone and Android in 2026",
+            "own": false
+          },
+          {
+            "domain": "www.perfectcorp.com",
+            "url": "https://www.perfectcorp.com/consumer/blog/video-editing/ai-face-swap-video-app?utm_source=chatgpt.com",
+            "title": "I Tested 11 Face Swap Apps",
+            "own": false
+          },
+          {
+            "domain": "thatpainter.com",
+            "url": "https://thatpainter.com/6-best-face-swap-apps-for-mobile-or-pc/?utm_source=chatgpt.com",
+            "title": "6 Best Face Swap Apps for Mobile and PC",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "How do i edit a photo to replace a face?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.deepswap.ai",
+            "url": "https://www.deepswap.ai/",
+            "title": "DeepSwap",
+            "own": false
+          },
+          {
+            "domain": "www.adobe.com",
+            "url": "https://www.adobe.com/products/photoshop/face-swap.html",
+            "title": "Adobe Photoshop",
+            "own": false
+          },
+          {
+            "domain": "www.face-swap.ai",
+            "url": "https://www.face-swap.ai/",
+            "title": "Face Swap AI",
+            "own": false
+          },
+          {
+            "domain": "www.adobe.com",
+            "url": "https://www.adobe.com/au/creativecloud/photography/discover/face-swap.html?utm_source=chatgpt.com",
+            "title": "How to swap faces in Photoshop",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free tool for swapping faces in photoshop?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/products/face-swap",
+            "title": "Try Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "pixlr.com",
+            "url": "https://pixlr.com/",
+            "title": "Try Pixlr",
+            "own": false
+          },
+          {
+            "domain": "github.com",
+            "url": "https://github.com/facefusion/facefusion",
+            "title": "Download FaceFusion",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Try Remaker",
+            "own": false
+          },
+          {
+            "domain": "blog.deepswap.ai",
+            "url": "https://blog.deepswap.ai/the-best-free-ai-face-swap-tools-in-2026/?utm_source=chatgpt.com",
+            "title": "The Best Free AI Face Swap Tools in 2026",
+            "own": false
+          },
+          {
+            "domain": "dupple.com",
+            "url": "https://dupple.com/learn/best-free-ai-face-swap-tools?utm_source=chatgpt.com",
+            "title": "Best Free AI Face Swap Tools in 2026: Free Limits Compared",
+            "own": false
+          },
+          {
+            "domain": "fancies.ai",
+            "url": "https://fancies.ai/free-ai-face-swap-tools-no-sign-up/?utm_source=chatgpt.com",
+            "title": "Top Free AI face swap tools with no sign-up",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Where can i swap faces for free?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "wavespeed.ai",
+            "url": "https://wavespeed.ai/free-tools/face-swapper",
+            "title": "Free AI Face Swap Online – Realistic, No Upload, No Watermark",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/products/face-swap",
+            "title": "AI Face Swap - Free Online, No Watermark, No Sign Up",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/blog/best-free-ai-face-swap-tools-2026",
+            "title": "5 best free AI face swap tools (2026): web & open source",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Try Remaker",
+            "own": false
+          },
+          {
+            "domain": "faceswapit.com",
+            "url": "https://faceswapit.com/",
+            "title": "Free AI Face Swap Online — No Signup, No Watermark",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "What is the best ai for swapping faces?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "akool.com",
+            "url": "https://akool.com/",
+            "title": "Visit AKOOL",
+            "own": false
+          },
+          {
+            "domain": "www.deepswap.ai",
+            "url": "https://www.deepswap.ai/",
+            "title": "Visit DeepSwap",
+            "own": false
+          },
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Visit Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Visit Remaker AI",
+            "own": false
+          },
+          {
+            "domain": "github.com",
+            "url": "https://github.com/facefusion/facefusion",
+            "title": "Visit FaceFusion",
+            "own": false
+          },
+          {
+            "domain": "toolchase.com",
+            "url": "https://toolchase.com/blog/best-ai-face-swap-tools-2026/?utm_source=chatgpt.com",
+            "title": "Best AI Face Swap Tools 2026: Tested & Compared",
+            "own": false
+          },
+          {
+            "domain": "guideaitools.com",
+            "url": "https://guideaitools.com/ai-toolkits/best-ai-face-swap-tools/?utm_source=chatgpt.com",
+            "title": "12 Best AI Face Swap Tools in 2026",
+            "own": false
+          },
+          {
+            "domain": "www.itechguides.com",
+            "url": "https://www.itechguides.com/best/ai-face-swap-tools/?utm_source=chatgpt.com",
+            "title": "Best AI Face Swap Tools in 2026: Researched & Ranked",
+            "own": false
+          },
+          {
+            "domain": "rottenwifi.com",
+            "url": "https://rottenwifi.com/11-best-ai-face-swap-tools-to-try-now/?utm_source=chatgpt.com",
+            "title": "11 Best AI Face Swap Tools for Photos, Video & Local Use",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is ai face swap real?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "www.dhs.gov",
+            "url": "https://www.dhs.gov/sites/default/files/2025-01/25_0110_st_impacts_of_adversarial_generative_aI_on_homeland_security_0.pdf?utm_source=chatgpt.com",
+            "title": "Impacts of Adversarial Use of Generative AI on Homeland Security",
+            "own": false
+          },
+          {
+            "domain": "www.gao.gov",
+            "url": "https://www.gao.gov/products/gao-20-379sp?utm_source=chatgpt.com",
+            "title": "Science & Tech Spotlight: Deepfakes",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Is there a free app for putting faces on pictures?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "apps.apple.com",
+            "url": "https://apps.apple.com/us/app/faceover-photo-face-swap/id393476155?utm_source=chatgpt.com",
+            "title": "‎Faceover: Photo Face Swap App - App Store",
+            "own": false
+          },
+          {
+            "domain": "themidtownpost.com",
+            "url": "https://themidtownpost.com/best-free-face-swap-apps/?utm_source=chatgpt.com",
+            "title": "15 Best Face Swap Apps For Free in 2025",
+            "own": false
+          },
+          {
+            "domain": "techcult.com",
+            "url": "https://techcult.com/best-free-face-morph-app-for-android/?utm_source=chatgpt.com",
+            "title": "19 Best Free Face Morph App for Android – TechCult",
+            "own": false
+          },
+          {
+            "domain": "membership.cyberlink.com",
+            "url": "https://membership.cyberlink.com/blog/app-photo-editing/2266/best-face-swap-apps?utm_source=chatgpt.com",
+            "title": "How to Swap Faces on Apps & Online: Try These 10 Best Tools!",
+            "own": false
+          },
+          {
+            "domain": "www.perfectcorp.com",
+            "url": "https://www.perfectcorp.com/consumer/blog/photo-editing/face-in-hole?utm_source=chatgpt.com",
+            "title": "Face in Hole Free: How to Put Your Face on Another Picture",
+            "own": false
+          },
+          {
+            "domain": "www.perfectcorp.com",
+            "url": "https://www.perfectcorp.com/consumer/blog/photo-editing/best-face-swap-app?utm_source=chatgpt.com",
+            "title": "15 Best Face Swap Apps and Online Tools in 2025 (Free & Paid)",
+            "own": false
+          },
+          {
+            "domain": "pixelfox.ai",
+            "url": "https://pixelfox.ai/blog/best-free-photo-morphing-app-2025-pixelfox-ai-face-swap-online?utm_source=chatgpt.com",
+            "title": "Best Free Photo Morphing App 2025 – Pixelfox AI Face Swap Online",
+            "own": false
+          },
+          {
+            "domain": "www.reddit.com",
+            "url": "https://www.reddit.com/r/selfpromotion/comments/1f4zl12?utm_source=chatgpt.com",
+            "title": "Best face swap tool, with a lot of free credits. Try Remaker AI.",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      },
+      {
+        "text": "Which free face swapping app is best?",
+        "variants": [],
+        "sources": [
+          {
+            "domain": "magichour.ai",
+            "url": "https://magichour.ai/",
+            "title": "Try Magic Hour",
+            "own": false
+          },
+          {
+            "domain": "reface.ai",
+            "url": "https://reface.ai/",
+            "title": "Try Reface",
+            "own": false
+          },
+          {
+            "domain": "remaker.ai",
+            "url": "https://remaker.ai/",
+            "title": "Try Remaker AI",
+            "own": false
+          },
+          {
+            "domain": "www.snapchat.com",
+            "url": "https://www.snapchat.com/",
+            "title": "Try Snapchat",
+            "own": false
+          },
+          {
+            "domain": "expertphotography.com",
+            "url": "https://expertphotography.com/face-swap-apps?utm_source=chatgpt.com",
+            "title": "9 Best Face Swap Apps for iPhone and Android in 2026",
+            "own": false
+          },
+          {
+            "domain": "diyai.io",
+            "url": "https://diyai.io/ai-tools/image-generation/best-ai-face-swap-apps/?utm_source=chatgpt.com",
+            "title": "Best AI Face Swap Apps for Photos and Video in 2026",
+            "own": false
+          },
+          {
+            "domain": "vtrends.me",
+            "url": "https://vtrends.me/blog/best-face-swap-video-apps?utm_source=chatgpt.com",
+            "title": "Best face swap app in 2026: 13 video tools compared",
+            "own": false
+          }
+        ],
+        "ownDomainCited": false,
+        "brandMentioned": false,
+        "tracked": false
+      }
+    ]
+  },
+  "meta": {
+    "projectId": "2d414b2c-f24f-4b0a-a038-a552b0c1142c",
+    "url": "https://app.openseo.so/p/2d414b2c-f24f-4b0a-a038-a552b0c1142c/ai-visibility/research"
+  }
+}
