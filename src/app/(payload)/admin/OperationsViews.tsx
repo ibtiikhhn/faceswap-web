@@ -1,12 +1,8 @@
 import Link from 'next/link';
+import AdminDate from './AdminDate';
 import type { ownerBilling, ownerInsights } from '@/cms/owner-insights';
 const fmt = (n: number | string) => Number(n).toLocaleString('en');
-const date = (s: string) =>
-  new Date(s).toLocaleString('en-GB', {
-    timeZone: 'UTC',
-    dateStyle: 'medium',
-    timeStyle: 'short',
-  }) + ' UTC';
+const date = (s: string) => <AdminDate value={s} />;
 const customerLink = (id: string) =>
   `/admin/saas?customer=${encodeURIComponent(id)}`;
 

@@ -14,17 +14,10 @@ import OwnerActions from './OwnerActions';
 import { ownerInsights, ownerBilling } from '@/cms/owner-insights';
 import { OperationsView, BillingView } from './OperationsViews';
 import GenerationPhoto from './GenerationPhoto';
+import AdminDate from './AdminDate';
 const number = (v: number) => new Intl.NumberFormat('en').format(v);
 function date(v: string | null) {
-  if (!v) return '—';
-  const d = new Date(v);
-  return Number.isNaN(d.valueOf())
-    ? '—'
-    : new Intl.DateTimeFormat('en', {
-        dateStyle: 'medium',
-        timeStyle: 'short',
-        timeZone: 'UTC',
-      }).format(d) + ' UTC';
+  return <AdminDate value={v} />;
 }
 function href(values: Record<string, string | number>) {
   return (
@@ -467,6 +460,10 @@ export default async function SaaSOverview({
           <div className="cms-saas__panel-head cms-saas__standalone">
             <div>
               <h2>Generation history</h2>
+              <p>
+                Newest first by generation start time. Dates use your browser’s
+                timezone; hover over a timestamp for UTC.
+              </p>
               <p>
                 Source → target → result. Photos are stored privately until
                 explicitly deleted. Previously removed photos cannot be
