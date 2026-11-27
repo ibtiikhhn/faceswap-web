@@ -1,0 +1,22 @@
+{
+  "date": "2026-11-27",
+  "pages": [
+    "/face-edit",
+    "/face-morph"
+  ],
+  "research": {
+    "openseoKeywordRows": 30,
+    "googleAutocompleteSeeds": 8,
+    "googleAutocompleteRows": 76,
+    "openseoReportId": "0169075b-88bf-4112-9be8-e9f123d1a984"
+  },
+  "validation": {
+    "typecheck": "passed",
+    "seoTests": 3,
+    "browser": "Chrome: desktop 1440x1000 and mobile 390x844",
+    "faqCount": 24,
+    "horizontalOverflow": false,
+    "generationTested": false
+  },
+  "deployment": "Verify after push"
+}

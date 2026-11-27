@@ -1,0 +1,91 @@
+[
+  {
+    "slug": "face-edit",
+    "status": 200,
+    "title": "Face Edit Online — Edit a Face into a Photo | SwapThisFace",
+    "description": "Edit a face onto another photo with our AI face editor. Upload a portrait and target, compare real examples, and download your face replacement. Try one swap free.",
+    "canonical": "http://localhost:3099/face-edit",
+    "h1": 1,
+    "headings": [
+      "What kind of face edit do you want to make?",
+      "How to edit a face in a photo with two uploads",
+      "Face editing example: a portrait beside the Eiffel Tower",
+      "A practical review for your edited face photo",
+      "Edit a face on your phone, then finish the picture",
+      "When the face edit needs another attempt",
+      "Try a face edit with your own photos",
+      "Face edit FAQs"
+    ],
+    "words": 1342,
+    "images": [
+      {
+        "alt": "Source portrait used to edit a face into the Paris photograph",
+        "loaded": true
+      },
+      {
+        "alt": "Original Paris portrait beside the Eiffel Tower before the face edit",
+        "loaded": true
+      },
+      {
+        "alt": "Edited Paris portrait showing the face replacement in the target scene",
+        "loaded": true
+      }
+    ],
+    "desktopOverflow": false,
+    "errors": [],
+    "mobileOverflow": false,
+    "faqOpens": true,
+    "faqCount": 12
+  },
+  {
+    "slug": "face-morph",
+    "status": 200,
+    "title": "Face Morph & Face Swap Online: Two-Photo Guide | SwapThisFace",
+    "description": "Explore face morph vs face swap, compare photo examples and put a face into a new picture. Our two-photo editor creates face replacements, not percentage blends.",
+    "canonical": "http://localhost:3099/face-morph",
+    "h1": 1,
+    "headings": [
+      "Face morph vs face swap: start with the result you want",
+      "Compare the photo transformations this tool makes",
+      "Transform a photo with a source face and target image",
+      "Choose portraits for face morphing or replacement",
+      "Why a face blend can look doubled—and why a swap can look pasted on",
+      "Try your face in a new photo",
+      "Face morph and photo swap FAQs"
+    ],
+    "words": 1330,
+    "images": [
+      {
+        "alt": "Source selfie used for this face swap example",
+        "loaded": true
+      },
+      {
+        "alt": "Target photo: A mirror selfie beside a sunlit window",
+        "loaded": true
+      },
+      {
+        "alt": "AI face swap result: the source person's face in a mirror selfie beside a sunlit window",
+        "loaded": true
+      },
+      {
+        "alt": "",
+        "loaded": true
+      },
+      {
+        "alt": "",
+        "loaded": true
+      },
+      {
+        "alt": "",
+        "loaded": true
+      }
+    ],
+    "desktopOverflow": false,
+    "errors": [],
+    "initialSlider": "50",
+    "sliderAfterKey": "51",
+    "mobileOverflow": false,
+    "faqOpens": true,
+    "faqCount": 12
+  }
+]
